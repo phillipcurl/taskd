@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-printer heroicon heroicon-sm">
+    <rect class="heroicon-printer-body heroicon-component-fill" width="58" height="26" x="1" y="23"></rect>
+    <path class="heroicon-printer-holder heroicon-component-accent heroicon-component-fill" d="M7 6a3 3 0 0 1 3-3h4v20H7V6zm46 0v17h-7V3h4a3 3 0 0 1 3 3z"></path>
+    <path class="heroicon-printer-guard heroicon-component-accent heroicon-component-fill" d="M5 34a2 2 0 0 1 2-2h46a2 2 0 0 1 2 2v5H5v-5z"></path>
+    <path class="heroicon-printer-base heroicon-component-accent heroicon-component-fill" d="M6 46h6v3H6v-3zm42 0h6v3h-6v-3z"></path>
+    <path class="heroicon-printer-lights heroicon-component-accent heroicon-component-fill" d="M5 28h3v3H5v-3zm4 0h3v3H9v-3zm4 0h3v3h-3v-3z"></path>
+    <path class="heroicon-printer-pages heroicon-component-fill" d="M14 1h32v22H14V1zm-2 38h36v20H12V39z"></path>
+    <polygon class="heroicon-shadows" points="48 43 55 43 55 39 5 39 5 43 12 43 12 42 48 42"></polygon>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M13 0h34v2h3a4 4 0 0 1 4 4v16h2a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4h-7v10H11V50H4a4 4 0 0 1-4-4V26a4 4 0 0 1 4-4h2V6a4 4 0 0 1 4-4h3V0zm2 2v20h30V2H15zm-2 20V4h-3a2 2 0 0 0-2 2v16h1V6.5a1.5 1.5 0 1 1 3 0V22h1zm-2 25H7v1h4v-1zm-6 1V34c0-1.1.9-2 2-2h46a2 2 0 0 1 2 2v14h1a2 2 0 0 0 2-2V26a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v20c0 1.1.9 2 2 2h1zm1-3h5v-5H6v5zm0-7h48v-4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v4zm48 2h-5v5h5v-5zm-1 8v-1h-4v1h4zM52 6a2 2 0 0 0-2-2h-3v18h1V6.5a1.5 1.5 0 0 1 3 0V22h1V6zM11 22V6.5a.5.5 0 0 0-1 0V22h1zm2 18v18h34V40H13zm37-18V6.5a.5.5 0 0 0-1 0V22h1zM6 28h2v3H5v-3h1zm1 1H6v1h1v-1zm2-1h3v3H9v-3zm1 2h1v-1h-1v1zm4-2h2v3h-3v-3h1zm1 1h-1v1h1v-1zm-8 5h23v1H8v2H7v-3zm35 8H20v-1h22v1zm-14 3v-1h14v1H28zm14 1v1H18v-1h24zm-22 3v-1h22v1H20zm22 2H19v-1h23v1zm0 1v1H18v-1h24z"></path>
+</svg>

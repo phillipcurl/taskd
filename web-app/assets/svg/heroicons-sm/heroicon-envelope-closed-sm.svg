@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-envelope-closed heroicon heroicon-sm">
+    <rect class="heroicon-envelope-closed-body heroicon-component-fill" width="60" height="36" y="12" rx="2"></rect>
+    <path class="heroicon-envelope-closed-sides heroicon-component-accent heroicon-component-fill" d="M1 13l4 4v26l-4 4V13zm58 34l-4-4V17l4-4v34z"></path>
+    <polygon class="heroicon-shadows" points="2 15 30 38 58 15 59 15 30 41 1 15"></polygon>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M2 12h56a2 2 0 0 1 2 2v32a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V14c0-1.1.9-2 2-2zm0 3.6v28.8l2-1.6V17.2l-2-1.6zM20 30L5 18v24l15-12zm1.6 1.28L3.2 46h53.6L38.4 31.28 30 38l-8.4-6.72zM56 42.8l2 1.6V15.6l-2 1.6v25.6zm-1-.8V18L40 30l15 12zm1.8-28H3.2L30 35.44 56.8 14z"></path>
+</svg>

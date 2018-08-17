@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-lightning heroicon heroicon-sm">
+    <polygon class="heroicon-lightning-front heroicon-component-fill" points="46.333 2 39.667 22 39 24 41.108 24 46.596 24 49 24 47.667 26 27.703 55.945 25 60 25.801 55.193 26.444 51.333 26.845 48.93 28.667 38 28.833 37 29 36 27.986 36 26.972 36 13.028 36 12.18 36 11.167 36 11 36 11.333 34 17 0 44.892 0 47 0"></polygon>
+    <path class="heroicon-lightning-side heroicon-component-accent heroicon-component-fill" d="M29.15 47.28L43.33 26h1.93L28.5 51.14l.65-3.86zM41.67 2h2.56L37.1 23.37 36.56 25H34l.33-1 7.34-22z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M46.33 2l-6.66 20-.67 2h10l-1.33 2L27.7 55.94 25 60l.8-4.8.64-3.87.4-2.4L28.68 38l.16-1 .17-1H11l.33-2L17 0h30l-.67 2zM29.15 47.28l-.65 3.86L45.26 26h-1.93L29.15 47.28zM42.13 26H32.61l.44-1.32L40.61 2H18.7l-5.33 32h18l-.39 2.33-1.42 8.54L42.13 26zm-.46-24l-7.34 22-.33 1h2.55l.55-1.63L44.23 2h-2.56z"></path>
+</svg>

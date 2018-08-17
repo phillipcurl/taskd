@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-envelope-open heroicon heroicon-sm">
+    <path class="heroicon-envelope-open-body heroicon-component-fill" d="M28.44 1.25a2.61 2.61 0 0 1 3.12 0L60 24v34a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V24L28.44 1.25z"></path>
+    <polygon class="heroicon-envelope-open-document heroicon-component-fill" points="12 8 48 8 48 34 38 42 22.5 42 12 34"></polygon>
+    <path class="heroicon-envelope-open-sides heroicon-component-accent heroicon-component-fill" d="M1 25l4 4v26l-4 4V25zm58 34l-4-4V29l4-4v34z"></path>
+    <polygon class="heroicon-shadows" points="3 26 22 38 38 38 57 26 38 42 22 42"></polygon>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M20 8l8.44-6.75a2.61 2.61 0 0 1 3.12 0L40 8h8v6.4L60 24v34a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V24l12-9.6V8h8zm3.2 0h13.6L30.3 2.8c-.13-.1-.49-.1-.62 0L23.2 8zM12 16.96L3.2 24H12v-7.04zM12 26H3.52L12 32.72V26zM2 27.34V56.4l2-1.6V28.93l-2-1.59zM3.2 58h53.6L38.05 43h-16.1L3.2 58zM58 56.4V27.34l-2 1.6V54.8l2 1.6zM56.48 26H48v6.72L56.48 26zM48 24h8.8L48 16.96V24zM14 10v24.3l4.65 3.7H39v1H19.91l2.52 2h15.14L46 34.3V10H14zm41 19.72L39.76 41.81 55 54V29.72zM5 54l15.24-12.2L5 29.73V54zm13-38h24v1H18v-1zm0 2h23v1H18v-1zm22 2v1H18v-1h22zm-22 2h24v1H18v-1zm14 2v1H18v-1h14zm-14 3h22v1H18v-1zm24 2v1H18v-1h24zm-24 2h23v1H18v-1zm18 2v1H18v-1h18zm-18 3h24v1H18v-1z"></path>
+</svg>

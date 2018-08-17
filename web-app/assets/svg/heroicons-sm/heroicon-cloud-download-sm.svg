@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-cloud-download heroicon heroicon-sm">
+    <path class="heroicon-cloud-download-background heroicon-component-fill" d="M35 44h14a11 11 0 0 0 2.9-21.61 10 10 0 0 0-10.66-11.36 16 16 0 0 0-29.13 7A13 13 0 0 0 13.01 44h12v-9h10v9z"></path>
+    <polygon class="heroicon-cloud-download-arrow heroicon-component-accent heroicon-component-fill" points="25 35 35 35 35 46 40 46 30 56 20 46 25 46"></polygon>
+    <path class="heroicon-shadows" d="M35 40h14a11 11 0 0 0 10.82-9A11 11 0 0 1 49 44H35v-4zm-10 0v4H13A13 13 0 0 1 .15 29 13 13 0 0 0 13 40h12z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M35 44v2h5l-2 2-6.59 6.59L30 56l-1.41-1.41L22 48l-2-2h5v-2H13a13 13 0 0 1-.88-25.97 16 16 0 0 1 29.13-7L42 11a10 10 0 0 1 9.9 11.39A11 11 0 0 1 49 44H35zm4.6-31.85a14 14 0 0 0-25.49 6.12l-.2 1.64-1.66.11A11 11 0 0 0 13 42h12v-7h10v7h14a9 9 0 0 0 2.38-17.68l-1.7-.47.24-1.74a8 8 0 0 0-8.53-9.09l-1.15.09-.65-.96zM27 46v2h-2.17L30 53.17 35.17 48H33V37h-6v9zm-9.74-31.37A12 12 0 0 1 28 8v1a11 11 0 0 0-9.84 6.08l-.9-.45zm38 21.5A7 7 0 0 1 49 40H37v-1h12a6 6 0 0 0 5.37-3.32l.9.45z"></path>
+</svg>

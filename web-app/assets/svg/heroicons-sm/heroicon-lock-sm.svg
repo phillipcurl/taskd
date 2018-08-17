@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-lock heroicon heroicon-sm">
+    <rect class="heroicon-lock-body heroicon-component-fill" width="54" height="34" x="3" y="25"></rect>
+    <path class="heroicon-lock-top heroicon-component-accent heroicon-component-fill" d="M12 25v-6a18 18 0 1 1 36 0v6h9v5H3v-5h9zm6 0h24v-6a12 12 0 1 0-24 0v6z"></path>
+    <path class="heroicon-shadows" d="M45 25v-6a15 15 0 0 0-30 0v6h3v-6a12 12 0 1 1 24 0v6.33l3-.33z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M11 24v-5a19 19 0 0 1 38 0v5h9v36H2V24h9zm0 2H4v3h25v-3H11zm18 5H4v3h25v-3zM4 38h25v-3H4v3zm0 1v3h25v-3H4zm0 7h25v-3H4v3zm0 1v3h25v-3H4zm0 7h25v-3H4v3zm0 1v3h25v-3H4zm27 0v3h25v-3H31zm25-1v-3H31v3h25zm0-7H31v3h25v-3zm0-1v-3H31v3h25zm0-7H31v3h25v-3zm0-1v-3H31v3h25zm0-7H31v3h25v-3zm0-2v-3H31v3h25zm-15-5v-5a11 11 0 0 0-22 0v5h22zm2 0h4v-5a17 17 0 1 0-34 0v5h4v-5a13 13 0 0 1 26 0v5z"></path>
+</svg>

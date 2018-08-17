@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-pie-chart heroicon heroicon-sm">
+    <path class="heroicon-pie-chart-slice-1 heroicon-component-fill" d="M54 32h2A28 28 0 1 1 28 4v28h26z"></path>
+    <path class="heroicon-pie-chart-slice-2 heroicon-component-accent heroicon-component-fill" d="M30 2v26l2-4L42.52 2.95l-.03-.02A27.84 27.84 0 0 0 30 0v2z"></path>
+    <path class="heroicon-pie-chart-slice-3 heroicon-component-accent heroicon-component-fill" d="M32 30l1-2L43.63 6.74l.9-1.79A28 28 0 0 1 60 30H31.99z"></path>
+    <path class="heroicon-shadows" d="M55.98 33A28 28 0 1 1 .11 29.5 28 28 0 0 0 55.36 33h.62zM35 26h24v4H33l2-4z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M54 32h2A28 28 0 1 1 28 4v28h26zm-22-2l1-2L43.63 6.74l.9-1.79A28 28 0 0 1 60 30H31.99zM30 2V0a28.4 28.4 0 0 1 10.7 2.12c.6.25 1.2.52 1.79.81l.03.02L32 24l-2 4V2zm-4 32V6.08A26 26 0 1 0 53.92 34H26zm31.92-6A26 26 0 0 0 45.38 7.7L35.24 28h22.68zM32 2.07v17.46L39.81 3.9A24.76 24.76 0 0 0 32 2.07zM7.42 21.7l-.9-.45a24.1 24.1 0 0 1 10.74-10.73l.45.9A23.1 23.1 0 0 0 7.42 21.7zM4 32c0-2.65.43-5.2 1.23-7.6l.94.32A22.98 22.98 0 0 0 5 32H4zm2.17 7.28l-.94.31c-.4-1.18-.7-2.4-.9-3.64l.98-.17c.2 1.2.49 2.37.86 3.5zM44 25h10v1H44v-1z"></path>
+</svg>

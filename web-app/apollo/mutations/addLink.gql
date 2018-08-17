@@ -1,0 +1,5 @@
+mutation AddLink($url: String!) {
+  createResource(url: $url) {
+    id
+  }
+}

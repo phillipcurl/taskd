@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-hand-open heroicon heroicon-sm">
+    <path class="heroicon-hand-open-hand heroicon-component-fill" d="M27.22 2.68a4 4 0 0 1 7.56 0A4 4 0 0 1 41 6v10c.32.04.65 0 1 0h2a2 2 0 0 1 2 2v18a12 12 0 0 1-8 11.32V52H24v-4.38A12 12 0 0 1 15 36V10a4 4 0 0 1 6-3.46V6a4 4 0 0 1 6.22-3.32z"></path>
+    <rect class="heroicon-hand-open-sleeve heroicon-component-accent heroicon-component-fill" width="20" height="6" x="19" y="53"></rect>
+    <rect class="heroicon-shadows" width="12" height="4" x="25" y="46"></rect>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M27.22 2.68a4 4 0 0 1 7.56 0A4 4 0 0 1 41 6v10.13c.32-.09.65-.13 1-.13h2a2 2 0 0 1 2 2v18a12 12 0 0 1-8 11.32V52h2v8H18v-8h6v-4.38A12 12 0 0 1 15 36V10a4 4 0 0 1 6-3.46V6a4 4 0 0 1 6.22-3.32zM44 20v-2h-2a2 2 0 0 0-2 2v12h2v1h-4a7 7 0 0 0-7 7h-1a8 8 0 0 1 8-8v-8h-2v-1h2v-3c0-1.01.38-1.94 1-2.65V6a2 2 0 1 0-4 0v18h-2V4a2 2 0 1 0-4 0v19h1v1h-6a7 7 0 0 0-7 7v5a10 10 0 0 0 10 10h1v2h-1c-.34 0-.67-.01-1-.04V52h10v-4.17c-.65.11-1.32.17-2 .17v-2a10 10 0 0 0 10-10V20zm-17 3V6a2 2 0 1 0-4 0v17.06c.33-.04.66-.06 1-.06h3zm-6 .58V10a2 2 0 1 0-4 0v17.13a8.04 8.04 0 0 1 4-3.55zM20 58h18v-2h-6v-1h6v-1H20v4z"></path>
+</svg>

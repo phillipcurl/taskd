@@ -1,0 +1,9 @@
+$primary-color: #7acfc0;
+$outline-color: adjust-color(
+  $primary-color,
+  $saturation: -75%,
+  $lightness: -26%
+);
+$fill-color: adjust-color($primary-color, $saturation: -82%, $lightness: 50%);
+
+$box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);

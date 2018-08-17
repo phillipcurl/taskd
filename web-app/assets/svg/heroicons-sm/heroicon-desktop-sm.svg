@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-desktop heroicon heroicon-sm">
+    <path class="heroicon-desktop-screen-edge heroicon-component-accent heroicon-component-fill" d="M0 3.99A4 4 0 0 1 4 0h52a4 4 0 0 1 4 3.99V39H0V3.99zM5 5v30h50V5H5z"></path>
+    <rect class="heroicon-desktop-screen heroicon-component-fill" width="50" height="30" x="5" y="5"></rect>
+    <path class="heroicon-desktop-stand heroicon-component-fill" d="M19.43 55l2-7H4A4 4 0 0 1 0 44v-5h60v5a4 4 0 0 1-4 4H38.56l2 7H48v5H12v-5h7.43z"></path>
+    <polygon class="heroicon-shadows" points="39.714 52 38 46 22 46 20.286 52 39.714 52"></polygon>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M56 48H38.57l2 7H48v5H12v-5h7.43l2-7H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h52a4 4 0 0 1 4 4v40a4 4 0 0 1-4 4zM4 2a2 2 0 0 0-2 2v34h56V4a2 2 0 0 0-2-2H4zM2 39v5c0 1.1.9 2 2 2h52a2 2 0 0 0 2-2v-5H2zm19.5 16h17l-2-7h-13l-2 7zM14 57v1h32v-1H14zM5 4h51v32H4V4h1zm50 1H5v30h50V5zM30.07 16.29l.86.5-4 6.92-.86-.5 4-6.92zm1 3l.86.5-4 6.92-.86-.5 4-6.92z"></path>
+</svg>

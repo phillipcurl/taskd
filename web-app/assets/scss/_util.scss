@@ -1,0 +1,27 @@
+.box-shadow {
+  box-shadow: $box-shadow;
+}
+
+.border-accent {
+  border-top: 6px solid $primary-color;
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.bg-primary {
+  background-color: $primary-color;
+}
+
+.b--primary {
+  border-color: $primary-color;
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}

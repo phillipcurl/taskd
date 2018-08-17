@@ -1,0 +1,54 @@
+@import './../../node_modules/tachyons/css/tachyons.min.css';
+
+@import 'vars';
+@import 'icons';
+@import 'util';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  // background-color: adjust-color(
+  //   $primary-color,
+  //   $saturation: -82%,
+  //   $lightness: 30%
+  // );
+  background-color: #f8f8f8;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s, transform 0.25s;
+}
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+  // transform: translateX(-15px);
+}
+
+.fa-pulse {
+  -webkit-animation: a 1s infinite steps(8);
+  animation: a 1s infinite steps(8);
+}
+@-webkit-keyframes a {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+@keyframes a {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}

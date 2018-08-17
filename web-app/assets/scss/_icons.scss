@@ -1,0 +1,19 @@
+.heroicon- {
+  &outline {
+    fill: $outline-color;
+  }
+
+  &component- {
+    &fill {
+      fill: $fill-color;
+    }
+    &accent {
+      fill: $primary-color;
+    }
+  }
+
+  &shadows {
+    fill: $outline-color;
+    opacity: 0.4;
+  }
+}

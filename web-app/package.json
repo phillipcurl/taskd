@@ -1,0 +1,44 @@
+{
+  "name": "taskd-web-app",
+  "version": "0.0.0",
+  "description": "Nuxt.js + Δ micro project",
+  "author": "Phillip Curl <phillipcurl@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon server.js",
+    "build": "nuxt build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@nuxtjs/apollo": "latest",
+    "@nuxtjs/axios": "latest",
+    "@nuxtjs/dotenv": "latest",
+    "@nuxtjs/google-analytics": "latest",
+    "@nuxtjs/pwa": "latest",
+    "@nuxtjs/sitemap": "latest",
+    "apollo-cache-inmemory": "latest",
+    "apollo-link": "latest",
+    "apollo-link-http": "latest",
+    "cookie": "latest",
+    "dotprop": "latest",
+    "graphql": "latest",
+    "graphql-tag": "latest",
+    "js-cookie": "latest",
+    "lodash": "latest",
+    "micro": "latest",
+    "micro-compress": "latest",
+    "micro-route": "latest",
+    "node-sass": "latest",
+    "nuxt": "latest",
+    "sass-loader": "latest",
+    "svg-inline-loader": "latest",
+    "vuex-router-sync": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest",
+    "tachyons": "latest"
+  },
+  "engines": {
+    "node": ">8.1.x"
+  }
+}

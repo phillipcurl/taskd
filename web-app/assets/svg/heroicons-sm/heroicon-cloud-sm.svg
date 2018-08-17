@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-cloud heroicon heroicon-sm">
+    <path class="heroicon-cloud-background heroicon-component-fill" d="M49 50a11 11 0 0 0 2.9-21.61 10 10 0 0 0-10.66-11.36 16 16 0 0 0-29.13 7A13 13 0 0 0 13.01 50h36z"></path>
+    <path class="heroicon-shadows" d="M.15 35A13 13 0 0 0 13 50h36a11 11 0 0 0 10.82-13A11 11 0 0 1 49 46H13A13 13 0 0 1 .15 35z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M49 50H13a13 13 0 0 1-.88-25.97 16 16 0 0 1 29.13-7L42 17a10 10 0 0 1 9.9 11.39A11 11 0 0 1 49 50zm-9.4-31.85a14 14 0 0 0-25.49 6.12l-.2 1.64-1.66.11A11 11 0 0 0 13 48h36a9 9 0 0 0 2.38-17.68l-1.7-.47.24-1.74a8 8 0 0 0-8.53-9.09l-1.15.09-.65-.96zm-22.34 2.48A12 12 0 0 1 28 14v1a11 11 0 0 0-9.84 6.08l-.9-.45zm38 21.5A7 7 0 0 1 49 46H37v-1h12a6 6 0 0 0 5.37-3.32l.9.45z"></path>
+</svg>

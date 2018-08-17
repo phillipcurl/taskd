@@ -1,0 +1,30 @@
+query Link($id: ID!) {
+  resource(id: $id) {
+    id
+    title
+    url
+    isFavorite
+    description
+    copyright
+    author
+    publisher
+    text
+    image
+    tags
+    canonicalLink
+    links {
+      text
+      href
+    }
+    summary {
+      text
+      length
+      ratio
+    }
+    topics
+    sentiment
+    words
+    difficulty
+    minutes
+  }
+}

@@ -1,0 +1,10 @@
+{
+  resources {
+    id
+    url
+    title
+    description
+    image
+    isFavorite
+  }
+}

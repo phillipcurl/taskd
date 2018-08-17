@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-quill heroicon heroicon-sm">
+    <path class="heroicon-quill-ink heroicon-component-fill" d="M13 49v-3h-2v-3h12v3h-2v3h5l3 3-4 8H9l-4-8 3-3h5z"></path>
+    <polygon class="heroicon-quill-feather heroicon-component-accent heroicon-component-fill" points="17 26 20 29 47 2 47 12 55 12 29 38 30 39 17 39"></polygon>
+    <polygon class="heroicon-quill-tip heroicon-component-fill" points="18 39 23 39 19 43 14 43"></polygon>
+    <path class="heroicon-shadows" d="M13 46h8v3h-8v-3zm-8 6h24l-4 8H9l-4-8z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M16 40V24l4 4L48 0v11h9L43 25 30 38l2 2h-9l-2 2h3v5h-2v1h4l4 4-4 8H8l-4-8 4-4h4v-1h-2v-5h4l2-2zm36.17-27H46v-1.59L33.41 24h7.76l11-11zm-12 12h-7.76l-13 13h7.76l13-13zM36 20v-5.17l-16 16-2-2V38l14-14 4-4zM46 4.83l-6 6V16l6-6V4.83zm-7 7l-2 2V19l2-2v-5.17zM18.83 40l-2 2h1.34l2-2h-1.34zm-4 4H12v1h10v-1h-7.17zM14 47v1h6v-1h-6zm8 3H8.83l-2 2h20.34l-2-2H22zM6.74 53l2.5 5h15.52l2.5-5H6.74z"></path>
+</svg>

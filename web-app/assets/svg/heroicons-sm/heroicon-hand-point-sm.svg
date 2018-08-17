@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-hand-point heroicon heroicon-sm">
+    <rect class="heroicon-hand-point-sleeve heroicon-component-accent heroicon-component-fill" width="20" height="6" x="23" y="53"></rect>
+    <path class="heroicon-hand-point-hand heroicon-component-fill" d="M38 47.32V53H24v-5.38A12 12 0 0 1 15 36V18c0-1.1.9-2 2-2h2a4 4 0 0 1 1 .13V4a4 4 0 1 1 8 0v10.54a3.98 3.98 0 0 1 5.78 2.14 4 4 0 0 1 6 2A4 4 0 0 1 46 22v14a12 12 0 0 1-8 11.32z"></path>
+    <rect class="heroicon-shadows" width="12" height="4" x="25" y="46"></rect>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M38 47.32V52h6v8H22v-8h2v-4.38A12 12 0 0 1 15 36V18c0-1.1.9-2 2-2h2a4 4 0 0 1 1 .13V4a4 4 0 1 1 8 0v10.54a3.98 3.98 0 0 1 5.78 2.14 4 4 0 0 1 6 2A4 4 0 0 1 46 22v14a12 12 0 0 1-8 11.32zM24 2a2 2 0 0 0-2 2v29h-2V18.27a2 2 0 0 0-1-.27h-2v18a10 10 0 0 0 10 10h1v2h-1c-.34 0-.67-.01-1-.04V52h10v-4.17c-.65.11-1.32.17-2 .17v-2a9.96 9.96 0 0 0 9.59-7.15A10 10 0 0 0 44 36V22a2 2 0 1 0-4 0v2h-2v-4a2 2 0 1 0-4 0v4h-2v-6a2 2 0 1 0-4 0v6h-2V4a2 2 0 0 0-2-2zm18 52H24v1h10v1H24v2h18v-4zM25 25v1h-2v-1h2zm6 1h-2v-1h2v1zm6-1v1h-2v-1h2zm6 1h-2v-1h2v1z"></path>
+</svg>

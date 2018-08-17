@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-media-player heroicon heroicon-sm">
+    <rect class="heroicon-media-player-chrome heroicon-component-accent heroicon-component-fill" width="58" height="46" x="1" y="7" rx="1"></rect>
+    <rect class="heroicon-media-player-video heroicon-component-fill" width="52" height="35" x="4" y="10"></rect>
+    <circle class="heroicon-media-player-play-circle heroicon-component-accent heroicon-component-fill" cx="30" cy="28" r="10"></circle>
+    <polygon class="heroicon-media-player-play-symbol heroicon-component-fill" points="28 24 34 28 28 32"></polygon>
+    <path class="heroicon-media-player-controls heroicon-component-fill" d="M4 47h40v3H4v-3zm41 0h3v3h-3v-3zm4 0h3v3h-3v-3zm4 0h3v3h-3v-3z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M0 8c0-1.1.9-2 2-2h56a2 2 0 0 1 2 2v44a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm2 0v44h56V8H2zm2 2h52v35H4V10zm1 1v33h50V11H5zm35 17a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-10 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2-10.8V24l1 .67 4.1 2.73.9.6-.9.6-4.1 2.73-1 .67v-6.8zm4.2 2.8L29 25.87v4.26L32.2 28zM5 47h39v3H4v-3h1zm38 1H5v1h38v-1zm10-1h3v3h-3v-3zm1 1v1h1v-1h-1zm-4-1h2v3h-3v-3h1zm1 1h-1v1h1v-1zm-6-1h3v3h-3v-3zm1 1v1h1v-1h-1z"></path>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-devices heroicon heroicon-sm">
+    <path class="heroicon-devices-tablet-edge heroicon-component-accent heroicon-component-fill" d="M47 14V4a3 3 0 0 0-3-3H4a3 3 0 0 0-3 3v52a3 3 0 0 0 3 3h31v-7H5V8h38v6h4z"></path>
+    <path class="heroicon-devices-tablet-screen heroicon-component-fill" d="M43 14V8H5v44h29V18a4 4 0 0 1 4-4h5z"></path>
+    <rect class="heroicon-devices-phone-edge heroicon-component-accent heroicon-component-fill" width="24" height="44" x="35" y="15" rx="3"></rect>
+    <rect class="heroicon-devices-phone-screen heroicon-component-fill" width="18" height="30" x="38" y="22"></rect>
+    <path class="heroicon-shadows" d="M35 14a4 4 0 0 0-4 4v38a4 4 0 0 0 4 4h3a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4h-3z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M48 14h8a4 4 0 0 1 4 4v38a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h40a4 4 0 0 1 4 4v10zM44 2H4a2 2 0 0 0-2 2v52c0 1.1.9 2 2 2h30.54a3.98 3.98 0 0 1-.54-2v-3H4V7h40v7h2V4a2 2 0 0 0-2-2zm-1 12V8H5v44h29V18a4 4 0 0 1 4-4h5zm-5 2a2 2 0 0 0-2 2v38c0 1.1.9 2 2 2h18a2 2 0 0 0 2-2V18a2 2 0 0 0-2-2H38zm-1 5h20v32H37V21zm1 1v30h18V22H38zM22 4h4v1h-4V4zm-1 51.5c0-.83.67-1.5 1.5-1.5h3a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 1-1.5-1.5zm1.5-.5a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm2.43-31.21l-4 6.92-.86-.5 4-6.92.86.5zm1 3l-4 6.92-.86-.5 4-6.92.86.5zM45.5 54h3a1.5 1.5 0 0 1 0 3h-3a1.5 1.5 0 0 1 0-3zm3 1h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm-.43-24.71l.86.5-4 6.92-.86-.5 4-6.92zm1 3l.86.5-4 6.92-.86-.5 4-6.92zM45 18h4v1h-4v-1z"></path>
+</svg>

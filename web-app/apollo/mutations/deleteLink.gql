@@ -1,0 +1,5 @@
+mutation DeleteLink($id: ID!) {
+  deleteResource(id: $id) {
+    id
+  }
+}

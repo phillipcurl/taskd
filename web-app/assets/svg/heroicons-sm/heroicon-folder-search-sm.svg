@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-folder-search heroicon heroicon-sm">
+    <polygon class="heroicon-folder-search-tab heroicon-component-accent heroicon-component-fill" points="1 2 27 2 33 8 59 8 59 12 1 12"></polygon>
+    <path class="heroicon-folder-search-cover heroicon-component-fill" d="M59 48V12H1v36h36a11 11 0 0 1 22 0z"></path>
+    <circle class="heroicon-folder-search-circle heroicon-component-accent heroicon-component-fill" cx="48" cy="48" r="11"></circle>
+    <path class="heroicon-folder-search-symbol heroicon-component-fill" d="M51.24 42.76a6 6 0 0 1 1.18 6.83l1.36 1.36.7.7-.7.71-1.42 1.42-.7.7-.71-.7-1.36-1.36a6 6 0 1 1 1.65-9.66zm-5.65 2.83a2 2 0 1 0 2.82 2.82 2 2 0 0 0-2.82-2.82z"></path>
+    <rect class="heroicon-shadows" width="58" height="2" x="1" y="10"></rect>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M27 1l6 6h25a2 2 0 0 1 2 2v38c0 .1 0 .2-.02.29L60 48a12 12 0 0 1-23.96 1H2a2 2 0 0 1-2-2V3c0-1.1.9-2 2-2h25zm31 14H2v32h34.04A12 12 0 0 1 58 41.36V15zM2 14h56v-1H2v1zm56-3V9H32.17l-.58-.59L26.17 3H2v8h56zM48 58a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM22 8v1H4V8h18zm4-3v1H4V5h22zm25.24 37.76a6 6 0 0 1 1.18 6.83l1.36 1.36.7.7-.7.71-1.42 1.42-.7.7-.71-.7-1.36-1.36a6 6 0 1 1 1.65-9.66zm-1.48 8.41l1.19 1.2.7.7.71-.7.7-.7.01-.01v-.01l-1.9-1.9a5 5 0 1 0-1.41 1.42zm-.64-6.3a3 3 0 1 1-4.24 4.25 3 3 0 0 1 4.24-4.24zm-3.53.72a2 2 0 1 0 2.82 2.82 2 2 0 0 0-2.82-2.82z"></path>
+</svg>

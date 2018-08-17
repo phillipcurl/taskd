@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-diamond heroicon heroicon-sm">
+    <polygon class="heroicon-diamond-shape heroicon-component-fill" points="0 22 12 10 30 8 48 10 60 22 30 52"></polygon>
+    <path class="heroicon-shadows" d="M13 10v12l17 27v3L0 22l13-12zm34 0l13 12-30 30v-3l17-27V10z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M0 22l12-12 18-2 18 2 12 12-30 30L0 22zm30-11.99l-1.12.13L14.91 21H45.1L31.12 10.14 30 10zM47 21v-9.1l-13.98-1.55L46.72 21H47zm-.8 2H13.8L30 49.1 46.2 23zM13 21h.29l13.7-10.65L13 11.9V21zm-1 0v-8.17L3.83 21H12zm-8.17 2L27 46.18 12.62 23h-8.8zm43.55 0L32.99 46.18 56.17 23h-8.8zm8.8-2L48 12.83V21h8.17z"></path>
+</svg>

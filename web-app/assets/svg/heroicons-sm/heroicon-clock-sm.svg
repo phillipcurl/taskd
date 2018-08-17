@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-clock heroicon heroicon-sm">
+    <path class="heroicon-clock-edge heroicon-component-accent heroicon-component-fill" d="M30 59a29 29 0 1 1 0-58 29 29 0 0 1 0 58zm0-5a24 24 0 1 0 0-48 24 24 0 0 0 0 48z"></path>
+    <circle class="heroicon-clock-background heroicon-component-fill" cx="30" cy="30" r="25"></circle>
+    <path class="heroicon-shadows" d="M55 29.5A25 25 0 0 0 5 29a25 25 0 1 1 50 .5zm3 0v.5a28 28 0 1 1-56-.5 28 28 0 0 0 56 0z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M30 60a30 30 0 1 1 0-60 30 30 0 0 1 0 60zm28-30a28 28 0 1 0-56 0 28 28 0 0 0 56 0zM30 55a25 25 0 1 1 0-50 25 25 0 0 1 0 50zm24-25a24 24 0 1 0-48 0 24 24 0 0 0 48 0zM29 8h2v4h-2V8zm23 21v2h-4v-2h4zM29 52v-4h2v4h-2zM8 31v-2h4v2H8zm36.44-16.85l1.4 1.41-13.2 14.34.9.8L31 33.25V46h-2V33.24l-2.54-2.53.94-.87-8.71-9.74 1.41-1.41 8.9 7.96V24h2v2.53l13.44-12.38zM31 30a1 1 0 1 0-2 0 1 1 0 0 0 2 0z"></path>
+</svg>

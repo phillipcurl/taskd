@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" class="heroicon-media-buttons heroicon heroicon-sm">
+    <circle class="heroicon-media-buttons-play-circle heroicon-component-fill" cx="14" cy="14" r="14"></circle>
+    <circle class="heroicon-media-buttons-pause-circle heroicon-component-fill" cx="46" cy="14" r="14"></circle>
+    <circle class="heroicon-media-buttons-back-circle heroicon-component-fill" cx="14" cy="46" r="14"></circle>
+    <circle class="heroicon-media-buttons-forward-circle heroicon-component-fill" cx="46" cy="46" r="14"></circle>
+    <polygon class="heroicon-media-buttons-play-symbol heroicon-component-accent heroicon-component-fill" points="10 8 20 14 10 20"></polygon>
+    <path class="heroicon-media-buttons-pause-symbol heroicon-component-accent heroicon-component-fill" d="M41 8h4v12h-4V8zm6 0h4v12h-4V8z"></path>
+    <path class="heroicon-media-buttons-back-symbol heroicon-component-accent heroicon-component-fill" d="M9 41h3v10H9V41zm3 5l8-5v10l-8-5z"></path>
+    <path class="heroicon-media-buttons-forward-symbol heroicon-component-accent heroicon-component-fill" d="M41 41l8 5-8 5V41zm8 0h3v10h-3V41z"></path>
+    <path class="heroicon-shadows" d="M25.9 12.5a12 12 0 1 1-23.81 0 12 12 0 0 0 23.82 0zm0 32a12 12 0 1 1-23.81 0 12 12 0 0 0 23.82 0zm32-32a12 12 0 1 1-23.81 0 12 12 0 0 0 23.82 0zm0 32a12 12 0 1 1-23.81 0 12 12 0 0 0 23.82 0z"></path>
+    <path class="heroicon-outline" fill-rule="nonzero" d="M14 28a14 14 0 1 1 0-28 14 14 0 0 1 0 28zm12-14a12 12 0 1 0-24 0 12 12 0 0 0 24 0zM4 14A10 10 0 0 1 14 4v1a9 9 0 0 0-8.05 13.03l-.9.44A9.96 9.96 0 0 1 4 14zm6-6l1 .6 8.03 4.82.97.58-.97.58L11 19.4l-1 .6V8zm1 10.23L18.06 14 11 9.77v8.46zM60 46a14 14 0 1 1-28 0 14 14 0 0 1 28 0zM46 58a12 12 0 1 0 0-24 12 12 0 0 0 0 24zm0-22v1a9 9 0 0 0-8.05 13.03l-.9.44A10 10 0 0 1 46 36zm-5 6.18V41l1 .63 6.06 3.78.94.59-.94.59L42 50.37 41 51v-8.82zM47.11 46L42 42.8v6.4l5.11-3.2zM49 46v-5h3v10h-3v-5zm2-4h-1v8h1v-8zM14 60a14 14 0 1 1 0-28 14 14 0 0 1 0 28zm12-14a12 12 0 1 0-24 0 12 12 0 0 0 24 0zM4 46a10 10 0 0 1 10-10v1a9 9 0 0 0-8.05 13.03l-.9.44A9.96 9.96 0 0 1 4 46zm16-5v10l-1-.63-6.06-3.78L12 46l.94-.59L19 41.63l1-.63zm-1 8.2v-6.4L13.89 46 19 49.2zM12 42v9H9V41h3v1zm-1 0h-1v8h1v-8zm49-28a14 14 0 1 1-28 0 14 14 0 0 1 28 0zM46 26a12 12 0 1 0 0-24 12 12 0 0 0 0 24zm0-22v1a9 9 0 0 0-8.05 13.03l-.9.44A10 10 0 0 1 46 4zm1 4h4v12h-4V8zm1 1v10h2V9h-2zm-6-1h3v12h-4V8h1zm2 1h-2v10h2V9z"></path>
+</svg>

@@ -1,0 +1,6 @@
+mutation AddLink($id: ID!, $isFavorite: Boolean!) {
+  favoriteResource(id: $id, isFavorite: $isFavorite) {
+    id
+    isFavorite
+  }
+}
