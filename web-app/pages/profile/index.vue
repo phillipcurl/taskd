@@ -1,6 +1,6 @@
 <template>
   <div v-if="user">
-    <h1>{{user.email}}</h1>
+    <h1 class="mv0">{{user.email}}</h1>
     <button @click="logout">logout</button>
   </div>
 </template>

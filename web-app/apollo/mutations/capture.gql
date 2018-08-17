@@ -1,0 +1,5 @@
+mutation Capture($title: String!) {
+  capture(title: $title) {
+    id
+  }
+}

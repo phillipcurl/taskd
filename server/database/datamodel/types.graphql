@@ -1,0 +1,190 @@
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String! @unique
+  password: String!
+  isAdmin: Boolean! @default(value: "false")
+  role: Role! @default(value: "CUSTOMER")
+  firstName: String
+  lastName: String
+  phone: String
+  avatarColor: String
+  tasks: [Task!]!
+  posts: [Post!]!
+  notifications: [Notification!]!
+}
+
+type Location {
+  id: ID! @unique
+  lat: Float!
+  lng: Float!
+  city: City
+  address: String
+  directions: String
+}
+
+type City {
+  id: ID! @unique
+  name: String!
+}
+
+type Picture {
+  url: String!
+}
+
+type Category {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  name: String
+  description: String
+  tasks: [Task!]!
+}
+
+type Priority {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  name: String
+  description: String
+}
+
+type Task {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  categories: [Category!]!
+  # assignees: [User]
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean! @default(value: "false")
+  duration: Int
+  priority: Priority
+  subTasks: [Task!]!
+  status: TASK_STATUS
+  tags: [Tag!]!
+  attachments: [File!]!
+}
+
+type Post {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isPublished: Boolean! @default(value: "false")
+  title: String!
+  text: String!
+  author: User!
+}
+
+type StatusUpdate {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  task: Task!
+  text: String!
+  previousStatus: String!
+  newStatus: String!
+}
+
+type Reminder {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  title: String!
+  description: String!
+}
+
+type Event {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  title: String!
+  description: String!
+  date: DateTime!
+  location: Location
+  tags: [Tag!]!
+}
+
+type Message {
+  id: ID! @unique
+  createdAt: DateTime!
+  from: User! @relation(name: "SentMessages")
+  to: User! @relation(name: "ReceivedMessages")
+  deliveredAt: DateTime!
+  readAt: DateTime!
+}
+
+type Notification {
+  id: ID! @unique
+  createdAt: DateTime!
+  type: NOTIFICATION_TYPE
+  user: User!
+  link: String!
+  readDate: DateTime!
+}
+
+type Tag {
+  name: String!
+  description: String
+  color: String!
+}
+
+type File {
+  id: ID! @unique
+  name: String!
+  size: Int!
+  secret: String! @unique
+  contentType: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  url: String! @unique
+}
+
+type Payment {
+  id: ID! @unique
+  createdAt: DateTime!
+  serviceFee: Float!
+  placePrice: Float!
+  totalPrice: Float!
+  paymentMethod: PaymentAccount!
+}
+
+type PaymentAccount {
+  id: ID! @unique
+  createdAt: DateTime!
+  type: PAYMENT_PROVIDER
+  user: User!
+  payments: [Payment!]!
+  paypal: PaypalInformation
+  creditcard: CreditCardInformation
+}
+
+type PaypalInformation {
+  id: ID! @unique
+  createdAt: DateTime!
+  email: String!
+  paymentAccount: PaymentAccount!
+}
+
+type CreditCardInformation {
+  id: ID! @unique
+  createdAt: DateTime!
+  cardNumber: String!
+  expiresOnMonth: Int!
+  expiresOnYear: Int!
+  securityCode: String!
+  firstName: String!
+  lastName: String!
+  postalCode: String!
+  country: String!
+  paymentAccount: PaymentAccount
+}

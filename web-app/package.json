@@ -25,6 +25,7 @@
     "graphql-tag": "latest",
     "js-cookie": "latest",
     "lodash": "latest",
+    "masonry-layout": "^4.2.2",
     "micro": "latest",
     "micro-compress": "latest",
     "micro-route": "latest",
@@ -32,6 +33,7 @@
     "nuxt": "latest",
     "sass-loader": "latest",
     "svg-inline-loader": "latest",
+    "vuetrend": "^0.3.2",
     "vuex-router-sync": "latest"
   },
   "devDependencies": {

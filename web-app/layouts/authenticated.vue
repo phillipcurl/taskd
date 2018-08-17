@@ -1,10 +1,10 @@
 <template>
-  <div class="app">
+  <div class="overflow-x-hidden relative app">
     <div class="fixed bg-white sidebar-wrapper">
       <app-sidebar />
     </div>
     <div class="content-wrapper">
-      <!-- <app-navigation/> -->
+      <app-navigation/>
       <main>
         <nuxt/>
       </main>
@@ -56,8 +56,8 @@
       </ul>
     </apps-sidebar> -->
     <button @click="captureModalOpen = true"
-            class="input-reset br-100 f3 fixed pointer capture-fab">
-      <feather-icon icon="plus" class="w-100" />
+            class="input-reset br-100 f3 fixed pointer bg-primary relative overflow-hidden capture-fab">
+      <feather-icon icon="plus" class="w-100 dib v-mid" />
     </button>
     <capture-modal :open.sync="captureModalOpen" />
   </div>
@@ -118,23 +118,46 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app {
+  height: 100%;
+  width: 100%;
+}
 .sidebar-wrapper {
   width: 250px;
   height: 100vh;
   top: 0;
   left: 0;
   overflow-y: auto;
+
+  @media screen and (max-width: 60em) and (min-width: 30em) {
+    // width: 60%;
+  }
+  @media screen and (max-width: 30em) {
+    display: none;
+  }
 }
 
 .content-wrapper {
   /* padding-top: 66px;
   min-height: 85vh; */
   /* margin-left: 250px; */
+  min-height: 100vh;
   width: calc(100vw - 250px);
   transform: translateX(250px);
+  transition: transform 0.2s ease-out;
+  top: 0;
+
+  @media screen and (max-width: 60em) and (min-width: 30em) {
+    // width: 60%;
+  }
+  @media screen and (max-width: 30em) {
+    width: 100%;
+    transform: translateX(0);
+  }
 
   main {
-    min-height: 90vh;
+    min-height: 94vh;
+    padding-top: 64px;
   }
 }
 
@@ -144,5 +167,7 @@ export default {
   height: 50px;
   width: 50px;
   line-height: 50px;
+  border: none;
+  box-shadow: rgba(8, 35, 51, 0.05) 0px 4px 8px;
 }
 </style>

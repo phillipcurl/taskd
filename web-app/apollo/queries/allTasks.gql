@@ -1,0 +1,10 @@
+{
+  allTasks {
+    id,
+    title,
+    createdBy {
+      id,
+      email
+    }
+  }
+}

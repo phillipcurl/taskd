@@ -1,6 +1,6 @@
 <template>
-  <aside class="flex flex-column justify-between h-100 w-100 sidebar">
-    <header class="flex items-center pa3 sidebar-header">
+  <aside class="flex flex-column justify-between h-100 w-100 overflow-hidden sidebar">
+    <header v-if="user" class="flex items-center pa3 sidebar-header">
       <nuxt-link to="/profile"  class="w2 w3-ns v-mid">
         <img :src="`https://robohash.org/${encodeURI(user.email)}.png`" class="db br-100 w-100"/>
       </nuxt-link>
@@ -14,6 +14,9 @@
       </div>
     </header>
     <section class="flex flex-column justify-center sidebar-content h-100">
+      <nuxt-link to="/home" class="db f5 link no-underline pv2 ph3 black-30 dim">
+        Home
+      </nuxt-link> 
       <div class="mb3">
         <h3 class="f5 mt0 mb2 ph3 lh-title ttu black-50">Section One</h3>
         <nuxt-link to="/tasks" class="db f5 link no-underline pv2 ph3 black-30 dim">
@@ -68,6 +71,8 @@ export default {
 
 <style lang="scss" scoped>
 .sidebar {
+  z-index: 1000;
+
   &-header {
     flex-grow: 0;
   }
