@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/public-peatfang-645/server/dev
-# timestamp: Fri Aug 17 2018 14:34:00 GMT-0400 (Eastern Daylight Time)
+# timestamp: Sun Aug 19 2018 19:01:46 GMT-0400 (EDT)
 
 type AggregateCategory {
   count: Int!
@@ -65,6 +65,10 @@ type AggregateStatusUpdate {
   count: Int!
 }
 
+type AggregateSubTask {
+  count: Int!
+}
+
 type AggregateTag {
   count: Int!
 }
@@ -105,8 +109,13 @@ type CategoryConnection {
 input CategoryCreateInput {
   name: String
   description: String
-  createdBy: UserCreateOneInput!
+  createdBy: UserCreateOneWithoutCategoriesInput!
   tasks: TaskCreateManyWithoutCategoriesInput
+}
+
+input CategoryCreateManyWithoutCreatedByInput {
+  create: [CategoryCreateWithoutCreatedByInput!]
+  connect: [CategoryWhereUniqueInput!]
 }
 
 input CategoryCreateManyWithoutTasksInput {
@@ -114,10 +123,16 @@ input CategoryCreateManyWithoutTasksInput {
   connect: [CategoryWhereUniqueInput!]
 }
 
+input CategoryCreateWithoutCreatedByInput {
+  name: String
+  description: String
+  tasks: TaskCreateManyWithoutCategoriesInput
+}
+
 input CategoryCreateWithoutTasksInput {
   name: String
   description: String
-  createdBy: UserCreateOneInput!
+  createdBy: UserCreateOneWithoutCategoriesInput!
 }
 
 """An edge in a connection."""
@@ -192,8 +207,17 @@ input CategorySubscriptionWhereInput {
 input CategoryUpdateInput {
   name: String
   description: String
-  createdBy: UserUpdateOneInput
+  createdBy: UserUpdateOneWithoutCategoriesInput
   tasks: TaskUpdateManyWithoutCategoriesInput
+}
+
+input CategoryUpdateManyWithoutCreatedByInput {
+  create: [CategoryCreateWithoutCreatedByInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutCreatedByInput!]
 }
 
 input CategoryUpdateManyWithoutTasksInput {
@@ -205,15 +229,32 @@ input CategoryUpdateManyWithoutTasksInput {
   upsert: [CategoryUpsertWithWhereUniqueWithoutTasksInput!]
 }
 
+input CategoryUpdateWithoutCreatedByDataInput {
+  name: String
+  description: String
+  tasks: TaskUpdateManyWithoutCategoriesInput
+}
+
 input CategoryUpdateWithoutTasksDataInput {
   name: String
   description: String
-  createdBy: UserUpdateOneInput
+  createdBy: UserUpdateOneWithoutCategoriesInput
+}
+
+input CategoryUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutCreatedByDataInput!
 }
 
 input CategoryUpdateWithWhereUniqueWithoutTasksInput {
   where: CategoryWhereUniqueInput!
   data: CategoryUpdateWithoutTasksDataInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutCreatedByDataInput!
+  create: CategoryCreateWithoutCreatedByInput!
 }
 
 input CategoryUpsertWithWhereUniqueWithoutTasksInput {
@@ -2446,6 +2487,7 @@ input MessageWhereUniqueInput {
 type Mutation {
   createPicture(data: PictureCreateInput!): Picture!
   createCategory(data: CategoryCreateInput!): Category!
+  createSubTask(data: SubTaskCreateInput!): SubTask!
   createPost(data: PostCreateInput!): Post!
   createStatusUpdate(data: StatusUpdateCreateInput!): StatusUpdate!
   createReminder(data: ReminderCreateInput!): Reminder!
@@ -2464,6 +2506,7 @@ type Mutation {
   createLocation(data: LocationCreateInput!): Location!
   createFile(data: FileCreateInput!): File!
   updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  updateSubTask(data: SubTaskUpdateInput!, where: SubTaskWhereUniqueInput!): SubTask
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateStatusUpdate(data: StatusUpdateUpdateInput!, where: StatusUpdateWhereUniqueInput!): StatusUpdate
   updateReminder(data: ReminderUpdateInput!, where: ReminderWhereUniqueInput!): Reminder
@@ -2477,10 +2520,12 @@ type Mutation {
   updatePriority(data: PriorityUpdateInput!, where: PriorityWhereUniqueInput!): Priority
   updateCity(data: CityUpdateInput!, where: CityWhereUniqueInput!): City
   updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
+  updateTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
   deleteCategory(where: CategoryWhereUniqueInput!): Category
+  deleteSubTask(where: SubTaskWhereUniqueInput!): SubTask
   deletePost(where: PostWhereUniqueInput!): Post
   deleteStatusUpdate(where: StatusUpdateWhereUniqueInput!): StatusUpdate
   deleteReminder(where: ReminderWhereUniqueInput!): Reminder
@@ -2494,10 +2539,12 @@ type Mutation {
   deletePriority(where: PriorityWhereUniqueInput!): Priority
   deleteCity(where: CityWhereUniqueInput!): City
   deleteTask(where: TaskWhereUniqueInput!): Task
+  deleteTag(where: TagWhereUniqueInput!): Tag
   deleteUser(where: UserWhereUniqueInput!): User
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteFile(where: FileWhereUniqueInput!): File
   upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  upsertSubTask(where: SubTaskWhereUniqueInput!, create: SubTaskCreateInput!, update: SubTaskUpdateInput!): SubTask!
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertStatusUpdate(where: StatusUpdateWhereUniqueInput!, create: StatusUpdateCreateInput!, update: StatusUpdateUpdateInput!): StatusUpdate!
   upsertReminder(where: ReminderWhereUniqueInput!, create: ReminderCreateInput!, update: ReminderUpdateInput!): Reminder!
@@ -2511,11 +2558,13 @@ type Mutation {
   upsertPriority(where: PriorityWhereUniqueInput!, create: PriorityCreateInput!, update: PriorityUpdateInput!): Priority!
   upsertCity(where: CityWhereUniqueInput!, create: CityCreateInput!, update: CityUpdateInput!): City!
   upsertTask(where: TaskWhereUniqueInput!, create: TaskCreateInput!, update: TaskUpdateInput!): Task!
+  upsertTag(where: TagWhereUniqueInput!, create: TagCreateInput!, update: TagUpdateInput!): Tag!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
   updateManyPictures(data: PictureUpdateInput!, where: PictureWhereInput): BatchPayload!
   updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
+  updateManySubTasks(data: SubTaskUpdateInput!, where: SubTaskWhereInput): BatchPayload!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyStatusUpdates(data: StatusUpdateUpdateInput!, where: StatusUpdateWhereInput): BatchPayload!
   updateManyReminders(data: ReminderUpdateInput!, where: ReminderWhereInput): BatchPayload!
@@ -2535,6 +2584,7 @@ type Mutation {
   updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
   deleteManyPictures(where: PictureWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  deleteManySubTasks(where: SubTaskWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyStatusUpdates(where: StatusUpdateWhereInput): BatchPayload!
   deleteManyReminders(where: ReminderWhereInput): BatchPayload!
@@ -4470,6 +4520,7 @@ input PriorityWhereUniqueInput {
 type Query {
   pictures(where: PictureWhereInput, orderBy: PictureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Picture]!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  subTasks(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SubTask]!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   statusUpdates(where: StatusUpdateWhereInput, orderBy: StatusUpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StatusUpdate]!
   reminders(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reminder]!
@@ -4488,6 +4539,7 @@ type Query {
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
   category(where: CategoryWhereUniqueInput!): Category
+  subTask(where: SubTaskWhereUniqueInput!): SubTask
   post(where: PostWhereUniqueInput!): Post
   statusUpdate(where: StatusUpdateWhereUniqueInput!): StatusUpdate
   reminder(where: ReminderWhereUniqueInput!): Reminder
@@ -4501,11 +4553,13 @@ type Query {
   priority(where: PriorityWhereUniqueInput!): Priority
   city(where: CityWhereUniqueInput!): City
   task(where: TaskWhereUniqueInput!): Task
+  tag(where: TagWhereUniqueInput!): Tag
   user(where: UserWhereUniqueInput!): User
   location(where: LocationWhereUniqueInput!): Location
   file(where: FileWhereUniqueInput!): File
   picturesConnection(where: PictureWhereInput, orderBy: PictureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PictureConnection!
   categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
+  subTasksConnection(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubTaskConnection!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   statusUpdatesConnection(where: StatusUpdateWhereInput, orderBy: StatusUpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatusUpdateConnection!
   remindersConnection(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReminderConnection!
@@ -5149,6 +5203,7 @@ input StatusUpdateWhereUniqueInput {
 type Subscription {
   picture(where: PictureSubscriptionWhereInput): PictureSubscriptionPayload
   category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+  subTask(where: SubTaskSubscriptionWhereInput): SubTaskSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   statusUpdate(where: StatusUpdateSubscriptionWhereInput): StatusUpdateSubscriptionPayload
   reminder(where: ReminderSubscriptionWhereInput): ReminderSubscriptionPayload
@@ -5168,8 +5223,433 @@ type Subscription {
   file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
 }
 
-type Tag {
+type SubTask implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy(where: UserWhereInput): User!
+  parent(where: TaskWhereInput): Task!
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean!
+  duration: Int
+}
+
+"""A connection to a list of items."""
+type SubTaskConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SubTaskEdge]!
+  aggregate: AggregateSubTask!
+}
+
+input SubTaskCreateInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserCreateOneInput!
+  parent: TaskCreateOneWithoutSubTasksInput!
+}
+
+input SubTaskCreateManyWithoutParentInput {
+  create: [SubTaskCreateWithoutParentInput!]
+  connect: [SubTaskWhereUniqueInput!]
+}
+
+input SubTaskCreateWithoutParentInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type SubTaskEdge {
+  """The item at the end of the edge."""
+  node: SubTask!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SubTaskOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  startDate_ASC
+  startDate_DESC
+  finishDate_ASC
+  finishDate_DESC
+  isComplete_ASC
+  isComplete_DESC
+  duration_ASC
+  duration_DESC
+}
+
+type SubTaskPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean!
+  duration: Int
+}
+
+type SubTaskSubscriptionPayload {
+  mutation: MutationType!
+  node: SubTask
+  updatedFields: [String!]
+  previousValues: SubTaskPreviousValues
+}
+
+input SubTaskSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubTaskSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubTaskSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubTaskSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SubTaskWhereInput
+}
+
+input SubTaskUpdateInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserUpdateOneInput
+  parent: TaskUpdateOneWithoutSubTasksInput
+}
+
+input SubTaskUpdateManyWithoutParentInput {
+  create: [SubTaskCreateWithoutParentInput!]
+  connect: [SubTaskWhereUniqueInput!]
+  disconnect: [SubTaskWhereUniqueInput!]
+  delete: [SubTaskWhereUniqueInput!]
+  update: [SubTaskUpdateWithWhereUniqueWithoutParentInput!]
+  upsert: [SubTaskUpsertWithWhereUniqueWithoutParentInput!]
+}
+
+input SubTaskUpdateWithoutParentDataInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserUpdateOneInput
+}
+
+input SubTaskUpdateWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput!
+  data: SubTaskUpdateWithoutParentDataInput!
+}
+
+input SubTaskUpsertWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput!
+  update: SubTaskUpdateWithoutParentDataInput!
+  create: SubTaskCreateWithoutParentInput!
+}
+
+input SubTaskWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubTaskWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubTaskWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubTaskWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  startDate: DateTime
+
+  """All values that are not equal to given value."""
+  startDate_not: DateTime
+
+  """All values that are contained in given list."""
+  startDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startDate_lte: DateTime
+
+  """All values greater than the given value."""
+  startDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startDate_gte: DateTime
+  finishDate: DateTime
+
+  """All values that are not equal to given value."""
+  finishDate_not: DateTime
+
+  """All values that are contained in given list."""
+  finishDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  finishDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  finishDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  finishDate_lte: DateTime
+
+  """All values greater than the given value."""
+  finishDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  finishDate_gte: DateTime
+  isComplete: Boolean
+
+  """All values that are not equal to given value."""
+  isComplete_not: Boolean
+  duration: Int
+
+  """All values that are not equal to given value."""
+  duration_not: Int
+
+  """All values that are contained in given list."""
+  duration_in: [Int!]
+
+  """All values that are not contained in given list."""
+  duration_not_in: [Int!]
+
+  """All values less than the given value."""
+  duration_lt: Int
+
+  """All values less than or equal the given value."""
+  duration_lte: Int
+
+  """All values greater than the given value."""
+  duration_gt: Int
+
+  """All values greater than or equal the given value."""
+  duration_gte: Int
+  createdBy: UserWhereInput
+  parent: TaskWhereInput
+}
+
+input SubTaskWhereUniqueInput {
+  id: ID
+}
+
+type Tag implements Node {
+  id: ID!
   name: String!
+  createdBy(where: UserWhereInput): User!
   description: String
   color: String!
 }
@@ -5188,10 +5668,12 @@ input TagCreateInput {
   name: String!
   description: String
   color: String!
+  createdBy: UserCreateOneInput!
 }
 
 input TagCreateManyInput {
   create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 """An edge in a connection."""
@@ -5204,14 +5686,14 @@ type TagEdge {
 }
 
 enum TagOrderByInput {
+  id_ASC
+  id_DESC
   name_ASC
   name_DESC
   description_ASC
   description_DESC
   color_ASC
   color_DESC
-  id_ASC
-  id_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -5219,6 +5701,7 @@ enum TagOrderByInput {
 }
 
 type TagPreviousValues {
+  id: ID!
   name: String!
   description: String
   color: String!
@@ -5263,14 +5746,38 @@ input TagSubscriptionWhereInput {
   node: TagWhereInput
 }
 
+input TagUpdateDataInput {
+  name: String
+  description: String
+  color: String
+  createdBy: UserUpdateOneInput
+}
+
 input TagUpdateInput {
   name: String
   description: String
   color: String
+  createdBy: UserUpdateOneInput
 }
 
 input TagUpdateManyInput {
   create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueNestedInput!]
+  upsert: [TagUpsertWithWhereUniqueNestedInput!]
+}
+
+input TagUpdateWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput!
+  data: TagUpdateDataInput!
+}
+
+input TagUpsertWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput!
+  update: TagUpdateDataInput!
+  create: TagCreateInput!
 }
 
 input TagWhereInput {
@@ -5282,6 +5789,46 @@ input TagWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [TagWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
   name: String
 
   """All values that are not equal to given value."""
@@ -5402,6 +5949,11 @@ input TagWhereInput {
 
   """All values not ending with the given string."""
   color_not_ends_with: String
+  createdBy: UserWhereInput
+}
+
+input TagWhereUniqueInput {
+  id: ID
 }
 
 type Task implements Node {
@@ -5415,9 +5967,10 @@ type Task implements Node {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean!
+  isClarified: Boolean!
   duration: Int
   priority(where: PriorityWhereInput): Priority
-  subTasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  subTasks(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SubTask!]
   status: TASK_STATUS
   tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag!]
   attachments(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
@@ -5446,19 +5999,15 @@ input TaskCreateInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserCreateOneWithoutTasksInput!
   categories: CategoryCreateManyWithoutTasksInput
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
-}
-
-input TaskCreateManyInput {
-  create: [TaskCreateInput!]
-  connect: [TaskWhereUniqueInput!]
 }
 
 input TaskCreateManyWithoutCategoriesInput {
@@ -5476,17 +6025,23 @@ input TaskCreateOneInput {
   connect: TaskWhereUniqueInput
 }
 
+input TaskCreateOneWithoutSubTasksInput {
+  create: TaskCreateWithoutSubTasksInput
+  connect: TaskWhereUniqueInput
+}
+
 input TaskCreateWithoutCategoriesInput {
   title: String
   description: String
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserCreateOneWithoutTasksInput!
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
 }
@@ -5497,11 +6052,28 @@ input TaskCreateWithoutCreatedByInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   categories: CategoryCreateManyWithoutTasksInput
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
+  tags: TagCreateManyInput
+  attachments: FileCreateManyInput
+}
+
+input TaskCreateWithoutSubTasksInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  isClarified: Boolean
+  duration: Int
+  status: TASK_STATUS
+  createdBy: UserCreateOneWithoutTasksInput!
+  categories: CategoryCreateManyWithoutTasksInput
+  priority: PriorityCreateOneInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
 }
@@ -5532,6 +6104,8 @@ enum TaskOrderByInput {
   finishDate_DESC
   isComplete_ASC
   isComplete_DESC
+  isClarified_ASC
+  isClarified_DESC
   duration_ASC
   duration_DESC
   status_ASC
@@ -5547,6 +6121,7 @@ type TaskPreviousValues {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean!
+  isClarified: Boolean!
   duration: Int
   status: TASK_STATUS
 }
@@ -5596,12 +6171,13 @@ input TaskUpdateDataInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
@@ -5612,23 +6188,15 @@ input TaskUpdateInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
-}
-
-input TaskUpdateManyInput {
-  create: [TaskCreateInput!]
-  connect: [TaskWhereUniqueInput!]
-  disconnect: [TaskWhereUniqueInput!]
-  delete: [TaskWhereUniqueInput!]
-  update: [TaskUpdateWithWhereUniqueNestedInput!]
-  upsert: [TaskUpsertWithWhereUniqueNestedInput!]
 }
 
 input TaskUpdateManyWithoutCategoriesInput {
@@ -5657,17 +6225,26 @@ input TaskUpdateOneInput {
   upsert: TaskUpsertNestedInput
 }
 
+input TaskUpdateOneWithoutSubTasksInput {
+  create: TaskCreateWithoutSubTasksInput
+  connect: TaskWhereUniqueInput
+  delete: Boolean
+  update: TaskUpdateWithoutSubTasksDataInput
+  upsert: TaskUpsertWithoutSubTasksInput
+}
+
 input TaskUpdateWithoutCategoriesDataInput {
   title: String
   description: String
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
@@ -5678,18 +6255,30 @@ input TaskUpdateWithoutCreatedByDataInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
 
-input TaskUpdateWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput!
-  data: TaskUpdateDataInput!
+input TaskUpdateWithoutSubTasksDataInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  isClarified: Boolean
+  duration: Int
+  status: TASK_STATUS
+  createdBy: UserUpdateOneWithoutTasksInput
+  categories: CategoryUpdateManyWithoutTasksInput
+  priority: PriorityUpdateOneInput
+  tags: TagUpdateManyInput
+  attachments: FileUpdateManyInput
 }
 
 input TaskUpdateWithWhereUniqueWithoutCategoriesInput {
@@ -5707,10 +6296,9 @@ input TaskUpsertNestedInput {
   create: TaskCreateInput!
 }
 
-input TaskUpsertWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput!
-  update: TaskUpdateDataInput!
-  create: TaskCreateInput!
+input TaskUpsertWithoutSubTasksInput {
+  update: TaskUpdateWithoutSubTasksDataInput!
+  create: TaskCreateWithoutSubTasksInput!
 }
 
 input TaskUpsertWithWhereUniqueWithoutCategoriesInput {
@@ -5946,6 +6534,10 @@ input TaskWhereInput {
 
   """All values that are not equal to given value."""
   isComplete_not: Boolean
+  isClarified: Boolean
+
+  """All values that are not equal to given value."""
+  isClarified_not: Boolean
   duration: Int
 
   """All values that are not equal to given value."""
@@ -5983,9 +6575,9 @@ input TaskWhereInput {
   categories_some: CategoryWhereInput
   categories_none: CategoryWhereInput
   priority: PriorityWhereInput
-  subTasks_every: TaskWhereInput
-  subTasks_some: TaskWhereInput
-  subTasks_none: TaskWhereInput
+  subTasks_every: SubTaskWhereInput
+  subTasks_some: SubTaskWhereInput
+  subTasks_none: SubTaskWhereInput
   tags_every: TagWhereInput
   tags_some: TagWhereInput
   tags_none: TagWhereInput
@@ -6010,6 +6602,7 @@ type User implements Node {
   lastName: String
   phone: String
   avatarColor: String
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification!]
@@ -6034,6 +6627,7 @@ input UserCreateInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
   notifications: NotificationCreateManyWithoutUserInput
@@ -6041,6 +6635,11 @@ input UserCreateInput {
 
 input UserCreateOneInput {
   create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCategoriesInput {
+  create: UserCreateWithoutCategoriesInput
   connect: UserWhereUniqueInput
 }
 
@@ -6059,6 +6658,20 @@ input UserCreateOneWithoutTasksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCategoriesInput {
+  email: String!
+  password: String!
+  isAdmin: Boolean
+  role: Role
+  firstName: String
+  lastName: String
+  phone: String
+  avatarColor: String
+  tasks: TaskCreateManyWithoutCreatedByInput
+  posts: PostCreateManyWithoutAuthorInput
+  notifications: NotificationCreateManyWithoutUserInput
+}
+
 input UserCreateWithoutNotificationsInput {
   email: String!
   password: String!
@@ -6068,6 +6681,7 @@ input UserCreateWithoutNotificationsInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
 }
@@ -6081,6 +6695,7 @@ input UserCreateWithoutPostsInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   notifications: NotificationCreateManyWithoutUserInput
 }
@@ -6094,6 +6709,7 @@ input UserCreateWithoutTasksInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
   notifications: NotificationCreateManyWithoutUserInput
 }
@@ -6194,6 +6810,7 @@ input UserUpdateDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -6208,6 +6825,7 @@ input UserUpdateInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -6219,6 +6837,14 @@ input UserUpdateOneInput {
   delete: Boolean
   update: UserUpdateDataInput
   upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneWithoutCategoriesInput {
+  create: UserCreateWithoutCategoriesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutCategoriesDataInput
+  upsert: UserUpsertWithoutCategoriesInput
 }
 
 input UserUpdateOneWithoutNotificationsInput {
@@ -6245,6 +6871,20 @@ input UserUpdateOneWithoutTasksInput {
   upsert: UserUpsertWithoutTasksInput
 }
 
+input UserUpdateWithoutCategoriesDataInput {
+  email: String
+  password: String
+  isAdmin: Boolean
+  role: Role
+  firstName: String
+  lastName: String
+  phone: String
+  avatarColor: String
+  tasks: TaskUpdateManyWithoutCreatedByInput
+  posts: PostUpdateManyWithoutAuthorInput
+  notifications: NotificationUpdateManyWithoutUserInput
+}
+
 input UserUpdateWithoutNotificationsDataInput {
   email: String
   password: String
@@ -6254,6 +6894,7 @@ input UserUpdateWithoutNotificationsDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
 }
@@ -6267,6 +6908,7 @@ input UserUpdateWithoutPostsDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
@@ -6280,6 +6922,7 @@ input UserUpdateWithoutTasksDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
@@ -6287,6 +6930,11 @@ input UserUpdateWithoutTasksDataInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutCategoriesInput {
+  update: UserUpdateWithoutCategoriesDataInput!
+  create: UserCreateWithoutCategoriesInput!
 }
 
 input UserUpsertWithoutNotificationsInput {
@@ -6651,6 +7299,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   avatarColor_not_ends_with: String
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
   tasks_every: TaskWhereInput
   tasks_some: TaskWhereInput
   tasks_none: TaskWhereInput

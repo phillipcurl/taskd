@@ -1,4 +1,11 @@
-$primary-color: #7acfc0;
+$primary-color: #5978f3;
 $outline-color: adjust-color( $primary-color, $saturation: -75%, $lightness: -26%);
 $fill-color: adjust-color($primary-color, $saturation: -82%, $lightness: 50%);
-$box-shadow: rgba(8, 35, 51, 0.05) 0px 4px 8px;
+$box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+$light-gray: hsl(200, 33%, 96%);
+$gray: hsl(200, 25%, 94%);
+$dark-gray: hsl(200, 25%, 88%);
+$text-black: #0c1e29;
+// $text-light-gray: hsl(200, 16%, 16%);
+$text-light-gray: #4e616c;
+$text-dark-gray: hsl(200, 31%, 14%);

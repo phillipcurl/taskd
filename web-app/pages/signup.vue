@@ -7,21 +7,27 @@
           <div class="mt3">
             <label class="db fw6 lh-copy f6" for="email">Email</label>
             <input v-model="email" 
+                  v-validate="'required|email'"
                   class="pa2 input-reset ba bg-transparent w-100" 
                   type="email" 
                   name="email" 
                   id="email"
                   required
                   autofocus>
+                  <i v-show="errors.has('email')" class="fa fa-warning"></i>
+                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
           </div>
           <div class="mv3">
             <label class="db fw6 lh-copy f6" for="password">Password</label>
-            <input v-model="password" 
+            <input v-model="password"
+                  v-validate="'required|min:7'"
                   class="b pa2 input-reset ba bg-transparent w-100" 
                   type="password" 
                   name="password" 
                   id="password"
                   required>
+                  <i v-show="errors.has('password')" class="fa fa-warning"></i>
+                <span v-show="errors.has('password')" class="help is-danger">{{ errors.first('password') }}</span>
           </div>
           <label class="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"> Remember me</label>
         </fieldset>
@@ -48,6 +54,7 @@
 <script>
 export default {
   auth: false,
+  authenticated: false,
   data() {
     return {
       isLoading: false,
@@ -64,6 +71,10 @@ export default {
       this.hasError = false;
       this.formSubmitted = true;
       try {
+        const validationResult = await this.$validator.validate();
+        if (!validationResult) {
+          return;
+        }
         await this.$auth.signup(this.email, this.password);
         this.hasError = false;
         this.$router.push({

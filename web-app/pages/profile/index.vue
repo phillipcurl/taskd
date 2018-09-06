@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  authenticated: true,
   layout: 'authenticated',
   computed: {
     user() {

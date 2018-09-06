@@ -10,6 +10,7 @@ type User {
   lastName: String
   phone: String
   avatarColor: String
+  categories: [Category!]!
   tasks: [Task!]!
   posts: [Post!]!
   notifications: [Notification!]!
@@ -64,12 +65,27 @@ type Task {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean! @default(value: "false")
+  isClarified: Boolean! @default(value: "false")
   duration: Int
   priority: Priority
-  subTasks: [Task!]!
+  subTasks: [SubTask!]!
   status: TASK_STATUS
   tags: [Tag!]!
   attachments: [File!]!
+}
+
+type SubTask {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  parent: Task!
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean! @default(value: "false")
+  duration: Int
 }
 
 type Post {
@@ -133,7 +149,9 @@ type Notification {
 }
 
 type Tag {
+  id: ID! @unique
   name: String!
+  createdBy: User!
   description: String
   color: String!
 }

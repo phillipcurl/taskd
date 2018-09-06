@@ -45,7 +45,8 @@
 
 <script>
 export default {
-  auth: false,
+  // auth: false,
+  authenticated: false,
   data() {
     return {
       isLoading: false,

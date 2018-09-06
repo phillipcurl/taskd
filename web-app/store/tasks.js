@@ -9,14 +9,17 @@ export const actions = {
     commit
   }, title) {
     console.log('the text is: ', title);
-    const data = await this.app.apolloProvider.defaultClient.mutate({
+    const {
+      data
+    } = await this.app.apolloProvider.defaultClient.mutate({
       mutation: captureTask,
       variables: {
         title: title
       }
     });
 
-    commit('SET_ACTIVE_TASK', data.data.capture);
+    commit('SET_ACTIVE_TASK', data.capture);
+    console.log(data.capture)
   }
 };
 

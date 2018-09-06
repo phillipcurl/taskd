@@ -3,7 +3,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s | Taskd',
+    // titleTemplate: 'Taskd | %s',
     meta: [{
         charset: 'utf-8'
       },
@@ -16,18 +16,18 @@ module.exports = {
         meta: 'description',
         content: 'Nuxt.js project'
       },
-      {
-        property: 'og:image',
-        content: 'https://user-images.githubusercontent.com/904724/26879447-689b56a8-4b91-11e7-968f-5eea1d6c71b4.png'
-      },
-      {
-        property: 'twitter:card',
-        content: 'summary_large_image'
-      },
-      {
-        property: 'twitter:site',
-        content: '@company'
-      }
+      // {
+      //   property: 'og:image',
+      //   content: 'https://user-images.githubusercontent.com/904724/26879447-689b56a8-4b91-11e7-968f-5eea1d6c71b4.png'
+      // },
+      // {
+      //   property: 'twitter:card',
+      //   content: 'summary_large_image'
+      // },
+      // {
+      //   property: 'twitter:site',
+      //   content: '@company'
+      // }
     ],
     link: [{
       rel: 'icon',
@@ -52,7 +52,7 @@ module.exports = {
    ** Customize the progress-bar color
    */
   manifest: {
-    name: 'Company | Company Slogan',
+    name: 'Taskd | %s',
     short_name: 'Company',
     start_url: '/',
     scope: '/',
@@ -73,13 +73,29 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/apollo',
     '@nuxtjs/axios',
-    '@nuxtjs/sitemap',
-    '~/modules/auth/module.js'
+    '~/modules/auth/module.js', ['nuxt-validate', {
+      lang: 'en',
+      // regular vee-validate options 
+    }],
+    '@nuxtjs/toast',
+    '@nuxtjs/sitemap', ['nuxt-social-meta', {
+      url: 'https://phillipcurl.com',
+      title: 'Taskd',
+      description: 'Simple task management to keep you organized and on track.',
+      img: 'static/icon.png',
+      locale: 'en_US',
+      twitter: '@philcurl',
+      themeColor: '#19a974'
+    }]
     // ['@nuxtjs/google-analytics', { ua: 'UA-{{ID}}' }]
   ],
   plugins: [
     '~/plugins/vuex-router-sync',
-    '~/plugins/filters'
+    '~/plugins/filters',
+    {
+      src: '~/plugins/vue-quill-editor.js',
+      ssr: false
+    }
   ],
   router: {
     middleware: ['https', 'auth']
@@ -88,6 +104,16 @@ module.exports = {
   apollo: {
     clientConfigs: {
       default: '~/apollo/client-configs/default.js'
+    }
+  },
+  toast: {
+    // theme: 'bubble',
+    position: 'top-right',
+    action: {
+      text: 'Cancel',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0);
+      }
     }
   },
   build: {

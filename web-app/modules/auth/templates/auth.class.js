@@ -1,13 +1,17 @@
 import Cookies from 'js-cookie';
-import { parse as parseCookie } from 'cookie';
-import { routeOption } from './auth.utilities';
+import {
+  parse as parseCookie
+} from 'cookie';
+import {
+  routeOption
+} from './auth.utilities';
 import getProp from 'dotprop';
 import Vue from 'vue';
 import gql from 'graphql-tag';
 
 const RELATIVE_URL_REGEX = /^\/[a-zA-Z0-9@\-%_~][\/a-zA-Z0-9@\-%_~]{1,200}$/;
 
-export const loginMutaion = gql`
+export const loginMutaion = gql `
   mutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -19,7 +23,7 @@ export const loginMutaion = gql`
   }
 `;
 
-export const signupMutation = gql`
+export const signupMutation = gql `
   mutation($email: String!, $password: String!) {
     signup(email: $email, password: $password) {
       token
@@ -62,9 +66,9 @@ export default class Auth {
     this.syncToken();
 
     // Fetch user if is not available
-    return !this.state.user && this.options.fetchUserOnLogin
-      ? this.fetchUser()
-      : Promise.resolve();
+    return !this.state.user && this.options.fetchUserOnLogin ?
+      this.fetchUser() :
+      Promise.resolve();
   }
 
   _registerVuexStore() {
@@ -169,7 +173,10 @@ export default class Auth {
       return;
     }
 
-    this.$store.commit(this.options.namespace + '/SET', { key, value });
+    this.$store.commit(this.options.namespace + '/SET', {
+      key,
+      value
+    });
   }
 
   getState(key) {
@@ -218,9 +225,9 @@ export default class Auth {
   }
 
   getCookie(name) {
-    const cookieStr = process.browser
-      ? document.cookie
-      : this.$req.headers.cookie;
+    const cookieStr = process.browser ?
+      document.cookie :
+      this.$req.headers.cookie;
 
     const cookies = parseCookie(cookieStr || '') || {};
 
@@ -228,7 +235,9 @@ export default class Auth {
   }
 
   async login(email, password) {
-    const { data } = await this.$apollo.mutate({
+    const {
+      data
+    } = await this.$apollo.mutate({
       mutation: loginMutaion,
       variables: {
         email,
@@ -253,7 +262,9 @@ export default class Auth {
   }
 
   async signup(email, password) {
-    const { data } = await this.$apollo.mutate({
+    const {
+      data
+    } = await this.$apollo.mutate({
       mutation: signupMutation,
       variables: {
         email,
@@ -283,7 +294,7 @@ export default class Auth {
     }
 
     const data = await this.$apollo.query({
-      query: gql`
+      query: gql `
         {
           me {
             id
@@ -305,7 +316,7 @@ export default class Auth {
     // await this._request('logout', endpoint);
 
     this.reset();
-    this.ctx.redirect('/');
+    this.ctx.redirect('/login');
   }
 
   setToken(token) {

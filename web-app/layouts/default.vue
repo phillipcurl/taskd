@@ -29,9 +29,14 @@
 
 <script>
 import AppFooter from '~/components/Footer.vue';
-import FeatherIcon from '~/components/FeatherIcon';
+import FeatherIcon from '~/components/Icons/FeatherIcon';
 
 export default {
+  fetch({ redirect }) {
+    if (this.$auth.state.loggedIn) {
+      return redirect('/tasks');
+    }
+  },
   components: {
     AppFooter,
     FeatherIcon

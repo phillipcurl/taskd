@@ -6,6 +6,7 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     pictures: <T = Picture[]>(args: { where?: PictureWhereInput, orderBy?: PictureOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     categories: <T = Category[]>(args: { where?: CategoryWhereInput, orderBy?: CategoryOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    subTasks: <T = SubTask[]>(args: { where?: SubTaskWhereInput, orderBy?: SubTaskOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     posts: <T = Post[]>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     statusUpdates: <T = StatusUpdate[]>(args: { where?: StatusUpdateWhereInput, orderBy?: StatusUpdateOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     reminders: <T = Reminder[]>(args: { where?: ReminderWhereInput, orderBy?: ReminderOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -24,6 +25,7 @@ export interface Query {
     locations: <T = Location[]>(args: { where?: LocationWhereInput, orderBy?: LocationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     files: <T = File[]>(args: { where?: FileWhereInput, orderBy?: FileOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     category: <T = Category | null>(args: { where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    subTask: <T = SubTask | null>(args: { where: SubTaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     post: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     statusUpdate: <T = StatusUpdate | null>(args: { where: StatusUpdateWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     reminder: <T = Reminder | null>(args: { where: ReminderWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -37,11 +39,13 @@ export interface Query {
     priority: <T = Priority | null>(args: { where: PriorityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     city: <T = City | null>(args: { where: CityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     task: <T = Task | null>(args: { where: TaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    tag: <T = Tag | null>(args: { where: TagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     location: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     file: <T = File | null>(args: { where: FileWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     picturesConnection: <T = PictureConnection>(args: { where?: PictureWhereInput, orderBy?: PictureOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     categoriesConnection: <T = CategoryConnection>(args: { where?: CategoryWhereInput, orderBy?: CategoryOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    subTasksConnection: <T = SubTaskConnection>(args: { where?: SubTaskWhereInput, orderBy?: SubTaskOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     postsConnection: <T = PostConnection>(args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     statusUpdatesConnection: <T = StatusUpdateConnection>(args: { where?: StatusUpdateWhereInput, orderBy?: StatusUpdateOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     remindersConnection: <T = ReminderConnection>(args: { where?: ReminderWhereInput, orderBy?: ReminderOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -65,6 +69,7 @@ export interface Query {
 export interface Mutation {
     createPicture: <T = Picture>(args: { data: PictureCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createCategory: <T = Category>(args: { data: CategoryCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createSubTask: <T = SubTask>(args: { data: SubTaskCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createPost: <T = Post>(args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createStatusUpdate: <T = StatusUpdate>(args: { data: StatusUpdateCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createReminder: <T = Reminder>(args: { data: ReminderCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -83,6 +88,7 @@ export interface Mutation {
     createLocation: <T = Location>(args: { data: LocationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createFile: <T = File>(args: { data: FileCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateCategory: <T = Category | null>(args: { data: CategoryUpdateInput, where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateSubTask: <T = SubTask | null>(args: { data: SubTaskUpdateInput, where: SubTaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updatePost: <T = Post | null>(args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateStatusUpdate: <T = StatusUpdate | null>(args: { data: StatusUpdateUpdateInput, where: StatusUpdateWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateReminder: <T = Reminder | null>(args: { data: ReminderUpdateInput, where: ReminderWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -96,10 +102,12 @@ export interface Mutation {
     updatePriority: <T = Priority | null>(args: { data: PriorityUpdateInput, where: PriorityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateCity: <T = City | null>(args: { data: CityUpdateInput, where: CityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateTask: <T = Task | null>(args: { data: TaskUpdateInput, where: TaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateTag: <T = Tag | null>(args: { data: TagUpdateInput, where: TagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateLocation: <T = Location | null>(args: { data: LocationUpdateInput, where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateFile: <T = File | null>(args: { data: FileUpdateInput, where: FileWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteCategory: <T = Category | null>(args: { where: CategoryWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteSubTask: <T = SubTask | null>(args: { where: SubTaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deletePost: <T = Post | null>(args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteStatusUpdate: <T = StatusUpdate | null>(args: { where: StatusUpdateWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteReminder: <T = Reminder | null>(args: { where: ReminderWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -113,10 +121,12 @@ export interface Mutation {
     deletePriority: <T = Priority | null>(args: { where: PriorityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteCity: <T = City | null>(args: { where: CityWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteTask: <T = Task | null>(args: { where: TaskWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteTag: <T = Tag | null>(args: { where: TagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteLocation: <T = Location | null>(args: { where: LocationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteFile: <T = File | null>(args: { where: FileWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertCategory: <T = Category>(args: { where: CategoryWhereUniqueInput, create: CategoryCreateInput, update: CategoryUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertSubTask: <T = SubTask>(args: { where: SubTaskWhereUniqueInput, create: SubTaskCreateInput, update: SubTaskUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertPost: <T = Post>(args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertStatusUpdate: <T = StatusUpdate>(args: { where: StatusUpdateWhereUniqueInput, create: StatusUpdateCreateInput, update: StatusUpdateUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertReminder: <T = Reminder>(args: { where: ReminderWhereUniqueInput, create: ReminderCreateInput, update: ReminderUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -130,11 +140,13 @@ export interface Mutation {
     upsertPriority: <T = Priority>(args: { where: PriorityWhereUniqueInput, create: PriorityCreateInput, update: PriorityUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertCity: <T = City>(args: { where: CityWhereUniqueInput, create: CityCreateInput, update: CityUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTask: <T = Task>(args: { where: TaskWhereUniqueInput, create: TaskCreateInput, update: TaskUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertTag: <T = Tag>(args: { where: TagWhereUniqueInput, create: TagCreateInput, update: TagUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertLocation: <T = Location>(args: { where: LocationWhereUniqueInput, create: LocationCreateInput, update: LocationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertFile: <T = File>(args: { where: FileWhereUniqueInput, create: FileCreateInput, update: FileUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPictures: <T = BatchPayload>(args: { data: PictureUpdateInput, where?: PictureWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyCategories: <T = BatchPayload>(args: { data: CategoryUpdateInput, where?: CategoryWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManySubTasks: <T = BatchPayload>(args: { data: SubTaskUpdateInput, where?: SubTaskWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyPosts: <T = BatchPayload>(args: { data: PostUpdateInput, where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyStatusUpdates: <T = BatchPayload>(args: { data: StatusUpdateUpdateInput, where?: StatusUpdateWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyReminders: <T = BatchPayload>(args: { data: ReminderUpdateInput, where?: ReminderWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -154,6 +166,7 @@ export interface Mutation {
     updateManyFiles: <T = BatchPayload>(args: { data: FileUpdateInput, where?: FileWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPictures: <T = BatchPayload>(args: { where?: PictureWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyCategories: <T = BatchPayload>(args: { where?: CategoryWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManySubTasks: <T = BatchPayload>(args: { where?: SubTaskWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyPosts: <T = BatchPayload>(args: { where?: PostWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyStatusUpdates: <T = BatchPayload>(args: { where?: StatusUpdateWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyReminders: <T = BatchPayload>(args: { where?: ReminderWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -176,6 +189,7 @@ export interface Mutation {
 export interface Subscription {
     picture: <T = PictureSubscriptionPayload | null>(args: { where?: PictureSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     category: <T = CategorySubscriptionPayload | null>(args: { where?: CategorySubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    subTask: <T = SubTaskSubscriptionPayload | null>(args: { where?: SubTaskSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     post: <T = PostSubscriptionPayload | null>(args: { where?: PostSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     statusUpdate: <T = StatusUpdateSubscriptionPayload | null>(args: { where?: StatusUpdateSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     reminder: <T = ReminderSubscriptionPayload | null>(args: { where?: ReminderSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
@@ -198,6 +212,7 @@ export interface Subscription {
 export interface Exists {
   Picture: (where?: PictureWhereInput) => Promise<boolean>
   Category: (where?: CategoryWhereInput) => Promise<boolean>
+  SubTask: (where?: SubTaskWhereInput) => Promise<boolean>
   Post: (where?: PostWhereInput) => Promise<boolean>
   StatusUpdate: (where?: StatusUpdateWhereInput) => Promise<boolean>
   Reminder: (where?: ReminderWhereInput) => Promise<boolean>
@@ -303,6 +318,10 @@ type AggregateStatusUpdate {
   count: Int!
 }
 
+type AggregateSubTask {
+  count: Int!
+}
+
 type AggregateTag {
   count: Int!
 }
@@ -343,8 +362,13 @@ type CategoryConnection {
 input CategoryCreateInput {
   name: String
   description: String
-  createdBy: UserCreateOneInput!
+  createdBy: UserCreateOneWithoutCategoriesInput!
   tasks: TaskCreateManyWithoutCategoriesInput
+}
+
+input CategoryCreateManyWithoutCreatedByInput {
+  create: [CategoryCreateWithoutCreatedByInput!]
+  connect: [CategoryWhereUniqueInput!]
 }
 
 input CategoryCreateManyWithoutTasksInput {
@@ -352,10 +376,16 @@ input CategoryCreateManyWithoutTasksInput {
   connect: [CategoryWhereUniqueInput!]
 }
 
+input CategoryCreateWithoutCreatedByInput {
+  name: String
+  description: String
+  tasks: TaskCreateManyWithoutCategoriesInput
+}
+
 input CategoryCreateWithoutTasksInput {
   name: String
   description: String
-  createdBy: UserCreateOneInput!
+  createdBy: UserCreateOneWithoutCategoriesInput!
 }
 
 """An edge in a connection."""
@@ -430,8 +460,17 @@ input CategorySubscriptionWhereInput {
 input CategoryUpdateInput {
   name: String
   description: String
-  createdBy: UserUpdateOneInput
+  createdBy: UserUpdateOneWithoutCategoriesInput
   tasks: TaskUpdateManyWithoutCategoriesInput
+}
+
+input CategoryUpdateManyWithoutCreatedByInput {
+  create: [CategoryCreateWithoutCreatedByInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutCreatedByInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutCreatedByInput!]
 }
 
 input CategoryUpdateManyWithoutTasksInput {
@@ -443,15 +482,32 @@ input CategoryUpdateManyWithoutTasksInput {
   upsert: [CategoryUpsertWithWhereUniqueWithoutTasksInput!]
 }
 
+input CategoryUpdateWithoutCreatedByDataInput {
+  name: String
+  description: String
+  tasks: TaskUpdateManyWithoutCategoriesInput
+}
+
 input CategoryUpdateWithoutTasksDataInput {
   name: String
   description: String
-  createdBy: UserUpdateOneInput
+  createdBy: UserUpdateOneWithoutCategoriesInput
+}
+
+input CategoryUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutCreatedByDataInput!
 }
 
 input CategoryUpdateWithWhereUniqueWithoutTasksInput {
   where: CategoryWhereUniqueInput!
   data: CategoryUpdateWithoutTasksDataInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutCreatedByDataInput!
+  create: CategoryCreateWithoutCreatedByInput!
 }
 
 input CategoryUpsertWithWhereUniqueWithoutTasksInput {
@@ -2684,6 +2740,7 @@ input MessageWhereUniqueInput {
 type Mutation {
   createPicture(data: PictureCreateInput!): Picture!
   createCategory(data: CategoryCreateInput!): Category!
+  createSubTask(data: SubTaskCreateInput!): SubTask!
   createPost(data: PostCreateInput!): Post!
   createStatusUpdate(data: StatusUpdateCreateInput!): StatusUpdate!
   createReminder(data: ReminderCreateInput!): Reminder!
@@ -2702,6 +2759,7 @@ type Mutation {
   createLocation(data: LocationCreateInput!): Location!
   createFile(data: FileCreateInput!): File!
   updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
+  updateSubTask(data: SubTaskUpdateInput!, where: SubTaskWhereUniqueInput!): SubTask
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateStatusUpdate(data: StatusUpdateUpdateInput!, where: StatusUpdateWhereUniqueInput!): StatusUpdate
   updateReminder(data: ReminderUpdateInput!, where: ReminderWhereUniqueInput!): Reminder
@@ -2715,10 +2773,12 @@ type Mutation {
   updatePriority(data: PriorityUpdateInput!, where: PriorityWhereUniqueInput!): Priority
   updateCity(data: CityUpdateInput!, where: CityWhereUniqueInput!): City
   updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
+  updateTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
   deleteCategory(where: CategoryWhereUniqueInput!): Category
+  deleteSubTask(where: SubTaskWhereUniqueInput!): SubTask
   deletePost(where: PostWhereUniqueInput!): Post
   deleteStatusUpdate(where: StatusUpdateWhereUniqueInput!): StatusUpdate
   deleteReminder(where: ReminderWhereUniqueInput!): Reminder
@@ -2732,10 +2792,12 @@ type Mutation {
   deletePriority(where: PriorityWhereUniqueInput!): Priority
   deleteCity(where: CityWhereUniqueInput!): City
   deleteTask(where: TaskWhereUniqueInput!): Task
+  deleteTag(where: TagWhereUniqueInput!): Tag
   deleteUser(where: UserWhereUniqueInput!): User
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteFile(where: FileWhereUniqueInput!): File
   upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
+  upsertSubTask(where: SubTaskWhereUniqueInput!, create: SubTaskCreateInput!, update: SubTaskUpdateInput!): SubTask!
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertStatusUpdate(where: StatusUpdateWhereUniqueInput!, create: StatusUpdateCreateInput!, update: StatusUpdateUpdateInput!): StatusUpdate!
   upsertReminder(where: ReminderWhereUniqueInput!, create: ReminderCreateInput!, update: ReminderUpdateInput!): Reminder!
@@ -2749,11 +2811,13 @@ type Mutation {
   upsertPriority(where: PriorityWhereUniqueInput!, create: PriorityCreateInput!, update: PriorityUpdateInput!): Priority!
   upsertCity(where: CityWhereUniqueInput!, create: CityCreateInput!, update: CityUpdateInput!): City!
   upsertTask(where: TaskWhereUniqueInput!, create: TaskCreateInput!, update: TaskUpdateInput!): Task!
+  upsertTag(where: TagWhereUniqueInput!, create: TagCreateInput!, update: TagUpdateInput!): Tag!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
   updateManyPictures(data: PictureUpdateInput!, where: PictureWhereInput): BatchPayload!
   updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
+  updateManySubTasks(data: SubTaskUpdateInput!, where: SubTaskWhereInput): BatchPayload!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
   updateManyStatusUpdates(data: StatusUpdateUpdateInput!, where: StatusUpdateWhereInput): BatchPayload!
   updateManyReminders(data: ReminderUpdateInput!, where: ReminderWhereInput): BatchPayload!
@@ -2773,6 +2837,7 @@ type Mutation {
   updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
   deleteManyPictures(where: PictureWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
+  deleteManySubTasks(where: SubTaskWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
   deleteManyStatusUpdates(where: StatusUpdateWhereInput): BatchPayload!
   deleteManyReminders(where: ReminderWhereInput): BatchPayload!
@@ -4708,6 +4773,7 @@ input PriorityWhereUniqueInput {
 type Query {
   pictures(where: PictureWhereInput, orderBy: PictureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Picture]!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
+  subTasks(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SubTask]!
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   statusUpdates(where: StatusUpdateWhereInput, orderBy: StatusUpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StatusUpdate]!
   reminders(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Reminder]!
@@ -4726,6 +4792,7 @@ type Query {
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
   category(where: CategoryWhereUniqueInput!): Category
+  subTask(where: SubTaskWhereUniqueInput!): SubTask
   post(where: PostWhereUniqueInput!): Post
   statusUpdate(where: StatusUpdateWhereUniqueInput!): StatusUpdate
   reminder(where: ReminderWhereUniqueInput!): Reminder
@@ -4739,11 +4806,13 @@ type Query {
   priority(where: PriorityWhereUniqueInput!): Priority
   city(where: CityWhereUniqueInput!): City
   task(where: TaskWhereUniqueInput!): Task
+  tag(where: TagWhereUniqueInput!): Tag
   user(where: UserWhereUniqueInput!): User
   location(where: LocationWhereUniqueInput!): Location
   file(where: FileWhereUniqueInput!): File
   picturesConnection(where: PictureWhereInput, orderBy: PictureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PictureConnection!
   categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
+  subTasksConnection(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubTaskConnection!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   statusUpdatesConnection(where: StatusUpdateWhereInput, orderBy: StatusUpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatusUpdateConnection!
   remindersConnection(where: ReminderWhereInput, orderBy: ReminderOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReminderConnection!
@@ -5387,6 +5456,7 @@ input StatusUpdateWhereUniqueInput {
 type Subscription {
   picture(where: PictureSubscriptionWhereInput): PictureSubscriptionPayload
   category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+  subTask(where: SubTaskSubscriptionWhereInput): SubTaskSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   statusUpdate(where: StatusUpdateSubscriptionWhereInput): StatusUpdateSubscriptionPayload
   reminder(where: ReminderSubscriptionWhereInput): ReminderSubscriptionPayload
@@ -5406,8 +5476,433 @@ type Subscription {
   file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
 }
 
-type Tag {
+type SubTask implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy(where: UserWhereInput): User!
+  parent(where: TaskWhereInput): Task!
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean!
+  duration: Int
+}
+
+"""A connection to a list of items."""
+type SubTaskConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SubTaskEdge]!
+  aggregate: AggregateSubTask!
+}
+
+input SubTaskCreateInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserCreateOneInput!
+  parent: TaskCreateOneWithoutSubTasksInput!
+}
+
+input SubTaskCreateManyWithoutParentInput {
+  create: [SubTaskCreateWithoutParentInput!]
+  connect: [SubTaskWhereUniqueInput!]
+}
+
+input SubTaskCreateWithoutParentInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserCreateOneInput!
+}
+
+"""An edge in a connection."""
+type SubTaskEdge {
+  """The item at the end of the edge."""
+  node: SubTask!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum SubTaskOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  startDate_ASC
+  startDate_DESC
+  finishDate_ASC
+  finishDate_DESC
+  isComplete_ASC
+  isComplete_DESC
+  duration_ASC
+  duration_DESC
+}
+
+type SubTaskPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean!
+  duration: Int
+}
+
+type SubTaskSubscriptionPayload {
+  mutation: MutationType!
+  node: SubTask
+  updatedFields: [String!]
+  previousValues: SubTaskPreviousValues
+}
+
+input SubTaskSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubTaskSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubTaskSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubTaskSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SubTaskWhereInput
+}
+
+input SubTaskUpdateInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserUpdateOneInput
+  parent: TaskUpdateOneWithoutSubTasksInput
+}
+
+input SubTaskUpdateManyWithoutParentInput {
+  create: [SubTaskCreateWithoutParentInput!]
+  connect: [SubTaskWhereUniqueInput!]
+  disconnect: [SubTaskWhereUniqueInput!]
+  delete: [SubTaskWhereUniqueInput!]
+  update: [SubTaskUpdateWithWhereUniqueWithoutParentInput!]
+  upsert: [SubTaskUpsertWithWhereUniqueWithoutParentInput!]
+}
+
+input SubTaskUpdateWithoutParentDataInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  duration: Int
+  createdBy: UserUpdateOneInput
+}
+
+input SubTaskUpdateWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput!
+  data: SubTaskUpdateWithoutParentDataInput!
+}
+
+input SubTaskUpsertWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput!
+  update: SubTaskUpdateWithoutParentDataInput!
+  create: SubTaskCreateWithoutParentInput!
+}
+
+input SubTaskWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SubTaskWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SubTaskWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SubTaskWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  startDate: DateTime
+
+  """All values that are not equal to given value."""
+  startDate_not: DateTime
+
+  """All values that are contained in given list."""
+  startDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startDate_lte: DateTime
+
+  """All values greater than the given value."""
+  startDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startDate_gte: DateTime
+  finishDate: DateTime
+
+  """All values that are not equal to given value."""
+  finishDate_not: DateTime
+
+  """All values that are contained in given list."""
+  finishDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  finishDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  finishDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  finishDate_lte: DateTime
+
+  """All values greater than the given value."""
+  finishDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  finishDate_gte: DateTime
+  isComplete: Boolean
+
+  """All values that are not equal to given value."""
+  isComplete_not: Boolean
+  duration: Int
+
+  """All values that are not equal to given value."""
+  duration_not: Int
+
+  """All values that are contained in given list."""
+  duration_in: [Int!]
+
+  """All values that are not contained in given list."""
+  duration_not_in: [Int!]
+
+  """All values less than the given value."""
+  duration_lt: Int
+
+  """All values less than or equal the given value."""
+  duration_lte: Int
+
+  """All values greater than the given value."""
+  duration_gt: Int
+
+  """All values greater than or equal the given value."""
+  duration_gte: Int
+  createdBy: UserWhereInput
+  parent: TaskWhereInput
+}
+
+input SubTaskWhereUniqueInput {
+  id: ID
+}
+
+type Tag implements Node {
+  id: ID!
   name: String!
+  createdBy(where: UserWhereInput): User!
   description: String
   color: String!
 }
@@ -5426,10 +5921,12 @@ input TagCreateInput {
   name: String!
   description: String
   color: String!
+  createdBy: UserCreateOneInput!
 }
 
 input TagCreateManyInput {
   create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
 }
 
 """An edge in a connection."""
@@ -5442,14 +5939,14 @@ type TagEdge {
 }
 
 enum TagOrderByInput {
+  id_ASC
+  id_DESC
   name_ASC
   name_DESC
   description_ASC
   description_DESC
   color_ASC
   color_DESC
-  id_ASC
-  id_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -5457,6 +5954,7 @@ enum TagOrderByInput {
 }
 
 type TagPreviousValues {
+  id: ID!
   name: String!
   description: String
   color: String!
@@ -5501,14 +5999,38 @@ input TagSubscriptionWhereInput {
   node: TagWhereInput
 }
 
+input TagUpdateDataInput {
+  name: String
+  description: String
+  color: String
+  createdBy: UserUpdateOneInput
+}
+
 input TagUpdateInput {
   name: String
   description: String
   color: String
+  createdBy: UserUpdateOneInput
 }
 
 input TagUpdateManyInput {
   create: [TagCreateInput!]
+  connect: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  delete: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueNestedInput!]
+  upsert: [TagUpsertWithWhereUniqueNestedInput!]
+}
+
+input TagUpdateWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput!
+  data: TagUpdateDataInput!
+}
+
+input TagUpsertWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput!
+  update: TagUpdateDataInput!
+  create: TagCreateInput!
 }
 
 input TagWhereInput {
@@ -5520,6 +6042,46 @@ input TagWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [TagWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
   name: String
 
   """All values that are not equal to given value."""
@@ -5640,6 +6202,11 @@ input TagWhereInput {
 
   """All values not ending with the given string."""
   color_not_ends_with: String
+  createdBy: UserWhereInput
+}
+
+input TagWhereUniqueInput {
+  id: ID
 }
 
 type Task implements Node {
@@ -5653,9 +6220,10 @@ type Task implements Node {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean!
+  isClarified: Boolean!
   duration: Int
   priority(where: PriorityWhereInput): Priority
-  subTasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+  subTasks(where: SubTaskWhereInput, orderBy: SubTaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SubTask!]
   status: TASK_STATUS
   tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag!]
   attachments(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
@@ -5684,19 +6252,15 @@ input TaskCreateInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserCreateOneWithoutTasksInput!
   categories: CategoryCreateManyWithoutTasksInput
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
-}
-
-input TaskCreateManyInput {
-  create: [TaskCreateInput!]
-  connect: [TaskWhereUniqueInput!]
 }
 
 input TaskCreateManyWithoutCategoriesInput {
@@ -5714,17 +6278,23 @@ input TaskCreateOneInput {
   connect: TaskWhereUniqueInput
 }
 
+input TaskCreateOneWithoutSubTasksInput {
+  create: TaskCreateWithoutSubTasksInput
+  connect: TaskWhereUniqueInput
+}
+
 input TaskCreateWithoutCategoriesInput {
   title: String
   description: String
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserCreateOneWithoutTasksInput!
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
 }
@@ -5735,11 +6305,28 @@ input TaskCreateWithoutCreatedByInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   categories: CategoryCreateManyWithoutTasksInput
   priority: PriorityCreateOneInput
-  subTasks: TaskCreateManyInput
+  subTasks: SubTaskCreateManyWithoutParentInput
+  tags: TagCreateManyInput
+  attachments: FileCreateManyInput
+}
+
+input TaskCreateWithoutSubTasksInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  isClarified: Boolean
+  duration: Int
+  status: TASK_STATUS
+  createdBy: UserCreateOneWithoutTasksInput!
+  categories: CategoryCreateManyWithoutTasksInput
+  priority: PriorityCreateOneInput
   tags: TagCreateManyInput
   attachments: FileCreateManyInput
 }
@@ -5770,6 +6357,8 @@ enum TaskOrderByInput {
   finishDate_DESC
   isComplete_ASC
   isComplete_DESC
+  isClarified_ASC
+  isClarified_DESC
   duration_ASC
   duration_DESC
   status_ASC
@@ -5785,6 +6374,7 @@ type TaskPreviousValues {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean!
+  isClarified: Boolean!
   duration: Int
   status: TASK_STATUS
 }
@@ -5834,12 +6424,13 @@ input TaskUpdateDataInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
@@ -5850,23 +6441,15 @@ input TaskUpdateInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
-}
-
-input TaskUpdateManyInput {
-  create: [TaskCreateInput!]
-  connect: [TaskWhereUniqueInput!]
-  disconnect: [TaskWhereUniqueInput!]
-  delete: [TaskWhereUniqueInput!]
-  update: [TaskUpdateWithWhereUniqueNestedInput!]
-  upsert: [TaskUpsertWithWhereUniqueNestedInput!]
 }
 
 input TaskUpdateManyWithoutCategoriesInput {
@@ -5895,17 +6478,26 @@ input TaskUpdateOneInput {
   upsert: TaskUpsertNestedInput
 }
 
+input TaskUpdateOneWithoutSubTasksInput {
+  create: TaskCreateWithoutSubTasksInput
+  connect: TaskWhereUniqueInput
+  delete: Boolean
+  update: TaskUpdateWithoutSubTasksDataInput
+  upsert: TaskUpsertWithoutSubTasksInput
+}
+
 input TaskUpdateWithoutCategoriesDataInput {
   title: String
   description: String
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   createdBy: UserUpdateOneWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
@@ -5916,18 +6508,30 @@ input TaskUpdateWithoutCreatedByDataInput {
   startDate: DateTime
   finishDate: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration: Int
   status: TASK_STATUS
   categories: CategoryUpdateManyWithoutTasksInput
   priority: PriorityUpdateOneInput
-  subTasks: TaskUpdateManyInput
+  subTasks: SubTaskUpdateManyWithoutParentInput
   tags: TagUpdateManyInput
   attachments: FileUpdateManyInput
 }
 
-input TaskUpdateWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput!
-  data: TaskUpdateDataInput!
+input TaskUpdateWithoutSubTasksDataInput {
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean
+  isClarified: Boolean
+  duration: Int
+  status: TASK_STATUS
+  createdBy: UserUpdateOneWithoutTasksInput
+  categories: CategoryUpdateManyWithoutTasksInput
+  priority: PriorityUpdateOneInput
+  tags: TagUpdateManyInput
+  attachments: FileUpdateManyInput
 }
 
 input TaskUpdateWithWhereUniqueWithoutCategoriesInput {
@@ -5945,10 +6549,9 @@ input TaskUpsertNestedInput {
   create: TaskCreateInput!
 }
 
-input TaskUpsertWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput!
-  update: TaskUpdateDataInput!
-  create: TaskCreateInput!
+input TaskUpsertWithoutSubTasksInput {
+  update: TaskUpdateWithoutSubTasksDataInput!
+  create: TaskCreateWithoutSubTasksInput!
 }
 
 input TaskUpsertWithWhereUniqueWithoutCategoriesInput {
@@ -6184,6 +6787,10 @@ input TaskWhereInput {
 
   """All values that are not equal to given value."""
   isComplete_not: Boolean
+  isClarified: Boolean
+
+  """All values that are not equal to given value."""
+  isClarified_not: Boolean
   duration: Int
 
   """All values that are not equal to given value."""
@@ -6221,9 +6828,9 @@ input TaskWhereInput {
   categories_some: CategoryWhereInput
   categories_none: CategoryWhereInput
   priority: PriorityWhereInput
-  subTasks_every: TaskWhereInput
-  subTasks_some: TaskWhereInput
-  subTasks_none: TaskWhereInput
+  subTasks_every: SubTaskWhereInput
+  subTasks_some: SubTaskWhereInput
+  subTasks_none: SubTaskWhereInput
   tags_every: TagWhereInput
   tags_some: TagWhereInput
   tags_none: TagWhereInput
@@ -6248,6 +6855,7 @@ type User implements Node {
   lastName: String
   phone: String
   avatarColor: String
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
   notifications(where: NotificationWhereInput, orderBy: NotificationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Notification!]
@@ -6272,6 +6880,7 @@ input UserCreateInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
   notifications: NotificationCreateManyWithoutUserInput
@@ -6279,6 +6888,11 @@ input UserCreateInput {
 
 input UserCreateOneInput {
   create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCategoriesInput {
+  create: UserCreateWithoutCategoriesInput
   connect: UserWhereUniqueInput
 }
 
@@ -6297,6 +6911,20 @@ input UserCreateOneWithoutTasksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateWithoutCategoriesInput {
+  email: String!
+  password: String!
+  isAdmin: Boolean
+  role: Role
+  firstName: String
+  lastName: String
+  phone: String
+  avatarColor: String
+  tasks: TaskCreateManyWithoutCreatedByInput
+  posts: PostCreateManyWithoutAuthorInput
+  notifications: NotificationCreateManyWithoutUserInput
+}
+
 input UserCreateWithoutNotificationsInput {
   email: String!
   password: String!
@@ -6306,6 +6934,7 @@ input UserCreateWithoutNotificationsInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
 }
@@ -6319,6 +6948,7 @@ input UserCreateWithoutPostsInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   tasks: TaskCreateManyWithoutCreatedByInput
   notifications: NotificationCreateManyWithoutUserInput
 }
@@ -6332,6 +6962,7 @@ input UserCreateWithoutTasksInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryCreateManyWithoutCreatedByInput
   posts: PostCreateManyWithoutAuthorInput
   notifications: NotificationCreateManyWithoutUserInput
 }
@@ -6432,6 +7063,7 @@ input UserUpdateDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -6446,6 +7078,7 @@ input UserUpdateInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
@@ -6457,6 +7090,14 @@ input UserUpdateOneInput {
   delete: Boolean
   update: UserUpdateDataInput
   upsert: UserUpsertNestedInput
+}
+
+input UserUpdateOneWithoutCategoriesInput {
+  create: UserCreateWithoutCategoriesInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutCategoriesDataInput
+  upsert: UserUpsertWithoutCategoriesInput
 }
 
 input UserUpdateOneWithoutNotificationsInput {
@@ -6483,6 +7124,20 @@ input UserUpdateOneWithoutTasksInput {
   upsert: UserUpsertWithoutTasksInput
 }
 
+input UserUpdateWithoutCategoriesDataInput {
+  email: String
+  password: String
+  isAdmin: Boolean
+  role: Role
+  firstName: String
+  lastName: String
+  phone: String
+  avatarColor: String
+  tasks: TaskUpdateManyWithoutCreatedByInput
+  posts: PostUpdateManyWithoutAuthorInput
+  notifications: NotificationUpdateManyWithoutUserInput
+}
+
 input UserUpdateWithoutNotificationsDataInput {
   email: String
   password: String
@@ -6492,6 +7147,7 @@ input UserUpdateWithoutNotificationsDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
 }
@@ -6505,6 +7161,7 @@ input UserUpdateWithoutPostsDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   tasks: TaskUpdateManyWithoutCreatedByInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
@@ -6518,6 +7175,7 @@ input UserUpdateWithoutTasksDataInput {
   lastName: String
   phone: String
   avatarColor: String
+  categories: CategoryUpdateManyWithoutCreatedByInput
   posts: PostUpdateManyWithoutAuthorInput
   notifications: NotificationUpdateManyWithoutUserInput
 }
@@ -6525,6 +7183,11 @@ input UserUpdateWithoutTasksDataInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutCategoriesInput {
+  update: UserUpdateWithoutCategoriesDataInput!
+  create: UserCreateWithoutCategoriesInput!
 }
 
 input UserUpsertWithoutNotificationsInput {
@@ -6889,6 +7552,9 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   avatarColor_not_ends_with: String
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
   tasks_every: TaskWhereInput
   tasks_some: TaskWhereInput
   tasks_none: TaskWhereInput
@@ -6912,38 +7578,27 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type PaymentOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'serviceFee_ASC' |
-  'serviceFee_DESC' |
-  'placePrice_ASC' |
-  'placePrice_DESC' |
-  'totalPrice_ASC' |
-  'totalPrice_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC'
-
-export type TagOrderByInput =   'name_ASC' |
-  'name_DESC' |
-  'description_ASC' |
-  'description_DESC' |
-  'color_ASC' |
-  'color_DESC' |
-  'id_ASC' |
-  'id_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
 export type PAYMENT_PROVIDER =   'PAYPAL' |
   'CREDIT_CARD'
 
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
+export type SubTaskOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'title_ASC' |
+  'title_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'startDate_ASC' |
+  'startDate_DESC' |
+  'finishDate_ASC' |
+  'finishDate_DESC' |
+  'isComplete_ASC' |
+  'isComplete_DESC' |
+  'duration_ASC' |
+  'duration_DESC'
 
 export type MessageOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6955,6 +7610,23 @@ export type MessageOrderByInput =   'id_ASC' |
   'readAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC'
+
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
+
+export type EventOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'title_ASC' |
+  'title_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'date_ASC' |
+  'date_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -6979,7 +7651,7 @@ export type UserOrderByInput =   'id_ASC' |
   'avatarColor_ASC' |
   'avatarColor_DESC'
 
-export type EventOrderByInput =   'id_ASC' |
+export type ReminderOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
@@ -6988,9 +7660,7 @@ export type EventOrderByInput =   'id_ASC' |
   'title_ASC' |
   'title_DESC' |
   'description_ASC' |
-  'description_DESC' |
-  'date_ASC' |
-  'date_DESC'
+  'description_DESC'
 
 export type PriorityOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -7003,16 +7673,18 @@ export type PriorityOrderByInput =   'id_ASC' |
   'description_ASC' |
   'description_DESC'
 
-export type ReminderOrderByInput =   'id_ASC' |
+export type StatusUpdateOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
-  'title_ASC' |
-  'title_DESC' |
-  'description_ASC' |
-  'description_DESC'
+  'text_ASC' |
+  'text_DESC' |
+  'previousStatus_ASC' |
+  'previousStatus_DESC' |
+  'newStatus_ASC' |
+  'newStatus_DESC'
 
 export type PaypalInformationOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -7050,36 +7722,82 @@ export type CategoryOrderByInput =   'id_ASC' |
   'description_ASC' |
   'description_DESC'
 
-export type PictureOrderByInput =   'url_ASC' |
-  'url_DESC' |
-  'id_ASC' |
+export type PaymentOrderByInput =   'id_ASC' |
   'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'serviceFee_ASC' |
+  'serviceFee_DESC' |
+  'placePrice_ASC' |
+  'placePrice_DESC' |
+  'totalPrice_ASC' |
+  'totalPrice_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC'
+
+export type NotificationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'type_ASC' |
+  'type_DESC' |
+  'link_ASC' |
+  'link_DESC' |
+  'readDate_ASC' |
+  'readDate_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC'
+
+export type LocationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'lat_ASC' |
+  'lat_DESC' |
+  'lng_ASC' |
+  'lng_DESC' |
+  'address_ASC' |
+  'address_DESC' |
+  'directions_ASC' |
+  'directions_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type StatusUpdateOrderByInput =   'id_ASC' |
+export type TagOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'color_ASC' |
+  'color_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type TaskOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
-  'text_ASC' |
-  'text_DESC' |
-  'previousStatus_ASC' |
-  'previousStatus_DESC' |
-  'newStatus_ASC' |
-  'newStatus_DESC'
-
-export type CityOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'name_ASC' |
-  'name_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
+  'title_ASC' |
+  'title_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'startDate_ASC' |
+  'startDate_DESC' |
+  'finishDate_ASC' |
+  'finishDate_DESC' |
+  'isComplete_ASC' |
+  'isComplete_DESC' |
+  'isClarified_ASC' |
+  'isClarified_DESC' |
+  'duration_ASC' |
+  'duration_DESC' |
+  'status_ASC' |
+  'status_DESC'
 
 export type FileOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -7098,27 +7816,6 @@ export type FileOrderByInput =   'id_ASC' |
   'url_ASC' |
   'url_DESC'
 
-export type TaskOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'title_ASC' |
-  'title_DESC' |
-  'description_ASC' |
-  'description_DESC' |
-  'startDate_ASC' |
-  'startDate_DESC' |
-  'finishDate_ASC' |
-  'finishDate_DESC' |
-  'isComplete_ASC' |
-  'isComplete_DESC' |
-  'duration_ASC' |
-  'duration_DESC' |
-  'status_ASC' |
-  'status_DESC'
-
 export type PostOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
@@ -7132,18 +7829,31 @@ export type PostOrderByInput =   'id_ASC' |
   'text_ASC' |
   'text_DESC'
 
-export type NotificationOrderByInput =   'id_ASC' |
+export type CityOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'type_ASC' |
-  'type_DESC' |
-  'link_ASC' |
-  'link_DESC' |
-  'readDate_ASC' |
-  'readDate_DESC' |
+  'name_ASC' |
+  'name_DESC' |
   'updatedAt_ASC' |
-  'updatedAt_DESC'
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type PictureOrderByInput =   'url_ASC' |
+  'url_DESC' |
+  'id_ASC' |
+  'id_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type TASK_STATUS =   'PENDING' |
+  'IN_PROCESS' |
+  'BLOCKED' |
+  'COMPLETED'
+
+export type Role =   'ADMIN' |
+  'CUSTOMER'
 
 export type CreditCardInformationOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -7168,32 +7878,12 @@ export type CreditCardInformationOrderByInput =   'id_ASC' |
   'updatedAt_ASC' |
   'updatedAt_DESC'
 
-export type LocationOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'lat_ASC' |
-  'lat_DESC' |
-  'lng_ASC' |
-  'lng_DESC' |
-  'address_ASC' |
-  'address_DESC' |
-  'directions_ASC' |
-  'directions_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export type TASK_STATUS =   'PENDING' |
-  'IN_PROCESS' |
-  'BLOCKED' |
-  'COMPLETED'
-
-export type Role =   'ADMIN' |
-  'CUSTOMER'
-
-export interface LocationCreateOneInput {
-  create?: LocationCreateInput
-  connect?: LocationWhereUniqueInput
+export interface LocationCreateInput {
+  lat: Float
+  lng: Float
+  address?: String
+  directions?: String
+  city?: CityCreateOneInput
 }
 
 export interface PictureWhereInput {
@@ -7216,32 +7906,59 @@ export interface PictureWhereInput {
   url_not_ends_with?: String
 }
 
-export interface ReminderUpdateInput {
+export interface TaskUpdateWithoutSubTasksDataInput {
   title?: String
   description?: String
-  createdBy?: UserUpdateOneInput
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy?: UserUpdateOneWithoutTasksInput
+  categories?: CategoryUpdateManyWithoutTasksInput
+  priority?: PriorityUpdateOneInput
+  tags?: TagUpdateManyInput
+  attachments?: FileUpdateManyInput
 }
 
-export interface TagUpdateManyInput {
-  create?: TagCreateInput[] | TagCreateInput
+export interface FileUpdateManyInput {
+  create?: FileCreateInput[] | FileCreateInput
+  connect?: FileWhereUniqueInput[] | FileWhereUniqueInput
+  disconnect?: FileWhereUniqueInput[] | FileWhereUniqueInput
+  delete?: FileWhereUniqueInput[] | FileWhereUniqueInput
+  update?: FileUpdateWithWhereUniqueNestedInput[] | FileUpdateWithWhereUniqueNestedInput
+  upsert?: FileUpsertWithWhereUniqueNestedInput[] | FileUpsertWithWhereUniqueNestedInput
 }
 
-export interface TaskUpsertNestedInput {
-  update: TaskUpdateDataInput
-  create: TaskCreateInput
-}
-
-export interface CreditCardInformationCreateOneWithoutPaymentAccountInput {
-  create?: CreditCardInformationCreateWithoutPaymentAccountInput
-  connect?: CreditCardInformationWhereUniqueInput
-}
-
-export interface TaskUpdateOneInput {
-  create?: TaskCreateInput
+export interface TaskUpdateOneWithoutSubTasksInput {
+  create?: TaskCreateWithoutSubTasksInput
   connect?: TaskWhereUniqueInput
   delete?: Boolean
-  update?: TaskUpdateDataInput
-  upsert?: TaskUpsertNestedInput
+  update?: TaskUpdateWithoutSubTasksDataInput
+  upsert?: TaskUpsertWithoutSubTasksInput
+}
+
+export interface CreditCardInformationCreateWithoutPaymentAccountInput {
+  cardNumber: String
+  expiresOnMonth: Int
+  expiresOnYear: Int
+  securityCode: String
+  firstName: String
+  lastName: String
+  postalCode: String
+  country: String
+}
+
+export interface SubTaskUpdateInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  duration?: Int
+  createdBy?: UserUpdateOneInput
+  parent?: TaskUpdateOneWithoutSubTasksInput
 }
 
 export interface LocationSubscriptionWhereInput {
@@ -7255,12 +7972,9 @@ export interface LocationSubscriptionWhereInput {
   node?: LocationWhereInput
 }
 
-export interface StatusUpdateUpdateInput {
-  text?: String
-  previousStatus?: String
-  newStatus?: String
-  createdBy?: UserUpdateOneInput
-  task?: TaskUpdateOneInput
+export interface UserUpsertWithoutCategoriesInput {
+  update: UserUpdateWithoutCategoriesDataInput
+  create: UserCreateWithoutCategoriesInput
 }
 
 export interface TagSubscriptionWhereInput {
@@ -7274,9 +7988,10 @@ export interface TagSubscriptionWhereInput {
   node?: TagWhereInput
 }
 
-export interface UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput
-  create: UserCreateWithoutPostsInput
+export interface TaskUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: TaskWhereUniqueInput
+  update: TaskUpdateWithoutCreatedByDataInput
+  create: TaskCreateWithoutCreatedByInput
 }
 
 export interface TaskSubscriptionWhereInput {
@@ -7290,36 +8005,86 @@ export interface TaskSubscriptionWhereInput {
   node?: TaskWhereInput
 }
 
-export interface UserUpdateWithoutPostsDataInput {
-  email?: String
-  password?: String
-  isAdmin?: Boolean
-  role?: Role
-  firstName?: String
-  lastName?: String
-  phone?: String
-  avatarColor?: String
-  tasks?: TaskUpdateManyWithoutCreatedByInput
-  notifications?: NotificationUpdateManyWithoutUserInput
+export interface PriorityUpsertNestedInput {
+  update: PriorityUpdateDataInput
+  create: PriorityCreateInput
 }
 
-export interface CitySubscriptionWhereInput {
-  AND?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
-  OR?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
-  NOT?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
+export interface PrioritySubscriptionWhereInput {
+  AND?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
+  OR?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
+  NOT?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: CityWhereInput
+  node?: PriorityWhereInput
 }
 
-export interface UserUpdateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutPostsDataInput
-  upsert?: UserUpsertWithoutPostsInput
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput
+  create: UserCreateInput
+}
+
+export interface NotificationWhereInput {
+  AND?: NotificationWhereInput[] | NotificationWhereInput
+  OR?: NotificationWhereInput[] | NotificationWhereInput
+  NOT?: NotificationWhereInput[] | NotificationWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  type?: NOTIFICATION_TYPE
+  type_not?: NOTIFICATION_TYPE
+  type_in?: NOTIFICATION_TYPE[] | NOTIFICATION_TYPE
+  type_not_in?: NOTIFICATION_TYPE[] | NOTIFICATION_TYPE
+  link?: String
+  link_not?: String
+  link_in?: String[] | String
+  link_not_in?: String[] | String
+  link_lt?: String
+  link_lte?: String
+  link_gt?: String
+  link_gte?: String
+  link_contains?: String
+  link_not_contains?: String
+  link_starts_with?: String
+  link_not_starts_with?: String
+  link_ends_with?: String
+  link_not_ends_with?: String
+  readDate?: DateTime
+  readDate_not?: DateTime
+  readDate_in?: DateTime[] | DateTime
+  readDate_not_in?: DateTime[] | DateTime
+  readDate_lt?: DateTime
+  readDate_lte?: DateTime
+  readDate_gt?: DateTime
+  readDate_gte?: DateTime
+  user?: UserWhereInput
+}
+
+export interface CategoryUpsertWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput
+  update: CategoryUpdateWithoutCreatedByDataInput
+  create: CategoryCreateWithoutCreatedByInput
 }
 
 export interface ReminderWhereInput {
@@ -7387,28 +8152,27 @@ export interface ReminderWhereInput {
   createdBy?: UserWhereInput
 }
 
-export interface PostUpdateInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
-  author?: UserUpdateOneWithoutPostsInput
-}
-
-export interface CreditCardInformationSubscriptionWhereInput {
-  AND?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
-  OR?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
-  NOT?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: CreditCardInformationWhereInput
-}
-
 export interface TaskUpsertWithWhereUniqueWithoutCategoriesInput {
   where: TaskWhereUniqueInput
   update: TaskUpdateWithoutCategoriesDataInput
   create: TaskCreateWithoutCategoriesInput
+}
+
+export interface PaypalInformationSubscriptionWhereInput {
+  AND?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
+  OR?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
+  NOT?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PaypalInformationWhereInput
+}
+
+export interface FileUpsertWithWhereUniqueNestedInput {
+  where: FileWhereUniqueInput
+  update: FileUpdateDataInput
+  create: FileCreateInput
 }
 
 export interface LocationWhereInput {
@@ -7476,19 +8240,8 @@ export interface LocationWhereInput {
   city?: CityWhereInput
 }
 
-export interface TaskUpdateWithoutCategoriesDataInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  createdBy?: UserUpdateOneWithoutTasksInput
-  priority?: PriorityUpdateOneInput
-  subTasks?: TaskUpdateManyInput
-  tags?: TagUpdateManyInput
-  attachments?: FileUpdateManyInput
+export interface PictureCreateInput {
+  url: String
 }
 
 export interface CityWhereInput {
@@ -7525,51 +8278,58 @@ export interface CityWhereInput {
   name_not_ends_with?: String
 }
 
-export interface TaskUpdateWithWhereUniqueWithoutCategoriesInput {
-  where: TaskWhereUniqueInput
-  data: TaskUpdateWithoutCategoriesDataInput
+export interface CategoryCreateInput {
+  name?: String
+  description?: String
+  createdBy: UserCreateOneWithoutCategoriesInput
+  tasks?: TaskCreateManyWithoutCategoriesInput
 }
 
-export interface PaymentAccountSubscriptionWhereInput {
-  AND?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
-  OR?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
-  NOT?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
+export interface PaymentSubscriptionWhereInput {
+  AND?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
+  OR?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
+  NOT?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: PaymentAccountWhereInput
+  node?: PaymentWhereInput
 }
 
-export interface TaskUpdateManyWithoutCategoriesInput {
-  create?: TaskCreateWithoutCategoriesInput[] | TaskCreateWithoutCategoriesInput
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  update?: TaskUpdateWithWhereUniqueWithoutCategoriesInput[] | TaskUpdateWithWhereUniqueWithoutCategoriesInput
-  upsert?: TaskUpsertWithWhereUniqueWithoutCategoriesInput[] | TaskUpsertWithWhereUniqueWithoutCategoriesInput
+export interface UserCreateOneWithoutCategoriesInput {
+  create?: UserCreateWithoutCategoriesInput
+  connect?: UserWhereUniqueInput
 }
 
-export interface NotificationSubscriptionWhereInput {
-  AND?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
-  OR?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
-  NOT?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
+export interface MessageSubscriptionWhereInput {
+  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
+  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
+  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: NotificationWhereInput
+  node?: MessageWhereInput
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput
-  create: UserCreateInput
+export interface UserCreateWithoutCategoriesInput {
+  email: String
+  password: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  tasks?: TaskCreateManyWithoutCreatedByInput
+  posts?: PostCreateManyWithoutAuthorInput
+  notifications?: NotificationCreateManyWithoutUserInput
 }
 
-export interface FileWhereInput {
-  AND?: FileWhereInput[] | FileWhereInput
-  OR?: FileWhereInput[] | FileWhereInput
-  NOT?: FileWhereInput[] | FileWhereInput
+export interface TagWhereInput {
+  AND?: TagWhereInput[] | TagWhereInput
+  OR?: TagWhereInput[] | TagWhereInput
+  NOT?: TagWhereInput[] | TagWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -7598,78 +8358,40 @@ export interface FileWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
-  size?: Int
-  size_not?: Int
-  size_in?: Int[] | Int
-  size_not_in?: Int[] | Int
-  size_lt?: Int
-  size_lte?: Int
-  size_gt?: Int
-  size_gte?: Int
-  secret?: String
-  secret_not?: String
-  secret_in?: String[] | String
-  secret_not_in?: String[] | String
-  secret_lt?: String
-  secret_lte?: String
-  secret_gt?: String
-  secret_gte?: String
-  secret_contains?: String
-  secret_not_contains?: String
-  secret_starts_with?: String
-  secret_not_starts_with?: String
-  secret_ends_with?: String
-  secret_not_ends_with?: String
-  contentType?: String
-  contentType_not?: String
-  contentType_in?: String[] | String
-  contentType_not_in?: String[] | String
-  contentType_lt?: String
-  contentType_lte?: String
-  contentType_gt?: String
-  contentType_gte?: String
-  contentType_contains?: String
-  contentType_not_contains?: String
-  contentType_starts_with?: String
-  contentType_not_starts_with?: String
-  contentType_ends_with?: String
-  contentType_not_ends_with?: String
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  url?: String
-  url_not?: String
-  url_in?: String[] | String
-  url_not_in?: String[] | String
-  url_lt?: String
-  url_lte?: String
-  url_gt?: String
-  url_gte?: String
-  url_contains?: String
-  url_not_contains?: String
-  url_starts_with?: String
-  url_not_starts_with?: String
-  url_ends_with?: String
-  url_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  color?: String
+  color_not?: String
+  color_in?: String[] | String
+  color_not_in?: String[] | String
+  color_lt?: String
+  color_lte?: String
+  color_gt?: String
+  color_gte?: String
+  color_contains?: String
+  color_not_contains?: String
+  color_starts_with?: String
+  color_not_starts_with?: String
+  color_ends_with?: String
+  color_not_ends_with?: String
+  createdBy?: UserWhereInput
 }
 
-export interface TaskUpsertWithWhereUniqueWithoutCreatedByInput {
-  where: TaskWhereUniqueInput
-  update: TaskUpdateWithoutCreatedByDataInput
-  create: TaskCreateWithoutCreatedByInput
+export interface TaskCreateManyWithoutCreatedByInput {
+  create?: TaskCreateWithoutCreatedByInput[] | TaskCreateWithoutCreatedByInput
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
 }
 
 export interface PaymentWhereInput {
@@ -7725,30 +8447,70 @@ export interface PaymentWhereInput {
   paymentMethod?: PaymentAccountWhereInput
 }
 
-export interface TaskUpsertWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput
-  update: TaskUpdateDataInput
-  create: TaskCreateInput
+export interface TaskCreateWithoutCreatedByInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  categories?: CategoryCreateManyWithoutTasksInput
+  priority?: PriorityCreateOneInput
+  subTasks?: SubTaskCreateManyWithoutParentInput
+  tags?: TagCreateManyInput
+  attachments?: FileCreateManyInput
 }
 
-export interface TagWhereInput {
-  AND?: TagWhereInput[] | TagWhereInput
-  OR?: TagWhereInput[] | TagWhereInput
-  NOT?: TagWhereInput[] | TagWhereInput
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
+export interface SubTaskWhereInput {
+  AND?: SubTaskWhereInput[] | SubTaskWhereInput
+  OR?: SubTaskWhereInput[] | SubTaskWhereInput
+  NOT?: SubTaskWhereInput[] | SubTaskWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  title?: String
+  title_not?: String
+  title_in?: String[] | String
+  title_not_in?: String[] | String
+  title_lt?: String
+  title_lte?: String
+  title_gt?: String
+  title_gte?: String
+  title_contains?: String
+  title_not_contains?: String
+  title_starts_with?: String
+  title_not_starts_with?: String
+  title_ends_with?: String
+  title_not_ends_with?: String
   description?: String
   description_not?: String
   description_in?: String[] | String
@@ -7763,26 +8525,39 @@ export interface TagWhereInput {
   description_not_starts_with?: String
   description_ends_with?: String
   description_not_ends_with?: String
-  color?: String
-  color_not?: String
-  color_in?: String[] | String
-  color_not_in?: String[] | String
-  color_lt?: String
-  color_lte?: String
-  color_gt?: String
-  color_gte?: String
-  color_contains?: String
-  color_not_contains?: String
-  color_starts_with?: String
-  color_not_starts_with?: String
-  color_ends_with?: String
-  color_not_ends_with?: String
+  startDate?: DateTime
+  startDate_not?: DateTime
+  startDate_in?: DateTime[] | DateTime
+  startDate_not_in?: DateTime[] | DateTime
+  startDate_lt?: DateTime
+  startDate_lte?: DateTime
+  startDate_gt?: DateTime
+  startDate_gte?: DateTime
+  finishDate?: DateTime
+  finishDate_not?: DateTime
+  finishDate_in?: DateTime[] | DateTime
+  finishDate_not_in?: DateTime[] | DateTime
+  finishDate_lt?: DateTime
+  finishDate_lte?: DateTime
+  finishDate_gt?: DateTime
+  finishDate_gte?: DateTime
+  isComplete?: Boolean
+  isComplete_not?: Boolean
+  duration?: Int
+  duration_not?: Int
+  duration_in?: Int[] | Int
+  duration_not_in?: Int[] | Int
+  duration_lt?: Int
+  duration_lte?: Int
+  duration_gt?: Int
+  duration_gte?: Int
+  createdBy?: UserWhereInput
+  parent?: TaskWhereInput
 }
 
-export interface FileUpsertWithWhereUniqueNestedInput {
-  where: FileWhereUniqueInput
-  update: FileUpdateDataInput
-  create: FileCreateInput
+export interface CategoryCreateManyWithoutTasksInput {
+  create?: CategoryCreateWithoutTasksInput[] | CategoryCreateWithoutTasksInput
+  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
 }
 
 export interface CreditCardInformationWhereInput {
@@ -7914,45 +8689,43 @@ export interface CreditCardInformationWhereInput {
   paymentAccount?: PaymentAccountWhereInput
 }
 
-export interface FileUpdateDataInput {
+export interface CategoryCreateWithoutTasksInput {
   name?: String
-  size?: Int
-  secret?: String
-  contentType?: String
-  url?: String
+  description?: String
+  createdBy: UserCreateOneWithoutCategoriesInput
 }
 
-export interface EventSubscriptionWhereInput {
-  AND?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
-  OR?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
-  NOT?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+export interface ReminderSubscriptionWhereInput {
+  AND?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
+  OR?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
+  NOT?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: EventWhereInput
+  node?: ReminderWhereInput
 }
 
-export interface PictureCreateInput {
-  url: String
+export interface PriorityCreateOneInput {
+  create?: PriorityCreateInput
+  connect?: PriorityWhereUniqueInput
 }
 
-export interface StatusUpdateSubscriptionWhereInput {
-  AND?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
-  OR?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
-  NOT?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
+export interface PostSubscriptionWhereInput {
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: StatusUpdateWhereInput
+  node?: PostWhereInput
 }
 
-export interface CategoryCreateInput {
+export interface PriorityCreateInput {
   name?: String
   description?: String
   createdBy: UserCreateOneInput
-  tasks?: TaskCreateManyWithoutCategoriesInput
 }
 
 export interface TaskWhereInput {
@@ -8035,6 +8808,8 @@ export interface TaskWhereInput {
   finishDate_gte?: DateTime
   isComplete?: Boolean
   isComplete_not?: Boolean
+  isClarified?: Boolean
+  isClarified_not?: Boolean
   duration?: Int
   duration_not?: Int
   duration_in?: Int[] | Int
@@ -8052,9 +8827,9 @@ export interface TaskWhereInput {
   categories_some?: CategoryWhereInput
   categories_none?: CategoryWhereInput
   priority?: PriorityWhereInput
-  subTasks_every?: TaskWhereInput
-  subTasks_some?: TaskWhereInput
-  subTasks_none?: TaskWhereInput
+  subTasks_every?: SubTaskWhereInput
+  subTasks_some?: SubTaskWhereInput
+  subTasks_none?: SubTaskWhereInput
   tags_every?: TagWhereInput
   tags_some?: TagWhereInput
   tags_none?: TagWhereInput
@@ -8192,6 +8967,9 @@ export interface UserWhereInput {
   avatarColor_not_starts_with?: String
   avatarColor_ends_with?: String
   avatarColor_not_ends_with?: String
+  categories_every?: CategoryWhereInput
+  categories_some?: CategoryWhereInput
+  categories_none?: CategoryWhereInput
   tasks_every?: TaskWhereInput
   tasks_some?: TaskWhereInput
   tasks_none?: TaskWhereInput
@@ -8212,109 +8990,65 @@ export interface UserCreateInput {
   lastName?: String
   phone?: String
   avatarColor?: String
+  categories?: CategoryCreateManyWithoutCreatedByInput
   tasks?: TaskCreateManyWithoutCreatedByInput
   posts?: PostCreateManyWithoutAuthorInput
   notifications?: NotificationCreateManyWithoutUserInput
-}
-
-export interface TagUpdateInput {
-  name?: String
-  description?: String
-  color?: String
-}
-
-export interface TaskCreateManyWithoutCreatedByInput {
-  create?: TaskCreateWithoutCreatedByInput[] | TaskCreateWithoutCreatedByInput
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
 }
 
 export interface PictureUpdateInput {
   url?: String
 }
 
-export interface TaskCreateWithoutCreatedByInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  categories?: CategoryCreateManyWithoutTasksInput
-  priority?: PriorityCreateOneInput
-  subTasks?: TaskCreateManyInput
-  tags?: TagCreateManyInput
-  attachments?: FileCreateManyInput
-}
-
-export interface PostWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface CategoryCreateManyWithoutTasksInput {
-  create?: CategoryCreateWithoutTasksInput[] | CategoryCreateWithoutTasksInput
+export interface CategoryCreateManyWithoutCreatedByInput {
+  create?: CategoryCreateWithoutCreatedByInput[] | CategoryCreateWithoutCreatedByInput
   connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
 }
 
-export interface ReminderWhereUniqueInput {
-  id?: ID_Input
+export interface FileUpdateInput {
+  name?: String
+  size?: Int
+  secret?: String
+  contentType?: String
+  url?: String
 }
 
-export interface CategoryCreateWithoutTasksInput {
+export interface CategoryCreateWithoutCreatedByInput {
   name?: String
   description?: String
-  createdBy: UserCreateOneInput
+  tasks?: TaskCreateManyWithoutCategoriesInput
 }
 
-export interface MessageWhereUniqueInput {
+export interface SubTaskWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface PriorityCreateOneInput {
-  create?: PriorityCreateInput
-  connect?: PriorityWhereUniqueInput
-}
-
-export interface PaymentWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface PriorityCreateInput {
-  name?: String
-  description?: String
-  createdBy: UserCreateOneInput
-}
-
-export interface PaypalInformationWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface TaskCreateManyInput {
-  create?: TaskCreateInput[] | TaskCreateInput
+export interface TaskCreateManyWithoutCategoriesInput {
+  create?: TaskCreateWithoutCategoriesInput[] | TaskCreateWithoutCategoriesInput
   connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
 }
 
-export interface PriorityWhereUniqueInput {
+export interface StatusUpdateWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface TaskCreateInput {
+export interface TaskCreateWithoutCategoriesInput {
   title?: String
   description?: String
   startDate?: DateTime
   finishDate?: DateTime
   isComplete?: Boolean
+  isClarified?: Boolean
   duration?: Int
   status?: TASK_STATUS
   createdBy: UserCreateOneWithoutTasksInput
-  categories?: CategoryCreateManyWithoutTasksInput
   priority?: PriorityCreateOneInput
-  subTasks?: TaskCreateManyInput
+  subTasks?: SubTaskCreateManyWithoutParentInput
   tags?: TagCreateManyInput
   attachments?: FileCreateManyInput
 }
 
-export interface TaskWhereUniqueInput {
+export interface EventWhereUniqueInput {
   id?: ID_Input
 }
 
@@ -8323,7 +9057,7 @@ export interface UserCreateOneWithoutTasksInput {
   connect?: UserWhereUniqueInput
 }
 
-export interface LocationWhereUniqueInput {
+export interface NotificationWhereUniqueInput {
   id?: ID_Input
 }
 
@@ -8336,16 +9070,13 @@ export interface UserCreateWithoutTasksInput {
   lastName?: String
   phone?: String
   avatarColor?: String
+  categories?: CategoryCreateManyWithoutCreatedByInput
   posts?: PostCreateManyWithoutAuthorInput
   notifications?: NotificationCreateManyWithoutUserInput
 }
 
-export interface FileUpdateInput {
-  name?: String
-  size?: Int
-  secret?: String
-  contentType?: String
-  url?: String
+export interface PaymentAccountWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface PostCreateManyWithoutAuthorInput {
@@ -8353,18 +9084,8 @@ export interface PostCreateManyWithoutAuthorInput {
   connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
 }
 
-export interface UserUpdateInput {
-  email?: String
-  password?: String
-  isAdmin?: Boolean
-  role?: Role
-  firstName?: String
-  lastName?: String
-  phone?: String
-  avatarColor?: String
-  tasks?: TaskUpdateManyWithoutCreatedByInput
-  posts?: PostUpdateManyWithoutAuthorInput
-  notifications?: NotificationUpdateManyWithoutUserInput
+export interface CreditCardInformationWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface PostCreateWithoutAuthorInput {
@@ -8373,8 +9094,8 @@ export interface PostCreateWithoutAuthorInput {
   text: String
 }
 
-export interface CityUpdateInput {
-  name?: String
+export interface CityWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface NotificationCreateManyWithoutUserInput {
@@ -8382,15 +9103,74 @@ export interface NotificationCreateManyWithoutUserInput {
   connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
 }
 
-export interface PaymentAccountUpsertWithoutCreditcardInput {
-  update: PaymentAccountUpdateWithoutCreditcardDataInput
-  create: PaymentAccountCreateWithoutCreditcardInput
+export interface TagWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface NotificationCreateWithoutUserInput {
   type?: NOTIFICATION_TYPE
   link: String
   readDate: DateTime
+}
+
+export interface LocationWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface SubTaskCreateManyWithoutParentInput {
+  create?: SubTaskCreateWithoutParentInput[] | SubTaskCreateWithoutParentInput
+  connect?: SubTaskWhereUniqueInput[] | SubTaskWhereUniqueInput
+}
+
+export interface LocationUpdateInput {
+  lat?: Float
+  lng?: Float
+  address?: String
+  directions?: String
+  city?: CityUpdateOneInput
+}
+
+export interface SubTaskCreateWithoutParentInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  duration?: Int
+  createdBy: UserCreateOneInput
+}
+
+export interface TagUpdateInput {
+  name?: String
+  description?: String
+  color?: String
+  createdBy?: UserUpdateOneInput
+}
+
+export interface TagCreateManyInput {
+  create?: TagCreateInput[] | TagCreateInput
+  connect?: TagWhereUniqueInput[] | TagWhereUniqueInput
+}
+
+export interface CityUpdateInput {
+  name?: String
+}
+
+export interface TagCreateInput {
+  name: String
+  description?: String
+  color: String
+  createdBy: UserCreateOneInput
+}
+
+export interface PaymentAccountUpsertWithoutCreditcardInput {
+  update: PaymentAccountUpdateWithoutCreditcardDataInput
+  create: PaymentAccountCreateWithoutCreditcardInput
+}
+
+export interface FileCreateManyInput {
+  create?: FileCreateInput[] | FileCreateInput
+  connect?: FileWhereUniqueInput[] | FileWhereUniqueInput
 }
 
 export interface PaymentAccountUpdateOneWithoutCreditcardInput {
@@ -8402,8 +9182,12 @@ export interface PaymentAccountUpdateOneWithoutCreditcardInput {
   upsert?: PaymentAccountUpsertWithoutCreditcardInput
 }
 
-export interface TagCreateManyInput {
-  create?: TagCreateInput[] | TagCreateInput
+export interface FileCreateInput {
+  name: String
+  size: Int
+  secret: String
+  contentType: String
+  url: String
 }
 
 export interface PaymentAccountUpsertWithoutPaypalInput {
@@ -8411,10 +9195,15 @@ export interface PaymentAccountUpsertWithoutPaypalInput {
   create: PaymentAccountCreateWithoutPaypalInput
 }
 
-export interface TagCreateInput {
-  name: String
+export interface SubTaskCreateInput {
+  title?: String
   description?: String
-  color: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  duration?: Int
+  createdBy: UserCreateOneInput
+  parent: TaskCreateOneWithoutSubTasksInput
 }
 
 export interface PaymentAccountUpdateOneWithoutPaypalInput {
@@ -8425,9 +9214,9 @@ export interface PaymentAccountUpdateOneWithoutPaypalInput {
   upsert?: PaymentAccountUpsertWithoutPaypalInput
 }
 
-export interface FileCreateManyInput {
-  create?: FileCreateInput[] | FileCreateInput
-  connect?: FileWhereUniqueInput[] | FileWhereUniqueInput
+export interface TaskCreateOneWithoutSubTasksInput {
+  create?: TaskCreateWithoutSubTasksInput
+  connect?: TaskWhereUniqueInput
 }
 
 export interface PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput {
@@ -8436,12 +9225,20 @@ export interface PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput {
   create: PaymentCreateWithoutPaymentMethodInput
 }
 
-export interface FileCreateInput {
-  name: String
-  size: Int
-  secret: String
-  contentType: String
-  url: String
+export interface TaskCreateWithoutSubTasksInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy: UserCreateOneWithoutTasksInput
+  categories?: CategoryCreateManyWithoutTasksInput
+  priority?: PriorityCreateOneInput
+  tags?: TagCreateManyInput
+  attachments?: FileCreateManyInput
 }
 
 export interface PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput {
@@ -8449,9 +9246,11 @@ export interface PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput {
   data: PaymentUpdateWithoutPaymentMethodDataInput
 }
 
-export interface TaskCreateManyWithoutCategoriesInput {
-  create?: TaskCreateWithoutCategoriesInput[] | TaskCreateWithoutCategoriesInput
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+export interface PostCreateInput {
+  isPublished?: Boolean
+  title: String
+  text: String
+  author: UserCreateOneWithoutPostsInput
 }
 
 export interface PaymentAccountUpdateInput {
@@ -8462,49 +9261,14 @@ export interface PaymentAccountUpdateInput {
   creditcard?: CreditCardInformationUpdateOneWithoutPaymentAccountInput
 }
 
-export interface TaskCreateWithoutCategoriesInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  createdBy: UserCreateOneWithoutTasksInput
-  priority?: PriorityCreateOneInput
-  subTasks?: TaskCreateManyInput
-  tags?: TagCreateManyInput
-  attachments?: FileCreateManyInput
-}
-
-export interface CreditCardInformationUpsertWithoutPaymentAccountInput {
-  update: CreditCardInformationUpdateWithoutPaymentAccountDataInput
-  create: CreditCardInformationCreateWithoutPaymentAccountInput
-}
-
-export interface PostCreateInput {
-  isPublished?: Boolean
-  title: String
-  text: String
-  author: UserCreateOneWithoutPostsInput
-}
-
-export interface CreditCardInformationUpdateOneWithoutPaymentAccountInput {
-  create?: CreditCardInformationCreateWithoutPaymentAccountInput
-  connect?: CreditCardInformationWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: CreditCardInformationUpdateWithoutPaymentAccountDataInput
-  upsert?: CreditCardInformationUpsertWithoutPaymentAccountInput
-}
-
 export interface UserCreateOneWithoutPostsInput {
   create?: UserCreateWithoutPostsInput
   connect?: UserWhereUniqueInput
 }
 
-export interface PaypalInformationUpdateWithoutPaymentAccountDataInput {
-  email?: String
+export interface CreditCardInformationUpsertWithoutPaymentAccountInput {
+  update: CreditCardInformationUpdateWithoutPaymentAccountDataInput
+  create: CreditCardInformationCreateWithoutPaymentAccountInput
 }
 
 export interface UserCreateWithoutPostsInput {
@@ -8516,15 +9280,18 @@ export interface UserCreateWithoutPostsInput {
   lastName?: String
   phone?: String
   avatarColor?: String
+  categories?: CategoryCreateManyWithoutCreatedByInput
   tasks?: TaskCreateManyWithoutCreatedByInput
   notifications?: NotificationCreateManyWithoutUserInput
 }
 
-export interface PaymentAccountUpdateWithoutPaymentsDataInput {
-  type?: PAYMENT_PROVIDER
-  user?: UserUpdateOneInput
-  paypal?: PaypalInformationUpdateOneWithoutPaymentAccountInput
-  creditcard?: CreditCardInformationUpdateOneWithoutPaymentAccountInput
+export interface CreditCardInformationUpdateOneWithoutPaymentAccountInput {
+  create?: CreditCardInformationCreateWithoutPaymentAccountInput
+  connect?: CreditCardInformationWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: CreditCardInformationUpdateWithoutPaymentAccountDataInput
+  upsert?: CreditCardInformationUpsertWithoutPaymentAccountInput
 }
 
 export interface StatusUpdateCreateInput {
@@ -8535,6 +9302,39 @@ export interface StatusUpdateCreateInput {
   task: TaskCreateOneInput
 }
 
+export interface PaypalInformationUpdateWithoutPaymentAccountDataInput {
+  email?: String
+}
+
+export interface TaskCreateOneInput {
+  create?: TaskCreateInput
+  connect?: TaskWhereUniqueInput
+}
+
+export interface PaymentAccountUpdateWithoutPaymentsDataInput {
+  type?: PAYMENT_PROVIDER
+  user?: UserUpdateOneInput
+  paypal?: PaypalInformationUpdateOneWithoutPaymentAccountInput
+  creditcard?: CreditCardInformationUpdateOneWithoutPaymentAccountInput
+}
+
+export interface TaskCreateInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy: UserCreateOneWithoutTasksInput
+  categories?: CategoryCreateManyWithoutTasksInput
+  priority?: PriorityCreateOneInput
+  subTasks?: SubTaskCreateManyWithoutParentInput
+  tags?: TagCreateManyInput
+  attachments?: FileCreateManyInput
+}
+
 export interface PaymentUpdateInput {
   serviceFee?: Float
   placePrice?: Float
@@ -8542,9 +9342,10 @@ export interface PaymentUpdateInput {
   paymentMethod?: PaymentAccountUpdateOneWithoutPaymentsInput
 }
 
-export interface TaskCreateOneInput {
-  create?: TaskCreateInput
-  connect?: TaskWhereUniqueInput
+export interface ReminderCreateInput {
+  title: String
+  description: String
+  createdBy: UserCreateOneInput
 }
 
 export interface UserUpdateWithoutNotificationsDataInput {
@@ -8556,21 +9357,9 @@ export interface UserUpdateWithoutNotificationsDataInput {
   lastName?: String
   phone?: String
   avatarColor?: String
+  categories?: CategoryUpdateManyWithoutCreatedByInput
   tasks?: TaskUpdateManyWithoutCreatedByInput
   posts?: PostUpdateManyWithoutAuthorInput
-}
-
-export interface ReminderCreateInput {
-  title: String
-  description: String
-  createdBy: UserCreateOneInput
-}
-
-export interface NotificationUpdateInput {
-  type?: NOTIFICATION_TYPE
-  link?: String
-  readDate?: DateTime
-  user?: UserUpdateOneWithoutNotificationsInput
 }
 
 export interface EventCreateInput {
@@ -8582,26 +9371,38 @@ export interface EventCreateInput {
   tags?: TagCreateManyInput
 }
 
+export interface NotificationUpdateInput {
+  type?: NOTIFICATION_TYPE
+  link?: String
+  readDate?: DateTime
+  user?: UserUpdateOneWithoutNotificationsInput
+}
+
+export interface LocationCreateOneInput {
+  create?: LocationCreateInput
+  connect?: LocationWhereUniqueInput
+}
+
 export interface LocationUpsertNestedInput {
   update: LocationUpdateDataInput
   create: LocationCreateInput
 }
 
-export interface FileUpdateWithWhereUniqueNestedInput {
-  where: FileWhereUniqueInput
-  data: FileUpdateDataInput
+export interface FileUpdateDataInput {
+  name?: String
+  size?: Int
+  secret?: String
+  contentType?: String
+  url?: String
 }
 
 export interface CityUpdateDataInput {
   name?: String
 }
 
-export interface LocationCreateInput {
-  lat: Float
-  lng: Float
-  address?: String
-  directions?: String
-  city?: CityCreateOneInput
+export interface CityCreateOneInput {
+  create?: CityCreateInput
+  connect?: CityWhereUniqueInput
 }
 
 export interface LocationUpdateDataInput {
@@ -8612,9 +9413,8 @@ export interface LocationUpdateDataInput {
   city?: CityUpdateOneInput
 }
 
-export interface CityCreateOneInput {
-  create?: CityCreateInput
-  connect?: CityWhereUniqueInput
+export interface CityCreateInput {
+  name: String
 }
 
 export interface EventUpdateInput {
@@ -8626,8 +9426,80 @@ export interface EventUpdateInput {
   tags?: TagUpdateManyInput
 }
 
-export interface CityCreateInput {
-  name: String
+export interface MessageCreateInput {
+  deliveredAt: DateTime
+  readAt: DateTime
+  from: UserCreateOneInput
+  to: UserCreateOneInput
+}
+
+export interface TaskUpsertNestedInput {
+  update: TaskUpdateDataInput
+  create: TaskCreateInput
+}
+
+export interface NotificationCreateInput {
+  type?: NOTIFICATION_TYPE
+  link: String
+  readDate: DateTime
+  user: UserCreateOneWithoutNotificationsInput
+}
+
+export interface TaskUpdateOneInput {
+  create?: TaskCreateInput
+  connect?: TaskWhereUniqueInput
+  delete?: Boolean
+  update?: TaskUpdateDataInput
+  upsert?: TaskUpsertNestedInput
+}
+
+export interface UserCreateOneWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserUpsertWithoutPostsInput {
+  update: UserUpdateWithoutPostsDataInput
+  create: UserCreateWithoutPostsInput
+}
+
+export interface UserCreateWithoutNotificationsInput {
+  email: String
+  password: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  categories?: CategoryCreateManyWithoutCreatedByInput
+  tasks?: TaskCreateManyWithoutCreatedByInput
+  posts?: PostCreateManyWithoutAuthorInput
+}
+
+export interface UserUpdateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutPostsDataInput
+  upsert?: UserUpsertWithoutPostsInput
+}
+
+export interface PaymentCreateInput {
+  serviceFee: Float
+  placePrice: Float
+  totalPrice: Float
+  paymentMethod: PaymentAccountCreateOneWithoutPaymentsInput
+}
+
+export interface TaskUpsertWithoutSubTasksInput {
+  update: TaskUpdateWithoutSubTasksDataInput
+  create: TaskCreateWithoutSubTasksInput
+}
+
+export interface PaymentAccountCreateOneWithoutPaymentsInput {
+  create?: PaymentAccountCreateWithoutPaymentsInput
+  connect?: PaymentAccountWhereUniqueInput
 }
 
 export interface UserSubscriptionWhereInput {
@@ -8641,11 +9513,1015 @@ export interface UserSubscriptionWhereInput {
   node?: UserWhereInput
 }
 
-export interface MessageCreateInput {
-  deliveredAt: DateTime
-  readAt: DateTime
-  from: UserCreateOneInput
-  to: UserCreateOneInput
+export interface PaymentAccountCreateWithoutPaymentsInput {
+  type?: PAYMENT_PROVIDER
+  user: UserCreateOneInput
+  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
+  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
+}
+
+export interface CitySubscriptionWhereInput {
+  AND?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
+  OR?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
+  NOT?: CitySubscriptionWhereInput[] | CitySubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CityWhereInput
+}
+
+export interface PaypalInformationCreateOneWithoutPaymentAccountInput {
+  create?: PaypalInformationCreateWithoutPaymentAccountInput
+  connect?: PaypalInformationWhereUniqueInput
+}
+
+export interface CreditCardInformationSubscriptionWhereInput {
+  AND?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
+  OR?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
+  NOT?: CreditCardInformationSubscriptionWhereInput[] | CreditCardInformationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CreditCardInformationWhereInput
+}
+
+export interface PaypalInformationCreateWithoutPaymentAccountInput {
+  email: String
+}
+
+export interface EventWhereInput {
+  AND?: EventWhereInput[] | EventWhereInput
+  OR?: EventWhereInput[] | EventWhereInput
+  NOT?: EventWhereInput[] | EventWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  title?: String
+  title_not?: String
+  title_in?: String[] | String
+  title_not_in?: String[] | String
+  title_lt?: String
+  title_lte?: String
+  title_gt?: String
+  title_gte?: String
+  title_contains?: String
+  title_not_contains?: String
+  title_starts_with?: String
+  title_not_starts_with?: String
+  title_ends_with?: String
+  title_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  date?: DateTime
+  date_not?: DateTime
+  date_in?: DateTime[] | DateTime
+  date_not_in?: DateTime[] | DateTime
+  date_lt?: DateTime
+  date_lte?: DateTime
+  date_gt?: DateTime
+  date_gte?: DateTime
+  createdBy?: UserWhereInput
+  location?: LocationWhereInput
+  tags_every?: TagWhereInput
+  tags_some?: TagWhereInput
+  tags_none?: TagWhereInput
+}
+
+export interface CreditCardInformationCreateOneWithoutPaymentAccountInput {
+  create?: CreditCardInformationCreateWithoutPaymentAccountInput
+  connect?: CreditCardInformationWhereUniqueInput
+}
+
+export interface FileWhereInput {
+  AND?: FileWhereInput[] | FileWhereInput
+  OR?: FileWhereInput[] | FileWhereInput
+  NOT?: FileWhereInput[] | FileWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  size?: Int
+  size_not?: Int
+  size_in?: Int[] | Int
+  size_not_in?: Int[] | Int
+  size_lt?: Int
+  size_lte?: Int
+  size_gt?: Int
+  size_gte?: Int
+  secret?: String
+  secret_not?: String
+  secret_in?: String[] | String
+  secret_not_in?: String[] | String
+  secret_lt?: String
+  secret_lte?: String
+  secret_gt?: String
+  secret_gte?: String
+  secret_contains?: String
+  secret_not_contains?: String
+  secret_starts_with?: String
+  secret_not_starts_with?: String
+  secret_ends_with?: String
+  secret_not_ends_with?: String
+  contentType?: String
+  contentType_not?: String
+  contentType_in?: String[] | String
+  contentType_not_in?: String[] | String
+  contentType_lt?: String
+  contentType_lte?: String
+  contentType_gt?: String
+  contentType_gte?: String
+  contentType_contains?: String
+  contentType_not_contains?: String
+  contentType_starts_with?: String
+  contentType_not_starts_with?: String
+  contentType_ends_with?: String
+  contentType_not_ends_with?: String
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  url?: String
+  url_not?: String
+  url_in?: String[] | String
+  url_not_in?: String[] | String
+  url_lt?: String
+  url_lte?: String
+  url_gt?: String
+  url_gte?: String
+  url_contains?: String
+  url_not_contains?: String
+  url_starts_with?: String
+  url_not_starts_with?: String
+  url_ends_with?: String
+  url_not_ends_with?: String
+}
+
+export interface FileUpdateWithWhereUniqueNestedInput {
+  where: FileWhereUniqueInput
+  data: FileUpdateDataInput
+}
+
+export interface MessageWhereInput {
+  AND?: MessageWhereInput[] | MessageWhereInput
+  OR?: MessageWhereInput[] | MessageWhereInput
+  NOT?: MessageWhereInput[] | MessageWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  deliveredAt?: DateTime
+  deliveredAt_not?: DateTime
+  deliveredAt_in?: DateTime[] | DateTime
+  deliveredAt_not_in?: DateTime[] | DateTime
+  deliveredAt_lt?: DateTime
+  deliveredAt_lte?: DateTime
+  deliveredAt_gt?: DateTime
+  deliveredAt_gte?: DateTime
+  readAt?: DateTime
+  readAt_not?: DateTime
+  readAt_in?: DateTime[] | DateTime
+  readAt_not_in?: DateTime[] | DateTime
+  readAt_lt?: DateTime
+  readAt_lte?: DateTime
+  readAt_gt?: DateTime
+  readAt_gte?: DateTime
+  from?: UserWhereInput
+  to?: UserWhereInput
+}
+
+export interface PaymentAccountCreateInput {
+  type?: PAYMENT_PROVIDER
+  user: UserCreateOneInput
+  payments?: PaymentCreateManyWithoutPaymentMethodInput
+  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
+  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
+}
+
+export interface PaymentAccountWhereInput {
+  AND?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
+  OR?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
+  NOT?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  type?: PAYMENT_PROVIDER
+  type_not?: PAYMENT_PROVIDER
+  type_in?: PAYMENT_PROVIDER[] | PAYMENT_PROVIDER
+  type_not_in?: PAYMENT_PROVIDER[] | PAYMENT_PROVIDER
+  user?: UserWhereInput
+  payments_every?: PaymentWhereInput
+  payments_some?: PaymentWhereInput
+  payments_none?: PaymentWhereInput
+  paypal?: PaypalInformationWhereInput
+  creditcard?: CreditCardInformationWhereInput
+}
+
+export interface PaymentCreateManyWithoutPaymentMethodInput {
+  create?: PaymentCreateWithoutPaymentMethodInput[] | PaymentCreateWithoutPaymentMethodInput
+  connect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
+}
+
+export interface PriorityWhereInput {
+  AND?: PriorityWhereInput[] | PriorityWhereInput
+  OR?: PriorityWhereInput[] | PriorityWhereInput
+  NOT?: PriorityWhereInput[] | PriorityWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  createdBy?: UserWhereInput
+}
+
+export interface PaymentCreateWithoutPaymentMethodInput {
+  serviceFee: Float
+  placePrice: Float
+  totalPrice: Float
+}
+
+export interface SubTaskSubscriptionWhereInput {
+  AND?: SubTaskSubscriptionWhereInput[] | SubTaskSubscriptionWhereInput
+  OR?: SubTaskSubscriptionWhereInput[] | SubTaskSubscriptionWhereInput
+  NOT?: SubTaskSubscriptionWhereInput[] | SubTaskSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: SubTaskWhereInput
+}
+
+export interface PaypalInformationCreateInput {
+  email: String
+  paymentAccount: PaymentAccountCreateOneWithoutPaypalInput
+}
+
+export interface PictureSubscriptionWhereInput {
+  AND?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
+  OR?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
+  NOT?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PictureWhereInput
+}
+
+export interface PaymentAccountCreateOneWithoutPaypalInput {
+  create?: PaymentAccountCreateWithoutPaypalInput
+  connect?: PaymentAccountWhereUniqueInput
+}
+
+export interface CategoryWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface PaymentAccountCreateWithoutPaypalInput {
+  type?: PAYMENT_PROVIDER
+  user: UserCreateOneInput
+  payments?: PaymentCreateManyWithoutPaymentMethodInput
+  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
+}
+
+export interface ReminderWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface CreditCardInformationCreateInput {
+  cardNumber: String
+  expiresOnMonth: Int
+  expiresOnYear: Int
+  securityCode: String
+  firstName: String
+  lastName: String
+  postalCode: String
+  country: String
+  paymentAccount?: PaymentAccountCreateOneWithoutCreditcardInput
+}
+
+export interface PaymentWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface PaymentAccountCreateOneWithoutCreditcardInput {
+  create?: PaymentAccountCreateWithoutCreditcardInput
+  connect?: PaymentAccountWhereUniqueInput
+}
+
+export interface PriorityWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface PaymentAccountCreateWithoutCreditcardInput {
+  type?: PAYMENT_PROVIDER
+  user: UserCreateOneInput
+  payments?: PaymentCreateManyWithoutPaymentMethodInput
+  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface CategoryUpdateInput {
+  name?: String
+  description?: String
+  createdBy?: UserUpdateOneWithoutCategoriesInput
+  tasks?: TaskUpdateManyWithoutCategoriesInput
+}
+
+export interface UserUpdateInput {
+  email?: String
+  password?: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  categories?: CategoryUpdateManyWithoutCreatedByInput
+  tasks?: TaskUpdateManyWithoutCreatedByInput
+  posts?: PostUpdateManyWithoutAuthorInput
+  notifications?: NotificationUpdateManyWithoutUserInput
+}
+
+export interface UserUpdateOneWithoutCategoriesInput {
+  create?: UserCreateWithoutCategoriesInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutCategoriesDataInput
+  upsert?: UserUpsertWithoutCategoriesInput
+}
+
+export interface PriorityUpdateInput {
+  name?: String
+  description?: String
+  createdBy?: UserUpdateOneInput
+}
+
+export interface UserUpdateWithoutCategoriesDataInput {
+  email?: String
+  password?: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  tasks?: TaskUpdateManyWithoutCreatedByInput
+  posts?: PostUpdateManyWithoutAuthorInput
+  notifications?: NotificationUpdateManyWithoutUserInput
+}
+
+export interface CreditCardInformationUpdateInput {
+  cardNumber?: String
+  expiresOnMonth?: Int
+  expiresOnYear?: Int
+  securityCode?: String
+  firstName?: String
+  lastName?: String
+  postalCode?: String
+  country?: String
+  paymentAccount?: PaymentAccountUpdateOneWithoutCreditcardInput
+}
+
+export interface TaskUpdateManyWithoutCreatedByInput {
+  create?: TaskCreateWithoutCreatedByInput[] | TaskCreateWithoutCreatedByInput
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  update?: TaskUpdateWithWhereUniqueWithoutCreatedByInput[] | TaskUpdateWithWhereUniqueWithoutCreatedByInput
+  upsert?: TaskUpsertWithWhereUniqueWithoutCreatedByInput[] | TaskUpsertWithWhereUniqueWithoutCreatedByInput
+}
+
+export interface PaypalInformationUpdateInput {
+  email?: String
+  paymentAccount?: PaymentAccountUpdateOneWithoutPaypalInput
+}
+
+export interface TaskUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: TaskWhereUniqueInput
+  data: TaskUpdateWithoutCreatedByDataInput
+}
+
+export interface PaymentUpdateManyWithoutPaymentMethodInput {
+  create?: PaymentCreateWithoutPaymentMethodInput[] | PaymentCreateWithoutPaymentMethodInput
+  connect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
+  disconnect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
+  delete?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
+  update?: PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput[] | PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput
+  upsert?: PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput[] | PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput
+}
+
+export interface TaskUpdateWithoutCreatedByDataInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  categories?: CategoryUpdateManyWithoutTasksInput
+  priority?: PriorityUpdateOneInput
+  subTasks?: SubTaskUpdateManyWithoutParentInput
+  tags?: TagUpdateManyInput
+  attachments?: FileUpdateManyInput
+}
+
+export interface CreditCardInformationUpdateWithoutPaymentAccountDataInput {
+  cardNumber?: String
+  expiresOnMonth?: Int
+  expiresOnYear?: Int
+  securityCode?: String
+  firstName?: String
+  lastName?: String
+  postalCode?: String
+  country?: String
+}
+
+export interface CategoryUpdateManyWithoutTasksInput {
+  create?: CategoryCreateWithoutTasksInput[] | CategoryCreateWithoutTasksInput
+  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  disconnect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  delete?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  update?: CategoryUpdateWithWhereUniqueWithoutTasksInput[] | CategoryUpdateWithWhereUniqueWithoutTasksInput
+  upsert?: CategoryUpsertWithWhereUniqueWithoutTasksInput[] | CategoryUpsertWithWhereUniqueWithoutTasksInput
+}
+
+export interface PaypalInformationUpdateOneWithoutPaymentAccountInput {
+  create?: PaypalInformationCreateWithoutPaymentAccountInput
+  connect?: PaypalInformationWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: PaypalInformationUpdateWithoutPaymentAccountDataInput
+  upsert?: PaypalInformationUpsertWithoutPaymentAccountInput
+}
+
+export interface CategoryUpdateWithWhereUniqueWithoutTasksInput {
+  where: CategoryWhereUniqueInput
+  data: CategoryUpdateWithoutTasksDataInput
+}
+
+export interface UserUpsertWithoutNotificationsInput {
+  update: UserUpdateWithoutNotificationsDataInput
+  create: UserCreateWithoutNotificationsInput
+}
+
+export interface CategoryUpdateWithoutTasksDataInput {
+  name?: String
+  description?: String
+  createdBy?: UserUpdateOneWithoutCategoriesInput
+}
+
+export interface MessageUpdateInput {
+  deliveredAt?: DateTime
+  readAt?: DateTime
+  from?: UserUpdateOneInput
+  to?: UserUpdateOneInput
+}
+
+export interface CategoryUpsertWithWhereUniqueWithoutTasksInput {
+  where: CategoryWhereUniqueInput
+  update: CategoryUpdateWithoutTasksDataInput
+  create: CategoryCreateWithoutTasksInput
+}
+
+export interface CityUpdateOneInput {
+  create?: CityCreateInput
+  connect?: CityWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: CityUpdateDataInput
+  upsert?: CityUpsertNestedInput
+}
+
+export interface PriorityUpdateOneInput {
+  create?: PriorityCreateInput
+  connect?: PriorityWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: PriorityUpdateDataInput
+  upsert?: PriorityUpsertNestedInput
+}
+
+export interface ReminderUpdateInput {
+  title?: String
+  description?: String
+  createdBy?: UserUpdateOneInput
+}
+
+export interface PriorityUpdateDataInput {
+  name?: String
+  description?: String
+  createdBy?: UserUpdateOneInput
+}
+
+export interface StatusUpdateUpdateInput {
+  text?: String
+  previousStatus?: String
+  newStatus?: String
+  createdBy?: UserUpdateOneInput
+  task?: TaskUpdateOneInput
+}
+
+export interface UserUpdateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateDataInput
+  upsert?: UserUpsertNestedInput
+}
+
+export interface PostUpdateInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+  author?: UserUpdateOneWithoutPostsInput
+}
+
+export interface UserUpdateDataInput {
+  email?: String
+  password?: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  categories?: CategoryUpdateManyWithoutCreatedByInput
+  tasks?: TaskUpdateManyWithoutCreatedByInput
+  posts?: PostUpdateManyWithoutAuthorInput
+  notifications?: NotificationUpdateManyWithoutUserInput
+}
+
+export interface PostWhereInput {
+  AND?: PostWhereInput[] | PostWhereInput
+  OR?: PostWhereInput[] | PostWhereInput
+  NOT?: PostWhereInput[] | PostWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  isPublished?: Boolean
+  isPublished_not?: Boolean
+  title?: String
+  title_not?: String
+  title_in?: String[] | String
+  title_not_in?: String[] | String
+  title_lt?: String
+  title_lte?: String
+  title_gt?: String
+  title_gte?: String
+  title_contains?: String
+  title_not_contains?: String
+  title_starts_with?: String
+  title_not_starts_with?: String
+  title_ends_with?: String
+  title_not_ends_with?: String
+  text?: String
+  text_not?: String
+  text_in?: String[] | String
+  text_not_in?: String[] | String
+  text_lt?: String
+  text_lte?: String
+  text_gt?: String
+  text_gte?: String
+  text_contains?: String
+  text_not_contains?: String
+  text_starts_with?: String
+  text_not_starts_with?: String
+  text_ends_with?: String
+  text_not_ends_with?: String
+  author?: UserWhereInput
+}
+
+export interface CategoryUpdateManyWithoutCreatedByInput {
+  create?: CategoryCreateWithoutCreatedByInput[] | CategoryCreateWithoutCreatedByInput
+  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  disconnect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  delete?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  update?: CategoryUpdateWithWhereUniqueWithoutCreatedByInput[] | CategoryUpdateWithWhereUniqueWithoutCreatedByInput
+  upsert?: CategoryUpsertWithWhereUniqueWithoutCreatedByInput[] | CategoryUpsertWithWhereUniqueWithoutCreatedByInput
+}
+
+export interface NotificationSubscriptionWhereInput {
+  AND?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
+  OR?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
+  NOT?: NotificationSubscriptionWhereInput[] | NotificationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: NotificationWhereInput
+}
+
+export interface CategoryUpdateWithWhereUniqueWithoutCreatedByInput {
+  where: CategoryWhereUniqueInput
+  data: CategoryUpdateWithoutCreatedByDataInput
+}
+
+export interface PaypalInformationWhereInput {
+  AND?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
+  OR?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
+  NOT?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  email?: String
+  email_not?: String
+  email_in?: String[] | String
+  email_not_in?: String[] | String
+  email_lt?: String
+  email_lte?: String
+  email_gt?: String
+  email_gte?: String
+  email_contains?: String
+  email_not_contains?: String
+  email_starts_with?: String
+  email_not_starts_with?: String
+  email_ends_with?: String
+  email_not_ends_with?: String
+  paymentAccount?: PaymentAccountWhereInput
+}
+
+export interface CategoryUpdateWithoutCreatedByDataInput {
+  name?: String
+  description?: String
+  tasks?: TaskUpdateManyWithoutCategoriesInput
+}
+
+export interface CategorySubscriptionWhereInput {
+  AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CategoryWhereInput
+}
+
+export interface TaskUpdateManyWithoutCategoriesInput {
+  create?: TaskCreateWithoutCategoriesInput[] | TaskCreateWithoutCategoriesInput
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
+  update?: TaskUpdateWithWhereUniqueWithoutCategoriesInput[] | TaskUpdateWithWhereUniqueWithoutCategoriesInput
+  upsert?: TaskUpsertWithWhereUniqueWithoutCategoriesInput[] | TaskUpsertWithWhereUniqueWithoutCategoriesInput
+}
+
+export interface PostWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface TaskUpdateWithWhereUniqueWithoutCategoriesInput {
+  where: TaskWhereUniqueInput
+  data: TaskUpdateWithoutCategoriesDataInput
+}
+
+export interface PaypalInformationWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface TaskUpdateWithoutCategoriesDataInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy?: UserUpdateOneWithoutTasksInput
+  priority?: PriorityUpdateOneInput
+  subTasks?: SubTaskUpdateManyWithoutParentInput
+  tags?: TagUpdateManyInput
+  attachments?: FileUpdateManyInput
+}
+
+export interface FileWhereUniqueInput {
+  id?: ID_Input
+  secret?: String
+  url?: String
+}
+
+export interface UserUpdateOneWithoutTasksInput {
+  create?: UserCreateWithoutTasksInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutTasksDataInput
+  upsert?: UserUpsertWithoutTasksInput
+}
+
+export interface PaymentAccountUpdateWithoutCreditcardDataInput {
+  type?: PAYMENT_PROVIDER
+  user?: UserUpdateOneInput
+  payments?: PaymentUpdateManyWithoutPaymentMethodInput
+  paypal?: PaypalInformationUpdateOneWithoutPaymentAccountInput
+}
+
+export interface UserUpdateWithoutTasksDataInput {
+  email?: String
+  password?: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  categories?: CategoryUpdateManyWithoutCreatedByInput
+  posts?: PostUpdateManyWithoutAuthorInput
+  notifications?: NotificationUpdateManyWithoutUserInput
+}
+
+export interface PaymentUpdateWithoutPaymentMethodDataInput {
+  serviceFee?: Float
+  placePrice?: Float
+  totalPrice?: Float
+}
+
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
+  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
+  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
+}
+
+export interface PaypalInformationUpsertWithoutPaymentAccountInput {
+  update: PaypalInformationUpdateWithoutPaymentAccountDataInput
+  create: PaypalInformationCreateWithoutPaymentAccountInput
+}
+
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  data: PostUpdateWithoutAuthorDataInput
+}
+
+export interface UserUpdateOneWithoutNotificationsInput {
+  create?: UserCreateWithoutNotificationsInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutNotificationsDataInput
+  upsert?: UserUpsertWithoutNotificationsInput
+}
+
+export interface PostUpdateWithoutAuthorDataInput {
+  isPublished?: Boolean
+  title?: String
+  text?: String
+}
+
+export interface LocationUpdateOneInput {
+  create?: LocationCreateInput
+  connect?: LocationWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: LocationUpdateDataInput
+  upsert?: LocationUpsertNestedInput
+}
+
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput
+  update: PostUpdateWithoutAuthorDataInput
+  create: PostCreateWithoutAuthorInput
+}
+
+export interface UserUpdateWithoutPostsDataInput {
+  email?: String
+  password?: String
+  isAdmin?: Boolean
+  role?: Role
+  firstName?: String
+  lastName?: String
+  phone?: String
+  avatarColor?: String
+  categories?: CategoryUpdateManyWithoutCreatedByInput
+  tasks?: TaskUpdateManyWithoutCreatedByInput
+  notifications?: NotificationUpdateManyWithoutUserInput
+}
+
+export interface NotificationUpdateManyWithoutUserInput {
+  create?: NotificationCreateWithoutUserInput[] | NotificationCreateWithoutUserInput
+  connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  disconnect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  delete?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
+  update?: NotificationUpdateWithWhereUniqueWithoutUserInput[] | NotificationUpdateWithWhereUniqueWithoutUserInput
+  upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput[] | NotificationUpsertWithWhereUniqueWithoutUserInput
 }
 
 export interface StatusUpdateWhereInput {
@@ -8728,210 +10604,26 @@ export interface StatusUpdateWhereInput {
   task?: TaskWhereInput
 }
 
-export interface NotificationCreateInput {
-  type?: NOTIFICATION_TYPE
-  link: String
-  readDate: DateTime
-  user: UserCreateOneWithoutNotificationsInput
+export interface NotificationUpdateWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput
+  data: NotificationUpdateWithoutUserDataInput
 }
 
-export interface NotificationWhereInput {
-  AND?: NotificationWhereInput[] | NotificationWhereInput
-  OR?: NotificationWhereInput[] | NotificationWhereInput
-  NOT?: NotificationWhereInput[] | NotificationWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
+export interface EventSubscriptionWhereInput {
+  AND?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+  OR?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+  NOT?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: EventWhereInput
+}
+
+export interface NotificationUpdateWithoutUserDataInput {
   type?: NOTIFICATION_TYPE
-  type_not?: NOTIFICATION_TYPE
-  type_in?: NOTIFICATION_TYPE[] | NOTIFICATION_TYPE
-  type_not_in?: NOTIFICATION_TYPE[] | NOTIFICATION_TYPE
   link?: String
-  link_not?: String
-  link_in?: String[] | String
-  link_not_in?: String[] | String
-  link_lt?: String
-  link_lte?: String
-  link_gt?: String
-  link_gte?: String
-  link_contains?: String
-  link_not_contains?: String
-  link_starts_with?: String
-  link_not_starts_with?: String
-  link_ends_with?: String
-  link_not_ends_with?: String
   readDate?: DateTime
-  readDate_not?: DateTime
-  readDate_in?: DateTime[] | DateTime
-  readDate_not_in?: DateTime[] | DateTime
-  readDate_lt?: DateTime
-  readDate_lte?: DateTime
-  readDate_gt?: DateTime
-  readDate_gte?: DateTime
-  user?: UserWhereInput
-}
-
-export interface UserCreateOneWithoutNotificationsInput {
-  create?: UserCreateWithoutNotificationsInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface PaypalInformationSubscriptionWhereInput {
-  AND?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
-  OR?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
-  NOT?: PaypalInformationSubscriptionWhereInput[] | PaypalInformationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PaypalInformationWhereInput
-}
-
-export interface UserCreateWithoutNotificationsInput {
-  email: String
-  password: String
-  isAdmin?: Boolean
-  role?: Role
-  firstName?: String
-  lastName?: String
-  phone?: String
-  avatarColor?: String
-  tasks?: TaskCreateManyWithoutCreatedByInput
-  posts?: PostCreateManyWithoutAuthorInput
-}
-
-export interface PaymentSubscriptionWhereInput {
-  AND?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
-  OR?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
-  NOT?: PaymentSubscriptionWhereInput[] | PaymentSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PaymentWhereInput
-}
-
-export interface PaymentCreateInput {
-  serviceFee: Float
-  placePrice: Float
-  totalPrice: Float
-  paymentMethod: PaymentAccountCreateOneWithoutPaymentsInput
-}
-
-export interface MessageSubscriptionWhereInput {
-  AND?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
-  OR?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
-  NOT?: MessageSubscriptionWhereInput[] | MessageSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: MessageWhereInput
-}
-
-export interface PaymentAccountCreateOneWithoutPaymentsInput {
-  create?: PaymentAccountCreateWithoutPaymentsInput
-  connect?: PaymentAccountWhereUniqueInput
-}
-
-export interface PaypalInformationWhereInput {
-  AND?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
-  OR?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
-  NOT?: PaypalInformationWhereInput[] | PaypalInformationWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  email?: String
-  email_not?: String
-  email_in?: String[] | String
-  email_not_in?: String[] | String
-  email_lt?: String
-  email_lte?: String
-  email_gt?: String
-  email_gte?: String
-  email_contains?: String
-  email_not_contains?: String
-  email_starts_with?: String
-  email_not_starts_with?: String
-  email_ends_with?: String
-  email_not_ends_with?: String
-  paymentAccount?: PaymentAccountWhereInput
-}
-
-export interface PaymentAccountCreateWithoutPaymentsInput {
-  type?: PAYMENT_PROVIDER
-  user: UserCreateOneInput
-  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
-  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
-}
-
-export interface ReminderSubscriptionWhereInput {
-  AND?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
-  OR?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
-  NOT?: ReminderSubscriptionWhereInput[] | ReminderSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ReminderWhereInput
-}
-
-export interface PaypalInformationCreateOneWithoutPaymentAccountInput {
-  create?: PaypalInformationCreateWithoutPaymentAccountInput
-  connect?: PaypalInformationWhereUniqueInput
-}
-
-export interface CategorySubscriptionWhereInput {
-  AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: CategoryWhereInput
-}
-
-export interface PaypalInformationCreateWithoutPaymentAccountInput {
-  email: String
 }
 
 export interface CategoryWhereInput {
@@ -9002,220 +10694,151 @@ export interface CategoryWhereInput {
   tasks_none?: TaskWhereInput
 }
 
-export interface FileUpdateManyInput {
-  create?: FileCreateInput[] | FileCreateInput
-  connect?: FileWhereUniqueInput[] | FileWhereUniqueInput
-  disconnect?: FileWhereUniqueInput[] | FileWhereUniqueInput
-  delete?: FileWhereUniqueInput[] | FileWhereUniqueInput
-  update?: FileUpdateWithWhereUniqueNestedInput[] | FileUpdateWithWhereUniqueNestedInput
-  upsert?: FileUpsertWithWhereUniqueNestedInput[] | FileUpsertWithWhereUniqueNestedInput
+export interface NotificationUpsertWithWhereUniqueWithoutUserInput {
+  where: NotificationWhereUniqueInput
+  update: NotificationUpdateWithoutUserDataInput
+  create: NotificationCreateWithoutUserInput
 }
 
-export interface StatusUpdateWhereUniqueInput {
+export interface TaskWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface CreditCardInformationCreateWithoutPaymentAccountInput {
-  cardNumber: String
-  expiresOnMonth: Int
-  expiresOnYear: Int
-  securityCode: String
-  firstName: String
-  lastName: String
-  postalCode: String
-  country: String
+export interface UserUpsertWithoutTasksInput {
+  update: UserUpdateWithoutTasksDataInput
+  create: UserCreateWithoutTasksInput
 }
 
-export interface NotificationWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface PaymentAccountCreateInput {
+export interface PaymentAccountUpdateWithoutPaypalDataInput {
   type?: PAYMENT_PROVIDER
-  user: UserCreateOneInput
-  payments?: PaymentCreateManyWithoutPaymentMethodInput
-  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
-  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
+  user?: UserUpdateOneInput
+  payments?: PaymentUpdateManyWithoutPaymentMethodInput
+  creditcard?: CreditCardInformationUpdateOneWithoutPaymentAccountInput
 }
 
-export interface CreditCardInformationWhereUniqueInput {
-  id?: ID_Input
+export interface SubTaskUpdateManyWithoutParentInput {
+  create?: SubTaskCreateWithoutParentInput[] | SubTaskCreateWithoutParentInput
+  connect?: SubTaskWhereUniqueInput[] | SubTaskWhereUniqueInput
+  disconnect?: SubTaskWhereUniqueInput[] | SubTaskWhereUniqueInput
+  delete?: SubTaskWhereUniqueInput[] | SubTaskWhereUniqueInput
+  update?: SubTaskUpdateWithWhereUniqueWithoutParentInput[] | SubTaskUpdateWithWhereUniqueWithoutParentInput
+  upsert?: SubTaskUpsertWithWhereUniqueWithoutParentInput[] | SubTaskUpsertWithWhereUniqueWithoutParentInput
 }
 
-export interface PaymentCreateManyWithoutPaymentMethodInput {
-  create?: PaymentCreateWithoutPaymentMethodInput[] | PaymentCreateWithoutPaymentMethodInput
-  connect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
+export interface PaymentAccountUpdateOneWithoutPaymentsInput {
+  create?: PaymentAccountCreateWithoutPaymentsInput
+  connect?: PaymentAccountWhereUniqueInput
+  delete?: Boolean
+  update?: PaymentAccountUpdateWithoutPaymentsDataInput
+  upsert?: PaymentAccountUpsertWithoutPaymentsInput
 }
 
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
+export interface SubTaskUpdateWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput
+  data: SubTaskUpdateWithoutParentDataInput
 }
 
-export interface PaymentCreateWithoutPaymentMethodInput {
-  serviceFee: Float
-  placePrice: Float
-  totalPrice: Float
-}
-
-export interface LocationUpdateInput {
-  lat?: Float
-  lng?: Float
-  address?: String
-  directions?: String
-  city?: CityUpdateOneInput
-}
-
-export interface PaypalInformationCreateInput {
-  email: String
-  paymentAccount: PaymentAccountCreateOneWithoutPaypalInput
-}
-
-export interface PriorityUpdateInput {
-  name?: String
+export interface TaskUpdateDataInput {
+  title?: String
   description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy?: UserUpdateOneWithoutTasksInput
+  categories?: CategoryUpdateManyWithoutTasksInput
+  priority?: PriorityUpdateOneInput
+  subTasks?: SubTaskUpdateManyWithoutParentInput
+  tags?: TagUpdateManyInput
+  attachments?: FileUpdateManyInput
+}
+
+export interface SubTaskUpdateWithoutParentDataInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  duration?: Int
   createdBy?: UserUpdateOneInput
 }
 
-export interface PaymentAccountCreateOneWithoutPaypalInput {
-  create?: PaymentAccountCreateWithoutPaypalInput
-  connect?: PaymentAccountWhereUniqueInput
+export interface PaymentAccountSubscriptionWhereInput {
+  AND?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
+  OR?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
+  NOT?: PaymentAccountSubscriptionWhereInput[] | PaymentAccountSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PaymentAccountWhereInput
 }
 
-export interface CreditCardInformationUpdateInput {
-  cardNumber?: String
-  expiresOnMonth?: Int
-  expiresOnYear?: Int
-  securityCode?: String
-  firstName?: String
-  lastName?: String
-  postalCode?: String
-  country?: String
-  paymentAccount?: PaymentAccountUpdateOneWithoutCreditcardInput
+export interface SubTaskUpsertWithWhereUniqueWithoutParentInput {
+  where: SubTaskWhereUniqueInput
+  update: SubTaskUpdateWithoutParentDataInput
+  create: SubTaskCreateWithoutParentInput
 }
 
-export interface PaymentAccountCreateWithoutPaypalInput {
-  type?: PAYMENT_PROVIDER
-  user: UserCreateOneInput
-  payments?: PaymentCreateManyWithoutPaymentMethodInput
-  creditcard?: CreditCardInformationCreateOneWithoutPaymentAccountInput
+export interface MessageWhereUniqueInput {
+  id?: ID_Input
 }
 
-export interface PaypalInformationUpdateInput {
-  email?: String
-  paymentAccount?: PaymentAccountUpdateOneWithoutPaypalInput
+export interface TagUpsertWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput
+  update: TagUpdateDataInput
+  create: TagCreateInput
 }
 
-export interface CreditCardInformationCreateInput {
-  cardNumber: String
-  expiresOnMonth: Int
-  expiresOnYear: Int
-  securityCode: String
-  firstName: String
-  lastName: String
-  postalCode: String
-  country: String
-  paymentAccount?: PaymentAccountCreateOneWithoutCreditcardInput
-}
-
-export interface PaymentUpdateManyWithoutPaymentMethodInput {
-  create?: PaymentCreateWithoutPaymentMethodInput[] | PaymentCreateWithoutPaymentMethodInput
-  connect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
-  disconnect?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
-  delete?: PaymentWhereUniqueInput[] | PaymentWhereUniqueInput
-  update?: PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput[] | PaymentUpdateWithWhereUniqueWithoutPaymentMethodInput
-  upsert?: PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput[] | PaymentUpsertWithWhereUniqueWithoutPaymentMethodInput
-}
-
-export interface PaymentAccountCreateOneWithoutCreditcardInput {
-  create?: PaymentAccountCreateWithoutCreditcardInput
-  connect?: PaymentAccountWhereUniqueInput
-}
-
-export interface CreditCardInformationUpdateWithoutPaymentAccountDataInput {
-  cardNumber?: String
-  expiresOnMonth?: Int
-  expiresOnYear?: Int
-  securityCode?: String
-  firstName?: String
-  lastName?: String
-  postalCode?: String
-  country?: String
-}
-
-export interface PaymentAccountCreateWithoutCreditcardInput {
-  type?: PAYMENT_PROVIDER
-  user: UserCreateOneInput
-  payments?: PaymentCreateManyWithoutPaymentMethodInput
-  paypal?: PaypalInformationCreateOneWithoutPaymentAccountInput
-}
-
-export interface PaypalInformationUpdateOneWithoutPaymentAccountInput {
-  create?: PaypalInformationCreateWithoutPaymentAccountInput
-  connect?: PaypalInformationWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: PaypalInformationUpdateWithoutPaymentAccountDataInput
-  upsert?: PaypalInformationUpsertWithoutPaymentAccountInput
-}
-
-export interface CategoryUpdateInput {
+export interface TagUpdateDataInput {
   name?: String
   description?: String
+  color?: String
   createdBy?: UserUpdateOneInput
-  tasks?: TaskUpdateManyWithoutCategoriesInput
 }
 
-export interface UserUpsertWithoutNotificationsInput {
-  update: UserUpdateWithoutNotificationsDataInput
-  create: UserCreateWithoutNotificationsInput
+export interface TagUpdateWithWhereUniqueNestedInput {
+  where: TagWhereUniqueInput
+  data: TagUpdateDataInput
 }
 
-export interface UserUpdateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateDataInput
-  upsert?: UserUpsertNestedInput
+export interface TagUpdateManyInput {
+  create?: TagCreateInput[] | TagCreateInput
+  connect?: TagWhereUniqueInput[] | TagWhereUniqueInput
+  disconnect?: TagWhereUniqueInput[] | TagWhereUniqueInput
+  delete?: TagWhereUniqueInput[] | TagWhereUniqueInput
+  update?: TagUpdateWithWhereUniqueNestedInput[] | TagUpdateWithWhereUniqueNestedInput
+  upsert?: TagUpsertWithWhereUniqueNestedInput[] | TagUpsertWithWhereUniqueNestedInput
 }
 
-export interface MessageUpdateInput {
-  deliveredAt?: DateTime
-  readAt?: DateTime
-  from?: UserUpdateOneInput
-  to?: UserUpdateOneInput
+export interface TaskUpdateInput {
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete?: Boolean
+  isClarified?: Boolean
+  duration?: Int
+  status?: TASK_STATUS
+  createdBy?: UserUpdateOneWithoutTasksInput
+  categories?: CategoryUpdateManyWithoutTasksInput
+  priority?: PriorityUpdateOneInput
+  subTasks?: SubTaskUpdateManyWithoutParentInput
+  tags?: TagUpdateManyInput
+  attachments?: FileUpdateManyInput
 }
 
-export interface UserUpdateDataInput {
-  email?: String
-  password?: String
-  isAdmin?: Boolean
-  role?: Role
-  firstName?: String
-  lastName?: String
-  phone?: String
-  avatarColor?: String
-  tasks?: TaskUpdateManyWithoutCreatedByInput
-  posts?: PostUpdateManyWithoutAuthorInput
-  notifications?: NotificationUpdateManyWithoutUserInput
-}
-
-export interface CityUpdateOneInput {
-  create?: CityCreateInput
-  connect?: CityWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: CityUpdateDataInput
-  upsert?: CityUpsertNestedInput
-}
-
-export interface TaskUpdateManyWithoutCreatedByInput {
-  create?: TaskCreateWithoutCreatedByInput[] | TaskCreateWithoutCreatedByInput
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  update?: TaskUpdateWithWhereUniqueWithoutCreatedByInput[] | TaskUpdateWithWhereUniqueWithoutCreatedByInput
-  upsert?: TaskUpsertWithWhereUniqueWithoutCreatedByInput[] | TaskUpsertWithWhereUniqueWithoutCreatedByInput
+export interface StatusUpdateSubscriptionWhereInput {
+  AND?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
+  OR?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
+  NOT?: StatusUpdateSubscriptionWhereInput[] | StatusUpdateSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: StatusUpdateWhereInput
 }
 
 export interface FileSubscriptionWhereInput {
@@ -9229,602 +10852,14 @@ export interface FileSubscriptionWhereInput {
   node?: FileWhereInput
 }
 
-export interface TaskUpdateWithWhereUniqueWithoutCreatedByInput {
-  where: TaskWhereUniqueInput
-  data: TaskUpdateWithoutCreatedByDataInput
-}
-
-export interface PrioritySubscriptionWhereInput {
-  AND?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
-  OR?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
-  NOT?: PrioritySubscriptionWhereInput[] | PrioritySubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PriorityWhereInput
-}
-
-export interface TaskUpdateWithoutCreatedByDataInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  categories?: CategoryUpdateManyWithoutTasksInput
-  priority?: PriorityUpdateOneInput
-  subTasks?: TaskUpdateManyInput
-  tags?: TagUpdateManyInput
-  attachments?: FileUpdateManyInput
-}
-
-export interface PostWhereInput {
-  AND?: PostWhereInput[] | PostWhereInput
-  OR?: PostWhereInput[] | PostWhereInput
-  NOT?: PostWhereInput[] | PostWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  isPublished?: Boolean
-  isPublished_not?: Boolean
-  title?: String
-  title_not?: String
-  title_in?: String[] | String
-  title_not_in?: String[] | String
-  title_lt?: String
-  title_lte?: String
-  title_gt?: String
-  title_gte?: String
-  title_contains?: String
-  title_not_contains?: String
-  title_starts_with?: String
-  title_not_starts_with?: String
-  title_ends_with?: String
-  title_not_ends_with?: String
-  text?: String
-  text_not?: String
-  text_in?: String[] | String
-  text_not_in?: String[] | String
-  text_lt?: String
-  text_lte?: String
-  text_gt?: String
-  text_gte?: String
-  text_contains?: String
-  text_not_contains?: String
-  text_starts_with?: String
-  text_not_starts_with?: String
-  text_ends_with?: String
-  text_not_ends_with?: String
-  author?: UserWhereInput
-}
-
-export interface CategoryUpdateManyWithoutTasksInput {
-  create?: CategoryCreateWithoutTasksInput[] | CategoryCreateWithoutTasksInput
-  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  disconnect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  delete?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  update?: CategoryUpdateWithWhereUniqueWithoutTasksInput[] | CategoryUpdateWithWhereUniqueWithoutTasksInput
-  upsert?: CategoryUpsertWithWhereUniqueWithoutTasksInput[] | CategoryUpsertWithWhereUniqueWithoutTasksInput
-}
-
-export interface PaymentAccountWhereInput {
-  AND?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
-  OR?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
-  NOT?: PaymentAccountWhereInput[] | PaymentAccountWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  type?: PAYMENT_PROVIDER
-  type_not?: PAYMENT_PROVIDER
-  type_in?: PAYMENT_PROVIDER[] | PAYMENT_PROVIDER
-  type_not_in?: PAYMENT_PROVIDER[] | PAYMENT_PROVIDER
-  user?: UserWhereInput
-  payments_every?: PaymentWhereInput
-  payments_some?: PaymentWhereInput
-  payments_none?: PaymentWhereInput
-  paypal?: PaypalInformationWhereInput
-  creditcard?: CreditCardInformationWhereInput
-}
-
-export interface CategoryUpdateWithWhereUniqueWithoutTasksInput {
-  where: CategoryWhereUniqueInput
-  data: CategoryUpdateWithoutTasksDataInput
-}
-
-export interface PostSubscriptionWhereInput {
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PostWhereInput
-}
-
-export interface CategoryUpdateWithoutTasksDataInput {
-  name?: String
-  description?: String
-  createdBy?: UserUpdateOneInput
-}
-
-export interface CategoryWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface CategoryUpsertWithWhereUniqueWithoutTasksInput {
-  where: CategoryWhereUniqueInput
-  update: CategoryUpdateWithoutTasksDataInput
-  create: CategoryCreateWithoutTasksInput
-}
-
-export interface PaymentAccountWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface PriorityUpdateOneInput {
-  create?: PriorityCreateInput
-  connect?: PriorityWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: PriorityUpdateDataInput
-  upsert?: PriorityUpsertNestedInput
-}
-
-export interface FileWhereUniqueInput {
-  id?: ID_Input
-  secret?: String
-  url?: String
-}
-
-export interface PriorityUpdateDataInput {
-  name?: String
-  description?: String
-  createdBy?: UserUpdateOneInput
-}
-
-export interface PaymentAccountUpdateWithoutCreditcardDataInput {
-  type?: PAYMENT_PROVIDER
-  user?: UserUpdateOneInput
-  payments?: PaymentUpdateManyWithoutPaymentMethodInput
-  paypal?: PaypalInformationUpdateOneWithoutPaymentAccountInput
-}
-
-export interface PriorityUpsertNestedInput {
-  update: PriorityUpdateDataInput
-  create: PriorityCreateInput
-}
-
-export interface PaymentUpdateWithoutPaymentMethodDataInput {
-  serviceFee?: Float
-  placePrice?: Float
-  totalPrice?: Float
-}
-
-export interface TaskUpdateManyInput {
-  create?: TaskCreateInput[] | TaskCreateInput
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput
-  update?: TaskUpdateWithWhereUniqueNestedInput[] | TaskUpdateWithWhereUniqueNestedInput
-  upsert?: TaskUpsertWithWhereUniqueNestedInput[] | TaskUpsertWithWhereUniqueNestedInput
-}
-
-export interface PaypalInformationUpsertWithoutPaymentAccountInput {
-  update: PaypalInformationUpdateWithoutPaymentAccountDataInput
-  create: PaypalInformationCreateWithoutPaymentAccountInput
-}
-
-export interface TaskUpdateWithWhereUniqueNestedInput {
-  where: TaskWhereUniqueInput
-  data: TaskUpdateDataInput
-}
-
-export interface UserUpdateOneWithoutNotificationsInput {
-  create?: UserCreateWithoutNotificationsInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutNotificationsDataInput
-  upsert?: UserUpsertWithoutNotificationsInput
-}
-
-export interface TaskUpdateDataInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  createdBy?: UserUpdateOneWithoutTasksInput
-  categories?: CategoryUpdateManyWithoutTasksInput
-  priority?: PriorityUpdateOneInput
-  subTasks?: TaskUpdateManyInput
-  tags?: TagUpdateManyInput
-  attachments?: FileUpdateManyInput
-}
-
-export interface LocationUpdateOneInput {
-  create?: LocationCreateInput
-  connect?: LocationWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: LocationUpdateDataInput
-  upsert?: LocationUpsertNestedInput
-}
-
-export interface UserUpdateOneWithoutTasksInput {
-  create?: UserCreateWithoutTasksInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutTasksDataInput
-  upsert?: UserUpsertWithoutTasksInput
-}
-
-export interface EventWhereInput {
-  AND?: EventWhereInput[] | EventWhereInput
-  OR?: EventWhereInput[] | EventWhereInput
-  NOT?: EventWhereInput[] | EventWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  title?: String
-  title_not?: String
-  title_in?: String[] | String
-  title_not_in?: String[] | String
-  title_lt?: String
-  title_lte?: String
-  title_gt?: String
-  title_gte?: String
-  title_contains?: String
-  title_not_contains?: String
-  title_starts_with?: String
-  title_not_starts_with?: String
-  title_ends_with?: String
-  title_not_ends_with?: String
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  date?: DateTime
-  date_not?: DateTime
-  date_in?: DateTime[] | DateTime
-  date_not_in?: DateTime[] | DateTime
-  date_lt?: DateTime
-  date_lte?: DateTime
-  date_gt?: DateTime
-  date_gte?: DateTime
-  createdBy?: UserWhereInput
-  location?: LocationWhereInput
-  tags_every?: TagWhereInput
-  tags_some?: TagWhereInput
-  tags_none?: TagWhereInput
-}
-
-export interface UserUpdateWithoutTasksDataInput {
-  email?: String
-  password?: String
-  isAdmin?: Boolean
-  role?: Role
-  firstName?: String
-  lastName?: String
-  phone?: String
-  avatarColor?: String
-  posts?: PostUpdateManyWithoutAuthorInput
-  notifications?: NotificationUpdateManyWithoutUserInput
-}
-
-export interface PriorityWhereInput {
-  AND?: PriorityWhereInput[] | PriorityWhereInput
-  OR?: PriorityWhereInput[] | PriorityWhereInput
-  NOT?: PriorityWhereInput[] | PriorityWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  createdBy?: UserWhereInput
-}
-
-export interface PostUpdateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  disconnect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  delete?: PostWhereUniqueInput[] | PostWhereUniqueInput
-  update?: PostUpdateWithWhereUniqueWithoutAuthorInput[] | PostUpdateWithWhereUniqueWithoutAuthorInput
-  upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput[] | PostUpsertWithWhereUniqueWithoutAuthorInput
-}
-
-export interface EventWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  data: PostUpdateWithoutAuthorDataInput
-}
-
-export interface TaskUpdateInput {
-  title?: String
-  description?: String
-  startDate?: DateTime
-  finishDate?: DateTime
-  isComplete?: Boolean
-  duration?: Int
-  status?: TASK_STATUS
-  createdBy?: UserUpdateOneWithoutTasksInput
-  categories?: CategoryUpdateManyWithoutTasksInput
-  priority?: PriorityUpdateOneInput
-  subTasks?: TaskUpdateManyInput
-  tags?: TagUpdateManyInput
-  attachments?: FileUpdateManyInput
-}
-
-export interface PostUpdateWithoutAuthorDataInput {
-  isPublished?: Boolean
-  title?: String
-  text?: String
-}
-
-export interface PaymentAccountUpsertWithoutPaymentsInput {
-  update: PaymentAccountUpdateWithoutPaymentsDataInput
-  create: PaymentAccountCreateWithoutPaymentsInput
-}
-
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput
-  update: PostUpdateWithoutAuthorDataInput
-  create: PostCreateWithoutAuthorInput
-}
-
 export interface CityUpsertNestedInput {
   update: CityUpdateDataInput
   create: CityCreateInput
 }
 
-export interface NotificationUpdateManyWithoutUserInput {
-  create?: NotificationCreateWithoutUserInput[] | NotificationCreateWithoutUserInput
-  connect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  disconnect?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  delete?: NotificationWhereUniqueInput[] | NotificationWhereUniqueInput
-  update?: NotificationUpdateWithWhereUniqueWithoutUserInput[] | NotificationUpdateWithWhereUniqueWithoutUserInput
-  upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput[] | NotificationUpsertWithWhereUniqueWithoutUserInput
-}
-
-export interface MessageWhereInput {
-  AND?: MessageWhereInput[] | MessageWhereInput
-  OR?: MessageWhereInput[] | MessageWhereInput
-  NOT?: MessageWhereInput[] | MessageWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  deliveredAt?: DateTime
-  deliveredAt_not?: DateTime
-  deliveredAt_in?: DateTime[] | DateTime
-  deliveredAt_not_in?: DateTime[] | DateTime
-  deliveredAt_lt?: DateTime
-  deliveredAt_lte?: DateTime
-  deliveredAt_gt?: DateTime
-  deliveredAt_gte?: DateTime
-  readAt?: DateTime
-  readAt_not?: DateTime
-  readAt_in?: DateTime[] | DateTime
-  readAt_not_in?: DateTime[] | DateTime
-  readAt_lt?: DateTime
-  readAt_lte?: DateTime
-  readAt_gt?: DateTime
-  readAt_gte?: DateTime
-  from?: UserWhereInput
-  to?: UserWhereInput
-}
-
-export interface CityWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserUpsertWithoutTasksInput {
-  update: UserUpdateWithoutTasksDataInput
-  create: UserCreateWithoutTasksInput
-}
-
-export interface NotificationUpsertWithWhereUniqueWithoutUserInput {
-  where: NotificationWhereUniqueInput
-  update: NotificationUpdateWithoutUserDataInput
-  create: NotificationCreateWithoutUserInput
-}
-
-export interface NotificationUpdateWithoutUserDataInput {
-  type?: NOTIFICATION_TYPE
-  link?: String
-  readDate?: DateTime
-}
-
-export interface NotificationUpdateWithWhereUniqueWithoutUserInput {
-  where: NotificationWhereUniqueInput
-  data: NotificationUpdateWithoutUserDataInput
-}
-
-export interface PaymentAccountUpdateWithoutPaypalDataInput {
-  type?: PAYMENT_PROVIDER
-  user?: UserUpdateOneInput
-  payments?: PaymentUpdateManyWithoutPaymentMethodInput
-  creditcard?: CreditCardInformationUpdateOneWithoutPaymentAccountInput
-}
-
-export interface PictureSubscriptionWhereInput {
-  AND?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
-  OR?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
-  NOT?: PictureSubscriptionWhereInput[] | PictureSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PictureWhereInput
-}
-
-export interface PaymentAccountUpdateOneWithoutPaymentsInput {
-  create?: PaymentAccountCreateWithoutPaymentsInput
-  connect?: PaymentAccountWhereUniqueInput
-  delete?: Boolean
-  update?: PaymentAccountUpdateWithoutPaymentsDataInput
-  upsert?: PaymentAccountUpsertWithoutPaymentsInput
+export interface PaymentAccountUpsertWithoutPaymentsInput {
+  update: PaymentAccountUpdateWithoutPaymentsDataInput
+  create: PaymentAccountCreateWithoutPaymentsInput
 }
 
 /*
@@ -9846,10 +10881,6 @@ export interface FilePreviousValues {
   url: String
 }
 
-export interface BatchPayload {
-  count: Long
-}
-
 export interface Priority extends Node {
   id: ID_Output
   createdAt: DateTime
@@ -9859,10 +10890,22 @@ export interface Priority extends Node {
   description?: String
 }
 
-export interface Tag {
-  name: String
+export interface SubTask extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  createdBy: User
+  parent: Task
+  title?: String
   description?: String
-  color: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete: Boolean
+  duration?: Int
+}
+
+export interface BatchPayload {
+  count: Long
 }
 
 export interface AggregateFile {
@@ -9947,9 +10990,10 @@ export interface Task extends Node {
   startDate?: DateTime
   finishDate?: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration?: Int
   priority?: Priority
-  subTasks?: Task[]
+  subTasks?: SubTask[]
   status?: TASK_STATUS
   tags?: Tag[]
   attachments?: File[]
@@ -10070,11 +11114,11 @@ export interface CreditCardInformationConnection {
   aggregate: AggregateCreditCardInformation
 }
 
-export interface PostSubscriptionPayload {
+export interface SubTaskSubscriptionPayload {
   mutation: MutationType
-  node?: Post
+  node?: SubTask
   updatedFields?: String[]
-  previousValues?: PostPreviousValues
+  previousValues?: SubTaskPreviousValues
 }
 
 /*
@@ -10086,13 +11130,16 @@ export interface PaypalInformationEdge {
   cursor: String
 }
 
-export interface PostPreviousValues {
+export interface SubTaskPreviousValues {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
+  title?: String
+  description?: String
+  startDate?: DateTime
+  finishDate?: DateTime
+  isComplete: Boolean
+  duration?: Int
 }
 
 export interface AggregatePaymentAccount {
@@ -10116,11 +11163,11 @@ export interface PaymentAccountConnection {
   aggregate: AggregatePaymentAccount
 }
 
-export interface StatusUpdateSubscriptionPayload {
+export interface PostSubscriptionPayload {
   mutation: MutationType
-  node?: StatusUpdate
+  node?: Post
   updatedFields?: String[]
-  previousValues?: StatusUpdatePreviousValues
+  previousValues?: PostPreviousValues
 }
 
 /*
@@ -10132,13 +11179,13 @@ export interface PaymentEdge {
   cursor: String
 }
 
-export interface StatusUpdatePreviousValues {
+export interface PostPreviousValues {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
+  isPublished: Boolean
+  title: String
   text: String
-  previousStatus: String
-  newStatus: String
 }
 
 export interface AggregateNotification {
@@ -10165,11 +11212,11 @@ export interface NotificationConnection {
   aggregate: AggregateNotification
 }
 
-export interface ReminderSubscriptionPayload {
+export interface StatusUpdateSubscriptionPayload {
   mutation: MutationType
-  node?: Reminder
+  node?: StatusUpdate
   updatedFields?: String[]
-  previousValues?: ReminderPreviousValues
+  previousValues?: StatusUpdatePreviousValues
 }
 
 /*
@@ -10181,12 +11228,13 @@ export interface MessageEdge {
   cursor: String
 }
 
-export interface ReminderPreviousValues {
+export interface StatusUpdatePreviousValues {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
-  title: String
-  description: String
+  text: String
+  previousStatus: String
+  newStatus: String
 }
 
 export interface AggregateEvent {
@@ -10212,11 +11260,11 @@ export interface EventConnection {
   aggregate: AggregateEvent
 }
 
-export interface EventSubscriptionPayload {
+export interface ReminderSubscriptionPayload {
   mutation: MutationType
-  node?: Event
+  node?: Reminder
   updatedFields?: String[]
-  previousValues?: EventPreviousValues
+  previousValues?: ReminderPreviousValues
 }
 
 /*
@@ -10228,13 +11276,12 @@ export interface ReminderEdge {
   cursor: String
 }
 
-export interface EventPreviousValues {
+export interface ReminderPreviousValues {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
   title: String
   description: String
-  date: DateTime
 }
 
 export interface AggregateStatusUpdate {
@@ -10260,11 +11307,11 @@ export interface StatusUpdateConnection {
   aggregate: AggregateStatusUpdate
 }
 
-export interface MessageSubscriptionPayload {
+export interface EventSubscriptionPayload {
   mutation: MutationType
-  node?: Message
+  node?: Event
   updatedFields?: String[]
-  previousValues?: MessagePreviousValues
+  previousValues?: EventPreviousValues
 }
 
 /*
@@ -10276,14 +11323,16 @@ export interface PostEdge {
   cursor: String
 }
 
-export interface MessagePreviousValues {
+export interface EventPreviousValues {
   id: ID_Output
   createdAt: DateTime
-  deliveredAt: DateTime
-  readAt: DateTime
+  updatedAt: DateTime
+  title: String
+  description: String
+  date: DateTime
 }
 
-export interface AggregateCategory {
+export interface AggregateSubTask {
   count: Int
 }
 
@@ -10296,10 +11345,57 @@ export interface City extends Node {
  * A connection to a list of items.
 
  */
-export interface CategoryConnection {
+export interface SubTaskConnection {
   pageInfo: PageInfo
-  edges: CategoryEdge[]
-  aggregate: AggregateCategory
+  edges: SubTaskEdge[]
+  aggregate: AggregateSubTask
+}
+
+export interface MessageSubscriptionPayload {
+  mutation: MutationType
+  node?: Message
+  updatedFields?: String[]
+  previousValues?: MessagePreviousValues
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface CategoryEdge {
+  node: Category
+  cursor: String
+}
+
+export interface MessagePreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  deliveredAt: DateTime
+  readAt: DateTime
+}
+
+export interface AggregatePicture {
+  count: Int
+}
+
+export interface Location extends Node {
+  id: ID_Output
+  lat: Float
+  lng: Float
+  city?: City
+  address?: String
+  directions?: String
+}
+
+/*
+ * Information about pagination in a connection.
+
+ */
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String
+  endCursor?: String
 }
 
 export interface NotificationSubscriptionPayload {
@@ -10313,8 +11409,8 @@ export interface NotificationSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface PictureEdge {
-  node: Picture
+export interface LocationEdge {
+  node: Location
   cursor: String
 }
 
@@ -10330,22 +11426,25 @@ export interface NotificationPreviousValues {
  * A connection to a list of items.
 
  */
-export interface PictureConnection {
+export interface UserConnection {
   pageInfo: PageInfo
-  edges: PictureEdge[]
-  aggregate: AggregatePicture
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
-export interface Location extends Node {
+export interface Event extends Node {
   id: ID_Output
-  lat: Float
-  lng: Float
-  city?: City
-  address?: String
-  directions?: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  createdBy: User
+  title: String
+  description: String
+  date: DateTime
+  location?: Location
+  tags?: Tag[]
 }
 
-export interface AggregateUser {
+export interface AggregateTask {
   count: Int
 }
 
@@ -10360,8 +11459,8 @@ export interface PaymentSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface TagEdge {
-  node: Tag
+export interface CityEdge {
+  node: City
   cursor: String
 }
 
@@ -10377,25 +11476,21 @@ export interface PaymentPreviousValues {
  * A connection to a list of items.
 
  */
-export interface TaskConnection {
+export interface PriorityConnection {
   pageInfo: PageInfo
-  edges: TaskEdge[]
-  aggregate: AggregateTask
+  edges: PriorityEdge[]
+  aggregate: AggregatePriority
 }
 
-export interface Event extends Node {
+export interface Tag extends Node {
   id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
+  name: String
   createdBy: User
-  title: String
-  description: String
-  date: DateTime
-  location?: Location
-  tags?: Tag[]
+  description?: String
+  color: String
 }
 
-export interface AggregatePriority {
+export interface AggregatePaypalInformation {
   count: Int
 }
 
@@ -10410,8 +11505,8 @@ export interface PaymentAccountSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface CreditCardInformationEdge {
-  node: CreditCardInformation
+export interface PaymentAccountEdge {
+  node: PaymentAccount
   cursor: String
 }
 
@@ -10425,24 +11520,22 @@ export interface PaymentAccountPreviousValues {
  * A connection to a list of items.
 
  */
-export interface PaypalInformationConnection {
+export interface PaymentConnection {
   pageInfo: PageInfo
-  edges: PaypalInformationEdge[]
-  aggregate: AggregatePaypalInformation
+  edges: PaymentEdge[]
+  aggregate: AggregatePayment
 }
 
-export interface File extends Node {
+export interface Reminder extends Node {
   id: ID_Output
-  name: String
-  size: Int
-  secret: String
-  contentType: String
   createdAt: DateTime
   updatedAt: DateTime
-  url: String
+  createdBy: User
+  title: String
+  description: String
 }
 
-export interface AggregatePayment {
+export interface AggregateMessage {
   count: Int
 }
 
@@ -10457,8 +11550,8 @@ export interface PaypalInformationSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface NotificationEdge {
-  node: Notification
+export interface EventEdge {
+  node: Event
   cursor: String
 }
 
@@ -10472,22 +11565,24 @@ export interface PaypalInformationPreviousValues {
  * A connection to a list of items.
 
  */
-export interface MessageConnection {
+export interface ReminderConnection {
   pageInfo: PageInfo
-  edges: MessageEdge[]
-  aggregate: AggregateMessage
+  edges: ReminderEdge[]
+  aggregate: AggregateReminder
 }
 
-export interface Reminder extends Node {
+export interface StatusUpdate extends Node {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
   createdBy: User
-  title: String
-  description: String
+  task: Task
+  text: String
+  previousStatus: String
+  newStatus: String
 }
 
-export interface AggregateReminder {
+export interface AggregatePost {
   count: Int
 }
 
@@ -10502,8 +11597,8 @@ export interface CreditCardInformationSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface StatusUpdateEdge {
-  node: StatusUpdate
+export interface SubTaskEdge {
+  node: SubTask
   cursor: String
 }
 
@@ -10524,25 +11619,29 @@ export interface CreditCardInformationPreviousValues {
  * A connection to a list of items.
 
  */
-export interface PostConnection {
+export interface CategoryConnection {
   pageInfo: PageInfo
-  edges: PostEdge[]
-  aggregate: AggregatePost
+  edges: CategoryEdge[]
+  aggregate: AggregateCategory
 }
 
-export interface StatusUpdate extends Node {
+export interface Notification extends Node {
   id: ID_Output
   createdAt: DateTime
-  updatedAt: DateTime
-  createdBy: User
-  task: Task
-  text: String
-  previousStatus: String
-  newStatus: String
+  type?: NOTIFICATION_TYPE
+  user: User
+  link: String
+  readDate: DateTime
 }
 
-export interface AggregatePicture {
-  count: Int
+/*
+ * A connection to a list of items.
+
+ */
+export interface PictureConnection {
+  pageInfo: PageInfo
+  edges: PictureEdge[]
+  aggregate: AggregatePicture
 }
 
 export interface PrioritySubscriptionPayload {
@@ -10556,8 +11655,8 @@ export interface PrioritySubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface LocationEdge {
-  node: Location
+export interface TagEdge {
+  node: Tag
   cursor: String
 }
 
@@ -10569,7 +11668,7 @@ export interface PriorityPreviousValues {
   description?: String
 }
 
-export interface AggregateTask {
+export interface AggregatePriority {
   count: Int
 }
 
@@ -10587,10 +11686,10 @@ export interface Category extends Node {
  * A connection to a list of items.
 
  */
-export interface PriorityConnection {
+export interface PaypalInformationConnection {
   pageInfo: PageInfo
-  edges: PriorityEdge[]
-  aggregate: AggregatePriority
+  edges: PaypalInformationEdge[]
+  aggregate: AggregatePaypalInformation
 }
 
 export interface CitySubscriptionPayload {
@@ -10604,8 +11703,8 @@ export interface CitySubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface PaymentAccountEdge {
-  node: PaymentAccount
+export interface NotificationEdge {
+  node: Notification
   cursor: String
 }
 
@@ -10614,27 +11713,28 @@ export interface CityPreviousValues {
   name: String
 }
 
-export interface AggregateMessage {
+export interface AggregateReminder {
   count: Int
 }
 
-export interface Notification extends Node {
+export interface Post extends Node {
   id: ID_Output
   createdAt: DateTime
-  type?: NOTIFICATION_TYPE
-  user: User
-  link: String
-  readDate: DateTime
+  updatedAt: DateTime
+  isPublished: Boolean
+  title: String
+  text: String
+  author: User
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface ReminderConnection {
+export interface PostConnection {
   pageInfo: PageInfo
-  edges: ReminderEdge[]
-  aggregate: AggregateReminder
+  edges: PostEdge[]
+  aggregate: AggregatePost
 }
 
 export interface TaskSubscriptionPayload {
@@ -10648,8 +11748,8 @@ export interface TaskSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface CategoryEdge {
-  node: Category
+export interface PictureEdge {
+  node: Picture
   cursor: String
 }
 
@@ -10662,6 +11762,7 @@ export interface TaskPreviousValues {
   startDate?: DateTime
   finishDate?: DateTime
   isComplete: Boolean
+  isClarified: Boolean
   duration?: Int
   status?: TASK_STATUS
 }
@@ -10670,23 +11771,24 @@ export interface TaskPreviousValues {
  * A connection to a list of items.
 
  */
-export interface UserConnection {
+export interface TaskConnection {
   pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
+  edges: TaskEdge[]
+  aggregate: AggregateTask
 }
 
-export interface Post extends Node {
+export interface File extends Node {
   id: ID_Output
+  name: String
+  size: Int
+  secret: String
+  contentType: String
   createdAt: DateTime
   updatedAt: DateTime
-  isPublished: Boolean
-  title: String
-  text: String
-  author: User
+  url: String
 }
 
-export interface AggregatePaypalInformation {
+export interface AggregatePayment {
   count: Int
 }
 
@@ -10694,8 +11796,8 @@ export interface AggregatePaypalInformation {
  * An edge in a connection.
 
  */
-export interface EventEdge {
-  node: Event
+export interface StatusUpdateEdge {
+  node: StatusUpdate
   cursor: String
 }
 
@@ -10718,12 +11820,14 @@ export interface User extends Node {
   lastName?: String
   phone?: String
   avatarColor?: String
+  categories?: Category[]
   tasks?: Task[]
   posts?: Post[]
   notifications?: Notification[]
 }
 
 export interface TagPreviousValues {
+  id: ID_Output
   name: String
   description?: String
   color: String
@@ -10736,7 +11840,7 @@ export interface TagSubscriptionPayload {
   previousValues?: TagPreviousValues
 }
 
-export interface AggregatePost {
+export interface AggregateCategory {
   count: Int
 }
 
@@ -10744,43 +11848,36 @@ export interface AggregatePost {
  * A connection to a list of items.
 
  */
-export interface PaymentConnection {
+export interface MessageConnection {
   pageInfo: PageInfo
-  edges: PaymentEdge[]
-  aggregate: AggregatePayment
+  edges: MessageEdge[]
+  aggregate: AggregateMessage
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface CityEdge {
-  node: City
+export interface CreditCardInformationEdge {
+  node: CreditCardInformation
   cursor: String
 }
 
-/*
- * Information about pagination in a connection.
-
- */
-export interface PageInfo {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
-  startCursor?: String
-  endCursor?: String
+export interface AggregateUser {
+  count: Int
 }
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number
-export type ID_Output = string
 
 /*
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
 */
 export type Long = string
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number
+export type ID_Output = string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.

@@ -6,9 +6,9 @@
         <span @click="closeModal" class="mobile-close"> X </span>
       </div>
       <div class="global-modal-body">
-        <div style="width: 400px; height: 400px;" class="bg-white">
+        <div style="width: 400px; height: 400px;" class="bg-white box-shadow border-accent pa3 pa4-l measure center">
           <div v-if="isLoading">LOADING</div>
-          <form @submit.prevent="formSubmit" class="bg-white box-shadow border-accent pa3 pa4-l measure center">
+          <form @submit.prevent="formSubmit" class="">
             <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
               <div class="mt3">
                 <label class="db fw6 lh-copy f6" for="email">Task</label>
@@ -69,6 +69,10 @@ export default {
       this.isLoading = true;
       await this.$store.dispatch('tasks/captureTask', this.taskTitle);
       this.isLoading = false;
+      this.$router.push({
+        path: `/tasks`
+      });
+      this.$emit('update:open', false);
     }
   }
 };

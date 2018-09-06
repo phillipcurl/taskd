@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 export function host(url) {
   const host = url.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
@@ -12,14 +13,30 @@ export function truncate(text, stop = 150) {
 }
 
 export function timeAgo(time) {
-  const between = Date.now() / 1000 - Number(time);
-  if (between < 3600) {
-    return pluralize(~~(between / 60), ' minute');
-  } else if (between < 86400) {
-    return pluralize(~~(between / 3600), ' hour');
-  } else {
-    return pluralize(~~(between / 86400), ' day');
-  }
+  const date = new Date(time);
+  return distanceInWordsToNow(date);
+  // const between = Date.now() / 1000 - Number(time);
+  // if (between < 3600) {
+  //   return pluralize(~~(between / 60), ' minute');
+  // } else if (between < 86400) {
+  //   return pluralize(~~(between / 3600), ' hour');
+  // } else {
+  //   return pluralize(~~(between / 86400), ' day');
+  // }
+}
+
+export function localDateTime(time) {
+  const date = new Date(time);
+  const options = {
+    hour12: true,
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  };
+  return date.toLocaleDateString('en-US', options);
 }
 
 function pluralize(time, label) {
@@ -32,7 +49,8 @@ function pluralize(time, label) {
 const filters = {
   host,
   truncate,
-  timeAgo
+  timeAgo,
+  localDateTime
 };
 export default filters;
 

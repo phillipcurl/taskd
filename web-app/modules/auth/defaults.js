@@ -31,7 +31,7 @@ module.exports = {
   },
   redirect: {
     login: '/login',
-    home: '/profile'
+    home: '/home'
   },
   token: {
     type: 'Bearer',

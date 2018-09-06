@@ -52,10 +52,16 @@
 <script>
 export default {
   auth: false,
+  authenticated: false,
   head() {
     return {
       title: 'Home'
     };
+  },
+  fetch({ redirect }) {
+    // if (this.$auth.state.loggedIn) {
+    //   return redirect('/tasks');
+    // }
   }
 };
 </script>

@@ -10,6 +10,6 @@ export default {};
 
 <style lang="scss" scoped>
 .widget-base {
-  box-shadow: rgba(8, 35, 51, 0.05) 0px 4px 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 }
 </style>

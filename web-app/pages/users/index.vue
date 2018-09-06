@@ -4,7 +4,7 @@
       Users
     </h1>
     <div class="cf">
-      <div v-for="(user, index) in users" class="w-100 w-50-m w-33-l fl ">
+      <div v-for="(user, index) in users" :key="index" class="w-100 w-50-m w-33-l fl ">
         <nuxt-link :to="`/users/${index}`" class="link db br3 pa3 pa4-ns ma3-ns mb4 ba b--black-10">
           <div class="tc">
             <img src="http://tachyons.io/img/avatar_1.jpg" class="br-100 h3 w3 dib" title="Photo of a kitty staring at you">
@@ -41,5 +41,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

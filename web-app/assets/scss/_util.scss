@@ -25,3 +25,50 @@
 .flex-grow-1 {
   flex-grow: 1;
 }
+
+.bg-light-gray {
+  background: $light-gray;
+}
+
+.bg-gray {
+  background: $gray;
+}
+
+.bg-dark-gray {
+  background: $dark-gray;
+}
+
+.text-light {
+  color: $text-light-gray;
+}
+
+.text-dark {
+  color: $text-dark-gray;
+}
+
+.fa-pulse {
+  -webkit-animation: a 1s infinite steps(8);
+  animation: a 1s infinite steps(8);
+}
+
+@-webkit-keyframes a {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes a {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(1turn);
+    transform: rotate(1turn);
+  }
+}

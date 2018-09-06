@@ -38,3 +38,33 @@ type User {
   posts: [Post!]!
   notifications: [Notification!]!
 }
+
+type Task {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+  categories: [Category!]!
+  # assignees: [User]
+  title: String
+  description: String
+  startDate: DateTime
+  finishDate: DateTime
+  isComplete: Boolean!
+  isClarified: Boolean!
+  duration: Int
+  priority: Priority
+  subTasks: [SubTask!]!
+  status: TASK_STATUS
+  tags: [Tag!]!
+  attachments: [File!]!
+}
+
+type TaskUpdateInput {
+  title: String
+  description: String
+  startDate: DateTime
+  isComplete: Boolean!
+  priority: Priority
+  status: TASK_STATUS
+}

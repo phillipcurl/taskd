@@ -2,4 +2,8 @@ query Task($id: ID!) {
   task(id: $id) {
     id
     title
+    description
+    createdAt
+    updatedAt
+  }
 }
